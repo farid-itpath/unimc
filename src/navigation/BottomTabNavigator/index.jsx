@@ -1,12 +1,12 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {Image} from 'react-native';
+import {Image, Text} from 'react-native';
 import Home from '../../screens/Home';
 import Events from '../../screens/Events';
 import News from '../../screens/News';
 import About from '../../screens/About';
 import {COLORS, SCREENS} from '../../utils/constants';
 import {styles} from './style';
-import { ICONS } from '../../assets';
+import {ICONS} from '../../assets';
 
 const Tab = createBottomTabNavigator();
 
@@ -16,15 +16,11 @@ const BottomTabNavigator = () => {
       case SCREENS.HOME.name:
         return ICONS.home;
       case SCREENS.EVENTS.name:
-        return ICONS.home;
-      case SCREENS.EVENTDETAILS.name:
-        return ICONS.home;
+        return ICONS.events;
       case SCREENS.NEWS.name:
-        return ICONS.home;
-      case SCREENS.NEWSDETAILS.name:
-        return ICONS.home;
+        return ICONS.news;
       case SCREENS.ABOUT.name:
-        return ICONS.home;
+        return ICONS.about;
     }
   };
   return (
@@ -32,16 +28,23 @@ const BottomTabNavigator = () => {
       screenOptions={({route}) => ({
         tabBarStyle: styles.tabBarStyle,
         tabBarShowLabel: false,
+        tabBarLabelStyle: styles.tabBarLabelStyle,
         headerShown: false,
         tabBarIcon: ({focused}) => {
           return (
-            <Image
-              source={getIconByRouteName(route.name)}
-              style={[
-                styles.tabIcon,
-                {tintColor: focused ? COLORS.black : COLORS.primary},
-              ]}
-            />
+            <>
+              <Image
+                source={getIconByRouteName(route.name)}
+                style={[styles.tabIcon, {tintColor: focused && COLORS.primary}]}
+              />
+              <Text
+                style={
+                  ([styles.tabBarLabelStyle],
+                  {color: focused && COLORS.primary})
+                }>
+                {route.name}
+              </Text>
+            </>
           );
         },
       })}>
