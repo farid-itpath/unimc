@@ -33,4 +33,5 @@ export const COLORS = {
   primary: '#7F0042',
   black: '#000000',
   white: '#ffffff',
+  primaryLight: '#c75b93',
 };

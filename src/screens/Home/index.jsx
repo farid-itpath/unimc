@@ -12,8 +12,8 @@ import {
 import {styles} from './style';
 import {COLORS} from '../../utils/constants';
 import {ICONS, IMAGES} from '../../assets';
-import Section from './Section';
 import {EventCategories} from '../../utils/data';
+import Section from '../../components/Section';
 
 const Home = () => {
   const renderEvents = ({item, index}) => {
@@ -34,9 +34,25 @@ const Home = () => {
   };
   const renderEventCategories = ({item, index}) => {
     return (
-      <View style={styles.eventCategoriesView} key={index}>
+      <TouchableOpacity style={styles.eventCategoriesView} key={index}>
         <Image source={item.icon} style={styles.eventCategoriesImage} />
         <Text style={styles.eventCategoryTitle}>{item.categoryName}</Text>
+      </TouchableOpacity>
+    );
+  };
+  const renderCategories = ({item, index}) => {
+    return (
+      <View style={styles.eventListView}>
+        <Image source={IMAGES.categoryImage} style={styles.eventListImage} />
+        <View style={styles.eventListDetails}>
+          <View>
+            <Text style={styles.eventListTitle}>Sports</Text>
+            <Text style={styles.eventListDesc}>
+              Women's leadership conference
+            </Text>
+          </View>
+          <Text style={styles.eventListTime}>5 hours ago</Text>
+        </View>
       </View>
     );
   };
@@ -52,7 +68,7 @@ const Home = () => {
           </TouchableOpacity>
         </View>
         <Section
-          title="Today's Event"
+          title="Today's Events"
           data={new Array(4).fill(IMAGES.todaysEvent)}
           renderItem={renderEvents}
         />
@@ -68,25 +84,7 @@ const Home = () => {
         />
         <FlatList
           data={EventCategories}
-          renderItem={({item, index}) => {
-            return (
-              <View style={styles.eventListView}>
-                <Image
-                  source={IMAGES.categoryImage}
-                  style={styles.eventListImage}
-                />
-                <View style={styles.eventListDetails}>
-                  <View>
-                    <Text style={styles.eventListTitle}>Sports</Text>
-                    <Text style={styles.eventListDesc}>
-                      Women's leadership conference
-                    </Text>
-                  </View>
-                  <Text style={styles.eventListTime}>5 hours ago</Text>
-                </View>
-              </View>
-            );
-          }}
+          renderItem={renderCategories}
           scrollEnabled={false}
           style={styles.flatList}
         />

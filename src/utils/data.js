@@ -6,3 +6,11 @@ export const EventCategories = [
   {categoryName: 'Food', icon: ICONS.food},
   {categoryName: 'Art', icon: ICONS.food},
 ];
+
+export const AboutSections = [
+  {title: 'About'},
+  {title: 'History'},
+  {title: 'Tourists'},
+  {title: 'Culture'},
+  {title: 'Tours'},
+];

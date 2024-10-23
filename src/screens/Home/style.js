@@ -14,7 +14,8 @@ export const styles = StyleSheet.create({
     borderBottomStartRadius: 40,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
+    paddingHorizontal: widthScale(10),
   },
   logo: {
     height: heightScale(20),
@@ -64,6 +65,10 @@ export const styles = StyleSheet.create({
     gap: 10,
     alignItems: 'center',
   },
+  eventLocationIcon: {
+    height: heightScale(60),
+    width: heightScale(60),
+  },
   eventAddressText: {
     fontFamily: FONTS.InterMedium,
   },
@@ -99,8 +104,8 @@ export const styles = StyleSheet.create({
     gap: 10,
   },
   eventListImage: {
-    height: heightScale(8),
-    width: heightScale(8),
+    height: heightScale(10),
+    width: heightScale(10),
   },
   eventListDetails: {
     justifyContent: 'space-between',
@@ -108,7 +113,7 @@ export const styles = StyleSheet.create({
   },
   eventListTitle: {
     textTransform: 'uppercase',
-    fontSize: heightScale(60),
+    fontSize: heightScale(72),
     fontFamily: FONTS.InterBold,
     color: COLORS.primary,
   },
@@ -118,6 +123,7 @@ export const styles = StyleSheet.create({
     fontSize: heightScale(60),
   },
   eventListTime: {
+    fontFamily: FONTS.InterMedium,
     marginBottom: 10,
   },
 });

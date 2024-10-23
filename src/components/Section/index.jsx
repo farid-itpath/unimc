@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text, Image, FlatList} from 'react-native';
 import {styles} from './style';
-import {ICONS} from '../../../assets';
+import {ICONS} from '../../assets';
 
 const Section = ({data, renderItem, title}) => {
   return (
@@ -19,6 +19,7 @@ const Section = ({data, renderItem, title}) => {
           renderItem={renderItem}
           horizontal
           showsHorizontalScrollIndicator={false}
+          contentContainerStyle={styles.flatListContainer}
         />
       </View>
     </View>
