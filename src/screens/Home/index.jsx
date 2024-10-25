@@ -21,7 +21,7 @@ const Home = () => {
   const {handlePressSearch, handlePressSeeAll, handlePressEvent} = useHome();
   const renderEvents = ({item, index}) => {
     return (
-      <SkeletonPlaceholder enabled={true}>
+      <SkeletonPlaceholder enabled={false}>
         <TouchableOpacity
           style={styles.eventView}
           key={index}
