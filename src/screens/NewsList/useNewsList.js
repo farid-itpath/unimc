@@ -5,8 +5,10 @@ export const useNewsList = () => {
   const navigation = useNavigation();
   const handlePressSearch = () => navigation.navigate(SCREENS.SEARCH.name);
   const handlePressBack = () => navigation.goBack();
+  const handlePressNews = () => navigation.navigate(SCREENS.NEWSDETAILS.name);
   return {
     handlePressSearch,
-    handlePressBack
+    handlePressBack,
+    handlePressNews,
   };
 };

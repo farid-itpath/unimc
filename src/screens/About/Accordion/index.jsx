@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {View, Text, TouchableOpacity, Image} from 'react-native';
+import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
 import {styles} from './style';
 import {ICONS} from '../../../assets';
 
@@ -20,10 +21,13 @@ const Accordion = ({title}) => {
         />
       </TouchableOpacity>
       {collapsed && (
-        <Text style={styles.accordionDesc}>
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-        </Text>
+        <SkeletonPlaceholder enabled={false}>
+          <Text style={styles.accordionDesc}>
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry. Lorem Ipsum has been the industry's standard dummy text
+            ever
+          </Text>
+        </SkeletonPlaceholder>
       )}
     </View>
   );

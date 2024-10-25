@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {Image, Text, TouchableOpacity, View} from 'react-native';
 import SnapCarousel, {Pagination} from 'react-native-snap-carousel';
+import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
 import {widthScale} from '../../../utils/helper';
 import {styles} from './style';
 import {IMAGES} from '../../../assets';
@@ -8,10 +9,12 @@ import {IMAGES} from '../../../assets';
 const Carousel = ({data}) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const renderCarouselItem = ({item}) => (
-    <TouchableOpacity style={styles.itemView}>
-      <Image source={IMAGES.todaysEvent} style={styles.itemImage} />
+    <SkeletonPlaceholder enabled={false}>
+      <TouchableOpacity style={styles.itemView}>
+        <Image source={IMAGES.todaysEvent} style={styles.itemImage} />
+      </TouchableOpacity>
       <Text style={styles.itemText}>Macerata - Corso Cavour</Text>
-    </TouchableOpacity>
+    </SkeletonPlaceholder>
   );
 
   return (

@@ -73,6 +73,7 @@ export const styles = StyleSheet.create({
     fontSize: heightScale(60),
     color: COLORS.black,
     padding: 5,
+    marginVertical: 5,
   },
   eventAddressView: {
     flexDirection: 'row',
@@ -88,6 +89,7 @@ export const styles = StyleSheet.create({
   eventAddressText: {
     fontFamily: FONTS.InterMedium,
     fontSize: heightScale(64),
+    color: COLORS.grey,
   },
   eventCategoriesView: {
     flexDirection: 'row',
@@ -128,12 +130,14 @@ export const styles = StyleSheet.create({
   eventListDetails: {
     justifyContent: 'space-between',
     flexShrink: 1,
+    width: '100%',
   },
   eventListTitle: {
     textTransform: 'uppercase',
     fontSize: heightScale(72),
     fontFamily: FONTS.InterBold,
     color: COLORS.primary,
+    marginBottom: 5,
   },
   eventListDesc: {
     fontFamily: FONTS.InterBold,

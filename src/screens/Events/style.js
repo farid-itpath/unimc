@@ -90,6 +90,7 @@ export const styles = StyleSheet.create({
     fontSize: heightScale(60),
     color: COLORS.black,
     padding: 5,
+    marginVertical: 5,
   },
   eventAddressView: {
     flexDirection: 'row',

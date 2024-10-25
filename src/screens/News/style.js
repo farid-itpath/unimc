@@ -124,6 +124,7 @@ export const styles = StyleSheet.create({
   newsListDetails: {
     justifyContent: 'space-between',
     flexShrink: 1,
+    width: '100%',
   },
   newsListTitle: {
     textTransform: 'uppercase',
@@ -132,7 +133,6 @@ export const styles = StyleSheet.create({
     color: COLORS.primary,
   },
   newsListDesc: {
-    flexGrow: 1,
     fontFamily: FONTS.InterBold,
     color: COLORS.black,
     fontSize: heightScale(60),

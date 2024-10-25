@@ -9,6 +9,7 @@ import {
   Image,
   TouchableHighlight,
 } from 'react-native';
+import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
 import {styles} from './style';
 import {ICONS, IMAGES} from '../../assets';
 import Section from '../../components/Section';
@@ -17,7 +18,18 @@ import {useEventDetails} from './useEventDetails';
 const EventDetails = () => {
   const {handlePressBack} = useEventDetails();
   const renderImages = ({item, index}) => {
-    return <Image source={item} style={styles.listImage} />;
+    return (
+      <SkeletonPlaceholder enabled={false} key={index}>
+        <Image source={item} style={styles.listImage} />
+      </SkeletonPlaceholder>
+    );
+  };
+  const renderVideos = ({item, index}) => {
+    return (
+      <SkeletonPlaceholder enabled={false} key={index}>
+        <Image source={item} style={styles.listImage} />
+      </SkeletonPlaceholder>
+    );
   };
   return (
     <>
@@ -90,7 +102,7 @@ const EventDetails = () => {
           />
           <Section
             data={new Array(5).fill(IMAGES.categoryImage)}
-            renderItem={renderImages}
+            renderItem={renderVideos}
             title={() => <Text style={styles.eventInfoTitle}>VIDEOS</Text>}
           />
           <View style={styles.eventInfoView}>

@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   FlatList,
 } from 'react-native';
+import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
 import {COLORS} from '../../utils/constants';
 import {ICONS, IMAGES} from '../../assets';
 import {useEventsList} from './useEventsList';
@@ -16,21 +17,26 @@ import {styles} from './style';
 import {EventCategories} from '../../utils/data';
 
 const EventsList = () => {
-  const {handlePressSearch, handlePressBack} = useEventsList();
+  const {handlePressSearch, handlePressBack, handlePressEvent} =
+    useEventsList();
   const renderCategories = ({item, index}) => {
     return (
-      <View style={styles.eventListView}>
-        <Image source={IMAGES.categoryImage} style={styles.eventListImage} />
-        <View style={styles.eventListDetails}>
-          <View>
-            <Text style={styles.eventListTitle}>Sports</Text>
-            <Text style={styles.eventListDesc}>
-              Women's leadership conference
-            </Text>
+      <SkeletonPlaceholder enabled={false}>
+        <TouchableOpacity
+          style={styles.eventListView}
+          onPress={handlePressEvent}>
+          <Image source={IMAGES.categoryImage} style={styles.eventListImage} />
+          <View style={styles.eventListDetails}>
+            <View>
+              <Text style={styles.eventListTitle}>Sports</Text>
+              <Text style={styles.eventListDesc}>
+                Women's leadership conference
+              </Text>
+            </View>
+            <Text style={styles.eventListTime}>5 hours ago</Text>
           </View>
-          <Text style={styles.eventListTime}>5 hours ago</Text>
-        </View>
-      </View>
+        </TouchableOpacity>
+      </SkeletonPlaceholder>
     );
   };
   return (

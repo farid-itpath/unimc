@@ -9,14 +9,15 @@ import {
   TouchableOpacity,
   FlatList,
 } from 'react-native';
+import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
 import {styles} from './style';
-import {COLORS, SCREENS} from '../../utils/constants';
+import {COLORS} from '../../utils/constants';
 import {ICONS, IMAGES} from '../../assets';
 import {EventCategories} from '../../utils/data';
 import {useEvents} from './useEvents';
 import Section from '../../components/Section';
 
-const Events = ({navigation}) => {
+const Events = () => {
   const {
     selectedCategory,
     scrollRef,
@@ -27,57 +28,64 @@ const Events = ({navigation}) => {
   } = useEvents();
   const renderCategoryItem = ({item, index}) => {
     return (
-      <TouchableOpacity
-        onPress={() => handleSelectCategory(index)}
-        style={[
-          styles.eventCategoriesView,
-          {
-            backgroundColor:
-              index === selectedCategory ? COLORS.primary : COLORS.white,
-          },
-        ]}
-        key={index}>
-        {item.icon && (
-          <Image
-            source={item.icon}
+      <SkeletonPlaceholder enabled={false}>
+        <TouchableOpacity
+          onPress={() => handleSelectCategory(index)}
+          style={[
+            styles.eventCategoriesView,
+            {
+              backgroundColor:
+                index === selectedCategory ? COLORS.primary : COLORS.white,
+            },
+          ]}
+          key={index}>
+          {item.icon && (
+            <Image
+              source={item.icon}
+              style={[
+                styles.eventCategoriesImage,
+                {
+                  tintColor:
+                    index === selectedCategory ? COLORS.white : COLORS.primary,
+                },
+              ]}
+            />
+          )}
+          <Text
             style={[
-              styles.eventCategoriesImage,
+              styles.eventCategoryTitle,
               {
-                tintColor:
+                color:
                   index === selectedCategory ? COLORS.white : COLORS.primary,
               },
-            ]}
-          />
-        )}
-        <Text
-          style={[
-            styles.eventCategoryTitle,
-            {
-              color: index === selectedCategory ? COLORS.white : COLORS.primary,
-            },
-          ]}>
-          {item.categoryName}
-        </Text>
-      </TouchableOpacity>
+            ]}>
+            {item.categoryName}
+          </Text>
+        </TouchableOpacity>
+      </SkeletonPlaceholder>
     );
   };
   const renderEvents = ({item, index}) => {
     return (
-      <TouchableOpacity
-        style={styles.eventView}
-        key={index}
-        onPress={handlePressEvent}>
-        <Image source={item} style={styles.eventImage} />
-        <View style={styles.eventDataView}>
-          <Text style={styles.eventDate}>10</Text>
-          <Text style={styles.eventMonth}>JUNE</Text>
-        </View>
-        <Text style={styles.eventTitle}>Appassionata concerts</Text>
-        <View style={styles.eventAddressView}>
-          <Image source={ICONS.location} style={styles.eventLocationIcon} />
-          <Text style={styles.eventAddressText}>Lauro Rossi Theatre, Mac</Text>
-        </View>
-      </TouchableOpacity>
+      <SkeletonPlaceholder enabled={false}>
+        <TouchableOpacity
+          style={styles.eventView}
+          key={index}
+          onPress={handlePressEvent}>
+          <Image source={item} style={styles.eventImage} />
+          <View style={styles.eventDataView}>
+            <Text style={styles.eventDate}>10</Text>
+            <Text style={styles.eventMonth}>JUNE</Text>
+          </View>
+          <Text style={styles.eventTitle}>Appassionata concerts</Text>
+          <View style={styles.eventAddressView}>
+            <Image source={ICONS.location} style={styles.eventLocationIcon} />
+            <Text style={styles.eventAddressText}>
+              Lauro Rossi Theatre, Mac
+            </Text>
+          </View>
+        </TouchableOpacity>
+      </SkeletonPlaceholder>
     );
   };
   return (

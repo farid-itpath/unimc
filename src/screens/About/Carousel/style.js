@@ -15,14 +15,15 @@ export const styles = StyleSheet.create({
     height: heightScale(4.2),
     width: widthScale(1.1),
     objectFit: 'fill',
+    borderRadius: 20,
   },
   itemText: {
     fontFamily: FONTS.InterMedium,
     fontSize: heightScale(48),
     color: COLORS.black,
-    alignSelf: 'flex-start',
     paddingHorizontal: heightScale(40),
     marginVertical: 5,
+    marginHorizontal: heightScale(40),
   },
   paginationContainer: {
     paddingVertical: 0,

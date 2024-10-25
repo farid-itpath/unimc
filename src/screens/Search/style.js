@@ -91,6 +91,7 @@ export const styles = StyleSheet.create({
   eventListDetails: {
     justifyContent: 'space-between',
     flexShrink: 1,
+    width: '100%',
   },
   eventListTitle: {
     textTransform: 'uppercase',
@@ -102,6 +103,7 @@ export const styles = StyleSheet.create({
     fontFamily: FONTS.InterBold,
     color: COLORS.black,
     fontSize: heightScale(60),
+    marginVertical: 5,
   },
   eventListTime: {
     fontFamily: FONTS.InterMedium,

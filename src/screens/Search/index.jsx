@@ -11,6 +11,7 @@ import {
   TouchableOpacity,
   TouchableHighlight,
 } from 'react-native';
+import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
 import {styles} from './style';
 import {COLORS} from '../../utils/constants';
 import {ICONS, IMAGES} from '../../assets';
@@ -30,20 +31,22 @@ const Search = () => {
   } = useSearch();
   const renderCategories = ({item, index}) => {
     return (
-      <TouchableOpacity
-        style={styles.eventListView}
-        onPress={handlePressResultItem}>
-        <Image source={IMAGES.categoryImage} style={styles.eventListImage} />
-        <View style={styles.eventListDetails}>
-          <View>
-            <Text style={styles.eventListTitle}>Sports</Text>
-            <Text style={styles.eventListDesc}>
-              Women's leadership conference
-            </Text>
+      <SkeletonPlaceholder enabled={false}>
+        <TouchableOpacity
+          style={styles.eventListView}
+          onPress={handlePressResultItem}>
+          <Image source={IMAGES.categoryImage} style={styles.eventListImage} />
+          <View style={styles.eventListDetails}>
+            <View>
+              <Text style={styles.eventListTitle}>Sports</Text>
+              <Text style={styles.eventListDesc}>
+                Women's leadership conference
+              </Text>
+            </View>
+            <Text style={styles.eventListTime}>5 hours ago</Text>
           </View>
-          <Text style={styles.eventListTime}>5 hours ago</Text>
-        </View>
-      </TouchableOpacity>
+        </TouchableOpacity>
+      </SkeletonPlaceholder>
     );
   };
   return (

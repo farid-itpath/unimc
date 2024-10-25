@@ -9,14 +9,15 @@ import {
   TouchableOpacity,
   FlatList,
 } from 'react-native';
+import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
 import {styles} from './style';
-import {COLORS, SCREENS} from '../../utils/constants';
+import {COLORS} from '../../utils/constants';
 import {ICONS, IMAGES} from '../../assets';
 import {EventCategories} from '../../utils/data';
 import Section from '../../components/Section';
 import {useNews} from './useNews';
 
-const News = ({navigation}) => {
+const News = () => {
   const {
     selectedCategory,
     scrollRef,
@@ -63,33 +64,39 @@ const News = ({navigation}) => {
   };
   const renderNews = ({item, index}) => {
     return (
-      <TouchableOpacity
-        style={styles.newsView}
-        key={index}
-        onPress={handlePressNews}>
-        <Image source={item} style={styles.newsImage} />
-        <View style={styles.newsDataView}>
-          <Text style={styles.newsDate}>10</Text>
-          <Text style={styles.newsMonth}>JUNE</Text>
-        </View>
-        <View style={styles.newsCategoryView}>
-          <Text style={styles.newsCategoryTitle}>SPORTS</Text>
-          <Text style={styles.newsCategoryTime}>2 min ago</Text>
-        </View>
-        <Text style={styles.newsTitle}>Appassionata concerts</Text>
-      </TouchableOpacity>
+      <SkeletonPlaceholder enabled={false}>
+        <TouchableOpacity
+          style={styles.newsView}
+          key={index}
+          onPress={handlePressNews}>
+          <Image source={item} style={styles.newsImage} />
+          <View style={styles.newsDataView}>
+            <Text style={styles.newsDate}>10</Text>
+            <Text style={styles.newsMonth}>JUNE</Text>
+          </View>
+          <View style={styles.newsCategoryView}>
+            <Text style={styles.newsCategoryTitle}>SPORTS</Text>
+            <Text style={styles.newsCategoryTime}>2 min ago</Text>
+          </View>
+          <Text style={styles.newsTitle}>Appassionata concerts</Text>
+        </TouchableOpacity>
+      </SkeletonPlaceholder>
     );
   };
   const renderCategories = ({item, index}) => {
     return (
-      <TouchableOpacity style={styles.newsListView} onPress={handlePressNews}>
-        <Image source={IMAGES.categoryImage} style={styles.newsListImage} />
-        <View style={styles.newsListDetails}>
-          <Text style={styles.newsListTitle}>Sports</Text>
-          <Text style={styles.newsListDesc}>Women's leadership conference</Text>
-          <Text style={styles.newsListTime}>5 hours ago</Text>
-        </View>
-      </TouchableOpacity>
+      <SkeletonPlaceholder enabled={false}>
+        <TouchableOpacity style={styles.newsListView} onPress={handlePressNews}>
+          <Image source={IMAGES.categoryImage} style={styles.newsListImage} />
+          <View style={styles.newsListDetails}>
+            <Text style={styles.newsListTitle}>Sports</Text>
+            <Text style={styles.newsListDesc}>
+              Women's leadership conference
+            </Text>
+            <Text style={styles.newsListTime}>5 hours ago</Text>
+          </View>
+        </TouchableOpacity>
+      </SkeletonPlaceholder>
     );
   };
   const renderHeaderComponent = title => {
