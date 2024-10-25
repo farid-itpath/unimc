@@ -14,18 +14,18 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   accordionTitle: {
-    fontFamily: FONTS.InterBold,
-    fontSize: heightScale(52),
+    fontFamily: FONTS.InterMedium,
+    fontSize: heightScale(40),
     color: COLORS.primary,
   },
   collapseIcon: {
-    height: heightScale(40),
-    width: heightScale(40),
+    height: heightScale(72),
+    width: heightScale(72),
     tintColor: COLORS.primary,
   },
   accordionDesc: {
     fontFamily: FONTS.InterMedium,
-    fontSize: heightScale(64),
+    fontSize: heightScale(60),
     marginTop: 8,
   },
 });

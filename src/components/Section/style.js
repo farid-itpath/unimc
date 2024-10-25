@@ -4,7 +4,9 @@ import {FONTS} from '../../assets';
 import {COLORS} from '../../utils/constants';
 
 export const styles = StyleSheet.create({
-  section: {},
+  section: {
+    marginBottom: heightScale(60),
+  },
   sectionHead: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -12,9 +14,9 @@ export const styles = StyleSheet.create({
     paddingHorizontal: heightScale(40),
   },
   sectionTitle: {
-    fontFamily: FONTS.InterBold,
+    fontFamily: FONTS.InterMedium,
     color: COLORS.black,
-    fontSize: heightScale(60),
+    fontSize: heightScale(50),
   },
   seeAllView: {
     flexDirection: 'row',
@@ -26,5 +28,10 @@ export const styles = StyleSheet.create({
   },
   flatListContainer: {
     paddingHorizontal: heightScale(40),
+  },
+  arrowRight: {
+    height: heightScale(100),
+    width: heightScale(100),
+    tintColor: COLORS.grey,
   },
 });

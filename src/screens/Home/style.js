@@ -4,25 +4,39 @@ import {heightScale, widthScale} from '../../utils/helper';
 import {FONTS} from '../../assets';
 
 export const styles = StyleSheet.create({
+  statusBarSafeArea: {
+    flex: 0,
+    backgroundColor: COLORS.primary,
+  },
   safeAreaView: {
     flex: 1,
   },
   headerView: {
     backgroundColor: COLORS.primary,
-    height: heightScale(14),
+    height: heightScale(12),
     borderBottomEndRadius: 40,
     borderBottomStartRadius: 40,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingHorizontal: widthScale(10),
+    paddingHorizontal: widthScale(12),
+    marginBottom: heightScale(40),
   },
   logo: {
-    height: heightScale(20),
+    height: heightScale(12),
     width: widthScale(2),
   },
+  emptyView: {
+    height: heightScale(30),
+    width: heightScale(30),
+  },
+  searchIcon: {
+    height: heightScale(30),
+    width: heightScale(30),
+    tintColor: COLORS.white,
+  },
   eventView: {
-    padding: 10,
+    padding: heightScale(60),
     backgroundColor: COLORS.white,
     borderRadius: 10,
     marginRight: 10,
@@ -37,8 +51,8 @@ export const styles = StyleSheet.create({
     position: 'absolute',
     backgroundColor: 'rgba(255,255,255,0.8)',
     padding: 5,
-    left: 20,
-    top: 20,
+    left: heightScale(40),
+    top: heightScale(40),
     borderRadius: 10,
     alignItems: 'center',
   },
@@ -46,7 +60,7 @@ export const styles = StyleSheet.create({
     fontSize: heightScale(50),
     color: COLORS.primary,
     fontFamily: FONTS.InterBold,
-    lineHeight: 20,
+    lineHeight: heightScale(42),
   },
   eventMonth: {
     fontSize: heightScale(80),
@@ -55,22 +69,25 @@ export const styles = StyleSheet.create({
     lineHeight: 16,
   },
   eventTitle: {
-    fontFamily: FONTS.InterBold,
+    fontFamily: FONTS.InterMedium,
     fontSize: heightScale(60),
     color: COLORS.black,
     padding: 5,
   },
   eventAddressView: {
     flexDirection: 'row',
-    gap: 10,
+    gap: 5,
     alignItems: 'center',
+    paddingHorizontal: 5,
   },
   eventLocationIcon: {
-    height: heightScale(60),
-    width: heightScale(60),
+    height: heightScale(72),
+    width: heightScale(72),
+    tintColor: COLORS.grey,
   },
   eventAddressText: {
     fontFamily: FONTS.InterMedium,
+    fontSize: heightScale(64),
   },
   eventCategoriesView: {
     flexDirection: 'row',
@@ -85,6 +102,7 @@ export const styles = StyleSheet.create({
   eventCategoriesImage: {
     height: heightScale(50),
     width: heightScale(50),
+    tintColor: COLORS.primary,
   },
   eventCategoryTitle: {
     fontFamily: FONTS.InterMedium,
@@ -125,5 +143,7 @@ export const styles = StyleSheet.create({
   eventListTime: {
     fontFamily: FONTS.InterMedium,
     marginBottom: 10,
+    fontSize: heightScale(64),
+    color: COLORS.grey,
   },
 });

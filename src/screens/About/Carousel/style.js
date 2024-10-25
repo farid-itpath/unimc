@@ -12,13 +12,13 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   itemImage: {
-    height: heightScale(5),
+    height: heightScale(4.2),
     width: widthScale(1.1),
     objectFit: 'fill',
   },
   itemText: {
     fontFamily: FONTS.InterMedium,
-    fontSize: heightScale(60),
+    fontSize: heightScale(48),
     color: COLORS.black,
     alignSelf: 'flex-start',
     paddingHorizontal: heightScale(40),

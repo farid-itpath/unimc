@@ -9,6 +9,13 @@ export const ICONS = {
   sports: require('./icons/sports.png'),
   music: require('./icons/music.png'),
   food: require('./icons/food.png'),
+  arrowLeft: require('./icons/arrow-left.png'),
+  qr: require('./icons/qr.png'),
+  back: require('./icons/back.png'),
+  filter: require('./icons/filter.png'),
+  tick: require('./icons/tick.png'),
+  close: require('./icons/close.png'),
+  art: require('./icons/art.png'),
 };
 export const IMAGES = {
   logo: require('./images/logo.png'),

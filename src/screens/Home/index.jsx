@@ -10,15 +10,20 @@ import {
   ScrollView,
 } from 'react-native';
 import {styles} from './style';
-import {COLORS} from '../../utils/constants';
+import {COLORS, SCREENS} from '../../utils/constants';
 import {ICONS, IMAGES} from '../../assets';
 import {EventCategories} from '../../utils/data';
 import Section from '../../components/Section';
+import {useHome} from './useHome';
 
-const Home = () => {
+const Home = ({navigation}) => {
+  const {handlePressSearch, handlePressSeeAll, handlePressEvent} = useHome();
   const renderEvents = ({item, index}) => {
     return (
-      <View style={styles.eventView} key={index}>
+      <TouchableOpacity
+        style={styles.eventView}
+        key={index}
+        onPress={handlePressEvent}>
         <Image source={item} style={styles.eventImage} />
         <View style={styles.eventDataView}>
           <Text style={styles.eventDate}>10</Text>
@@ -29,7 +34,7 @@ const Home = () => {
           <Image source={ICONS.location} style={styles.eventLocationIcon} />
           <Text style={styles.eventAddressText}>Lauro Rossi Theatre, Mac</Text>
         </View>
-      </View>
+      </TouchableOpacity>
     );
   };
   const renderEventCategories = ({item, index}) => {
@@ -42,7 +47,7 @@ const Home = () => {
   };
   const renderCategories = ({item, index}) => {
     return (
-      <View style={styles.eventListView}>
+      <TouchableOpacity style={styles.eventListView} onPress={handlePressEvent}>
         <Image source={IMAGES.categoryImage} style={styles.eventListImage} />
         <View style={styles.eventListDetails}>
           <View>
@@ -53,43 +58,54 @@ const Home = () => {
           </View>
           <Text style={styles.eventListTime}>5 hours ago</Text>
         </View>
-      </View>
+      </TouchableOpacity>
     );
   };
   return (
-    <SafeAreaView style={styles.safeAreaView}>
-      <StatusBar backgroundColor={COLORS.primary} />
-      <ScrollView>
-        <View style={styles.headerView}>
-          <View />
-          <Image source={IMAGES.logoHome} style={styles.logo} />
-          <TouchableOpacity>
-            <Image source={ICONS.search} />
-          </TouchableOpacity>
-        </View>
-        <Section
-          title="Today's Events"
-          data={new Array(4).fill(IMAGES.todaysEvent)}
-          renderItem={renderEvents}
+    <>
+      <SafeAreaView style={styles.statusBarSafeArea} />
+      <SafeAreaView style={styles.safeAreaView}>
+        <StatusBar
+          backgroundColor={COLORS.primary}
+          translucent={false}
+          barStyle={'light-content'}
         />
-        <Section
-          title="Event Categories"
-          data={EventCategories}
-          renderItem={renderEventCategories}
-        />
-        <Section
-          title="Upcoming Events"
-          data={new Array(4).fill(IMAGES.upcomingEvent)}
-          renderItem={renderEvents}
-        />
-        <FlatList
-          data={EventCategories}
-          renderItem={renderCategories}
-          scrollEnabled={false}
-          style={styles.flatList}
-        />
-      </ScrollView>
-    </SafeAreaView>
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{backgroundColor: COLORS.extraLightGrey}}>
+          <View style={styles.headerView}>
+            <View style={styles.emptyView} />
+            <Image source={IMAGES.logoHome} style={styles.logo} />
+            <TouchableOpacity onPress={handlePressSearch}>
+              <Image source={ICONS.search} style={styles.searchIcon} />
+            </TouchableOpacity>
+          </View>
+          <Section
+            title="Today's Events"
+            data={new Array(4).fill(IMAGES.todaysEvent)}
+            renderItem={renderEvents}
+            onPressSeeAll={handlePressSeeAll}
+          />
+          <Section
+            title="Event Categories"
+            data={EventCategories}
+            renderItem={renderEventCategories}
+          />
+          <Section
+            title="Upcoming Events"
+            data={new Array(4).fill(IMAGES.upcomingEvent)}
+            renderItem={renderEvents}
+            onPressSeeAll={handlePressSeeAll}
+          />
+          <FlatList
+            data={EventCategories}
+            renderItem={renderCategories}
+            scrollEnabled={false}
+            style={styles.flatList}
+          />
+        </ScrollView>
+      </SafeAreaView>
+    </>
   );
 };
 

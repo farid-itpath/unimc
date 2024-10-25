@@ -4,23 +4,32 @@ import {COLORS} from '../../utils/constants';
 import {FONTS} from '../../assets';
 
 export const styles = StyleSheet.create({
+  statusBarSafeArea: {
+    flex: 0,
+    backgroundColor: COLORS.primary,
+  },
   safeAreaView: {
     flex: 1,
   },
   headerView: {
     backgroundColor: COLORS.primary,
-    height: heightScale(14),
+    height: heightScale(12),
     borderBottomEndRadius: 40,
     borderBottomStartRadius: 40,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingHorizontal: widthScale(10),
+    paddingHorizontal: widthScale(12),
   },
   headerTitle: {
     fontFamily: FONTS.InterBold,
     fontSize: heightScale(48),
     color: COLORS.white,
+  },
+  searchIcon: {
+    height: heightScale(30),
+    width: heightScale(30),
+    tintColor: COLORS.white,
   },
   flatListContainer: {
     marginVertical: heightScale(40),
@@ -59,8 +68,8 @@ export const styles = StyleSheet.create({
     position: 'absolute',
     backgroundColor: 'rgba(255,255,255,0.8)',
     padding: 5,
-    left: 20,
-    top: 20,
+    left: heightScale(40),
+    top: heightScale(40),
     borderRadius: 10,
     alignItems: 'center',
   },
@@ -68,7 +77,7 @@ export const styles = StyleSheet.create({
     fontSize: heightScale(50),
     color: COLORS.primary,
     fontFamily: FONTS.InterBold,
-    lineHeight: 20,
+    lineHeight: heightScale(42),
   },
   newsMonth: {
     fontSize: heightScale(80),
@@ -97,13 +106,15 @@ export const styles = StyleSheet.create({
   },
   newsCategoryTime: {
     fontFamily: FONTS.InterMedium,
+    fontSize: heightScale(64),
+    color: COLORS.grey,
   },
   newsListView: {
     flexDirection: 'row',
     padding: 10,
     borderRadius: 20,
     backgroundColor: COLORS.white,
-    marginVertical: 10,
+    marginVertical: heightScale(60),
     gap: 10,
   },
   newsListImage: {
@@ -129,6 +140,8 @@ export const styles = StyleSheet.create({
   newsListTime: {
     fontFamily: FONTS.InterMedium,
     marginBottom: 10,
+    fontSize: heightScale(64),
+    color: COLORS.grey,
   },
   flatList: {
     paddingHorizontal: heightScale(40),
@@ -140,9 +153,9 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   sectionTitle: {
-    fontFamily: FONTS.InterBold,
-    color: COLORS.black,
-    fontSize: heightScale(60),
+    fontFamily: FONTS.InterMedium,
+    color: COLORS.primary,
+    fontSize: heightScale(50),
   },
   seeAllView: {
     flexDirection: 'row',
@@ -151,5 +164,10 @@ export const styles = StyleSheet.create({
   seeAllText: {
     fontFamily: FONTS.InterMedium,
     fontSize: heightScale(60),
+  },
+  arrowRight: {
+    height: heightScale(100),
+    width: heightScale(100),
+    tintColor: COLORS.grey,
   },
 });

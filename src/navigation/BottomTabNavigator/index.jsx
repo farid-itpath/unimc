@@ -1,5 +1,5 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {Image, Text} from 'react-native';
+import {Image, Platform, Text, View} from 'react-native';
 import Home from '../../screens/Home';
 import Events from '../../screens/Events';
 import News from '../../screens/News';
@@ -7,6 +7,7 @@ import About from '../../screens/About';
 import {COLORS, SCREENS} from '../../utils/constants';
 import {styles} from './style';
 import {ICONS} from '../../assets';
+import {heightScale} from '../../utils/helper';
 
 const Tab = createBottomTabNavigator();
 
@@ -26,32 +27,36 @@ const BottomTabNavigator = () => {
   return (
     <Tab.Navigator
       screenOptions={({route}) => ({
-        tabBarStyle: styles.tabBarStyle,
+        tabBarStyle: {
+          height: Platform.OS === 'ios' ? heightScale(10) : heightScale(16),
+        },
         tabBarShowLabel: false,
-        tabBarLabelStyle: styles.tabBarLabelStyle,
         headerShown: false,
         tabBarIcon: ({focused}) => {
           return (
-            <>
+            <View style={styles.tabBarView}>
               <Image
                 source={getIconByRouteName(route.name)}
-                style={[styles.tabIcon, {tintColor: focused && COLORS.primary}]}
+                style={[
+                  styles.tabIcon,
+                  {tintColor: focused ? COLORS.primary : COLORS.grey},
+                ]}
               />
               <Text
                 style={
                   ([styles.tabBarLabelStyle],
-                  {color: focused && COLORS.primary})
+                  {color: focused ? COLORS.primary : COLORS.grey})
                 }>
                 {route.name}
               </Text>
-            </>
+            </View>
           );
         },
       })}>
-      <Tab.Screen name="Home" component={Home} />
-      <Tab.Screen name="Events" component={Events} />
-      <Tab.Screen name="News" component={News} />
-      <Tab.Screen name="About" component={About} />
+      <Tab.Screen name={SCREENS.HOME.name} component={Home} />
+      <Tab.Screen name={SCREENS.EVENTS.name} component={Events} />
+      <Tab.Screen name={SCREENS.NEWS.name} component={News} />
+      <Tab.Screen name={SCREENS.ABOUT.name} component={About} />
     </Tab.Navigator>
   );
 };

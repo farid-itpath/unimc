@@ -42,27 +42,30 @@ const About = () => {
     );
   };
   return (
-    <SafeAreaView style={styles.safeAreaView}>
-      <StatusBar backgroundColor={COLORS.primary} />
-      <ScrollView ref={scrollRef}>
-        <View style={styles.headerView}>
-          <Text style={styles.headerTitle}>About Macerata</Text>
-        </View>
-        <FlatList
-          data={[{title: 'All'}, ...AboutSections]}
-          renderItem={renderCategoryItem}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={styles.flatListContainer}
-        />
-        <Carousel />
-        <Accordion title="About Macerata" />
-        <Accordion title="History of Macerata" />
-        <Accordion title="Tourist of Macerata" />
-        <Accordion title="Cultural routes of Macerata" />
-        <Accordion title="Tours of Macerata" />
-      </ScrollView>
-    </SafeAreaView>
+    <>
+      <SafeAreaView style={styles.statusBarSafeArea} />
+      <SafeAreaView style={styles.safeAreaView}>
+        <StatusBar backgroundColor={COLORS.primary} />
+        <ScrollView ref={scrollRef} showsVerticalScrollIndicator={false}>
+          <View style={styles.headerView}>
+            <Text style={styles.headerTitle}>About Macerata</Text>
+          </View>
+          <FlatList
+            data={[{title: 'All'}, ...AboutSections]}
+            renderItem={renderCategoryItem}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={styles.flatListContainer}
+          />
+          <Carousel />
+          <Accordion title="About Macerata" />
+          <Accordion title="History of Macerata" />
+          <Accordion title="Tourist of Macerata" />
+          <Accordion title="Cultural routes of Macerata" />
+          <Accordion title="Tours of Macerata" />
+        </ScrollView>
+      </SafeAreaView>
+    </>
   );
 };
 

@@ -4,18 +4,22 @@ import {heightScale, widthScale} from '../../utils/helper';
 import {FONTS} from '../../assets';
 
 export const styles = StyleSheet.create({
+  statusBarSafeArea: {
+    flex: 0,
+    backgroundColor: COLORS.primary,
+  },
   safeAreaView: {
     flex: 1,
   },
   headerView: {
     backgroundColor: COLORS.primary,
-    height: heightScale(14),
+    height: heightScale(12),
     borderBottomEndRadius: 40,
     borderBottomStartRadius: 40,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingHorizontal: widthScale(10),
+    paddingHorizontal: widthScale(12),
   },
   headerTitle: {
     fontFamily: FONTS.InterBold,
