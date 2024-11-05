@@ -17,6 +17,8 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   headerImage: {
+    height: heightScale(3),
+    width: widthScale(1),
     position: 'absolute',
     objectFit: 'fill',
   },
@@ -46,7 +48,7 @@ export const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 20,
     marginRight: 10,
-    zIndex: 1,
+    zIndex: 11,
     bottom: 22,
     backgroundColor: COLORS.white,
     alignSelf: 'center',

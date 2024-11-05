@@ -1,6 +1,8 @@
 import {combineReducers} from '@reduxjs/toolkit';
-import authSlice from './authSlice';
+import eventsSlice from './eventsSlice';
+import newsSlice from './newsSlice';
 
 export const reducers = combineReducers({
-  auth: authSlice,
+  events: eventsSlice,
+  news: newsSlice,
 });

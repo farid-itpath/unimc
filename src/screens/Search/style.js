@@ -76,43 +76,20 @@ export const styles = StyleSheet.create({
     fontSize: heightScale(64),
     color: COLORS.white,
   },
-  eventListView: {
-    flexDirection: 'row',
-    padding: 10,
-    borderRadius: 20,
-    backgroundColor: COLORS.white,
-    marginVertical: 10,
-    gap: 10,
-  },
-  eventListImage: {
-    height: heightScale(10),
-    width: heightScale(10),
-  },
-  eventListDetails: {
-    justifyContent: 'space-between',
-    flexShrink: 1,
-    width: '100%',
-  },
-  eventListTitle: {
-    textTransform: 'uppercase',
-    fontSize: heightScale(72),
-    fontFamily: FONTS.InterBold,
-    color: COLORS.primary,
-  },
-  eventListDesc: {
-    fontFamily: FONTS.InterBold,
-    color: COLORS.black,
-    fontSize: heightScale(60),
-    marginVertical: 5,
-  },
-  eventListTime: {
-    fontFamily: FONTS.InterMedium,
-    marginBottom: 10,
-    fontSize: heightScale(64),
-    color: COLORS.grey,
-  },
   flatList: {
     paddingHorizontal: heightScale(40),
     marginTop: heightScale(40),
+  },
+  listEmptyComponent: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: widthScale(1.12),
+    height: heightScale(4),
+  },
+  listEmptyComponentText: {
+    fontFamily: FONTS.InterBold,
+    color: COLORS.primaryLight,
+    fontSize: heightScale(40),
   },
 });

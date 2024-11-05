@@ -9,26 +9,34 @@ import {
   Image,
   TouchableHighlight,
 } from 'react-native';
-import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
 import {styles} from './style';
 import {ICONS, IMAGES} from '../../assets';
 import Section from '../../components/Section';
 import {useEventDetails} from './useEventDetails';
+import {IMAGES_BASE_URL} from '../../utils/constants';
+import Skeleton from 'react-native-reanimated-skeleton';
 
 const EventDetails = () => {
-  const {handlePressBack} = useEventDetails();
+  const {event, handlePressBack, getEventDate, getEventTime} =
+    useEventDetails();
   const renderImages = ({item, index}) => {
     return (
-      <SkeletonPlaceholder enabled={false} key={index}>
-        <Image source={item} style={styles.listImage} />
-      </SkeletonPlaceholder>
+      <Skeleton isLoading={!item} key={index}>
+        <Image
+          source={{uri: `${IMAGES_BASE_URL}${item?.path}`}}
+          style={styles.listImage}
+        />
+      </Skeleton>
     );
   };
   const renderVideos = ({item, index}) => {
     return (
-      <SkeletonPlaceholder enabled={false} key={index}>
-        <Image source={item} style={styles.listImage} />
-      </SkeletonPlaceholder>
+      <Skeleton isLoading={!item} key={index}>
+        <Image
+          source={{uri: `${IMAGES_BASE_URL}${item?.path}`}}
+          style={styles.listImage}
+        />
+      </Skeleton>
     );
   };
   return (
@@ -41,7 +49,10 @@ const EventDetails = () => {
         />
         <ScrollView showsVerticalScrollIndicator={false}>
           <View style={styles.headerView}>
-            <Image source={IMAGES.todaysEvent} style={styles.headerImage} />
+            <Image
+              source={{uri: `${IMAGES_BASE_URL}${event?.thumbnail_image}`}}
+              style={styles.headerImage}
+            />
             <View style={styles.innerHeaderView}>
               <View style={styles.screenHeaderView}>
                 <TouchableHighlight
@@ -50,9 +61,7 @@ const EventDetails = () => {
                   underlayColor="rgba(255,255,255,0.3)">
                   <Image source={ICONS.arrowLeft} style={styles.back} />
                 </TouchableHighlight>
-                <Text style={styles.screenHeaderText}>
-                  Appassionata concerts
-                </Text>
+                <Text style={styles.screenHeaderText}>{event?.title}</Text>
               </View>
               <TouchableOpacity>
                 <Image source={ICONS.qr} style={styles.qrIcon} />
@@ -60,19 +69,28 @@ const EventDetails = () => {
             </View>
           </View>
           <View style={styles.eventCategoriesView}>
-            <Image source={ICONS.music} style={styles.eventCategoriesImage} />
-            <Text style={styles.eventCategoryTitle}>Music</Text>
+            <Image
+              source={{
+                uri: `${IMAGES_BASE_URL}${event?.event_category?.icon_image}`,
+              }}
+              style={styles.eventCategoriesImage}
+            />
+            <Text style={styles.eventCategoryTitle}>
+              {event?.event_category?.title}
+            </Text>
           </View>
           <View style={styles.eventDetailsView}>
-            <Text style={styles.eventTitle}>Appassionata concerts</Text>
+            <Text style={styles.eventTitle}>{event?.title}</Text>
             <View style={styles.venueDetailView}>
               <View style={styles.venueIconView}>
                 <Image source={ICONS.events} style={styles.venueIcon} />
               </View>
               <View style={styles.venueTexts}>
-                <Text style={styles.venueFirstText}>14 JUNE, 2021</Text>
+                <Text style={styles.venueFirstText}>
+                  {getEventDate(event?.event_date)}
+                </Text>
                 <Text style={styles.venueSecondText}>
-                  Tuesday, 4:00PM - 9:00PM
+                  {getEventTime(event?.event_date)}
                 </Text>
               </View>
             </View>
@@ -82,26 +100,25 @@ const EventDetails = () => {
               </View>
               <View style={styles.venueTexts}>
                 <Text style={styles.venueFirstText}>Lauro Rossi Theatre</Text>
-                <Text style={styles.venueSecondText}>Macerata, Italy</Text>
+                <Text style={styles.venueSecondText}>{event?.location}</Text>
               </View>
             </View>
           </View>
           <View style={styles.eventInfoView}>
             <Text style={styles.eventInfoTitle}>ABOUT EVENT</Text>
-            <Text style={styles.aboutText}>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s, when an unknown printer took a galley of
-              type and scrambled it to make a type
-            </Text>
+            <Text style={styles.aboutText}>{event?.description}</Text>
           </View>
           <Section
-            data={new Array(5).fill(IMAGES.categoryImage)}
+            data={event?.event_assets?.filter(
+              item => item?.media_type === 'image',
+            )}
             renderItem={renderImages}
             title={() => <Text style={styles.eventInfoTitle}>IMAGES</Text>}
           />
           <Section
-            data={new Array(5).fill(IMAGES.categoryImage)}
+            data={event?.event_assets?.filter(
+              item => item?.media_type === 'video',
+            )}
             renderItem={renderVideos}
             title={() => <Text style={styles.eventInfoTitle}>VIDEOS</Text>}
           />
@@ -113,10 +130,12 @@ const EventDetails = () => {
                 style={styles.organizerImage}
               />
               <View style={styles.organizerTexts}>
-                <Text style={styles.organizerFirstText}>Ashfak Sayem</Text>
+                <Text style={styles.organizerFirstText}>
+                  {event?.creator?.first_name} {event?.creator?.last_name}
+                </Text>
                 <Text style={styles.organizerSecondText}>Organizer</Text>
                 <Text style={styles.organizerSecondText}>
-                  Published on: 14 November, 2021
+                  Published on: {getEventDate(event?.createdAt)}
                 </Text>
               </View>
             </View>

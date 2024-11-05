@@ -9,18 +9,24 @@ import {
   TouchableOpacity,
   FlatList,
 } from 'react-native';
-import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
 import {styles} from './style';
 import {COLORS} from '../../utils/constants';
-import {ICONS, IMAGES} from '../../assets';
-import {EventCategories} from '../../utils/data';
+import {ICONS} from '../../assets';
 import {useEvents} from './useEvents';
 import Section from '../../components/Section';
+import CategoryItem from '../../components/CategoryItem';
+import EventsSectionItem from '../../components/EventsSectionItem';
 
 const Events = () => {
   const {
     selectedCategory,
     scrollRef,
+    categories,
+    categoriesError,
+    categoriesLoading,
+    events,
+    eventsLoading,
+    eventsError,
     handleSelectCategory,
     handlePressSeeAll,
     handlePressSearch,
@@ -28,65 +34,16 @@ const Events = () => {
   } = useEvents();
   const renderCategoryItem = ({item, index}) => {
     return (
-      <SkeletonPlaceholder enabled={false}>
-        <TouchableOpacity
-          onPress={() => handleSelectCategory(index)}
-          style={[
-            styles.eventCategoriesView,
-            {
-              backgroundColor:
-                index === selectedCategory ? COLORS.primary : COLORS.white,
-            },
-          ]}
-          key={index}>
-          {item.icon && (
-            <Image
-              source={item.icon}
-              style={[
-                styles.eventCategoriesImage,
-                {
-                  tintColor:
-                    index === selectedCategory ? COLORS.white : COLORS.primary,
-                },
-              ]}
-            />
-          )}
-          <Text
-            style={[
-              styles.eventCategoryTitle,
-              {
-                color:
-                  index === selectedCategory ? COLORS.white : COLORS.primary,
-              },
-            ]}>
-            {item.categoryName}
-          </Text>
-        </TouchableOpacity>
-      </SkeletonPlaceholder>
+      <CategoryItem
+        item={item}
+        index={index}
+        onPress={() => handleSelectCategory(index)}
+        selectedCategory={selectedCategory}
+      />
     );
   };
   const renderEvents = ({item, index}) => {
-    return (
-      <SkeletonPlaceholder enabled={false}>
-        <TouchableOpacity
-          style={styles.eventView}
-          key={index}
-          onPress={handlePressEvent}>
-          <Image source={item} style={styles.eventImage} />
-          <View style={styles.eventDataView}>
-            <Text style={styles.eventDate}>10</Text>
-            <Text style={styles.eventMonth}>JUNE</Text>
-          </View>
-          <Text style={styles.eventTitle}>Appassionata concerts</Text>
-          <View style={styles.eventAddressView}>
-            <Image source={ICONS.location} style={styles.eventLocationIcon} />
-            <Text style={styles.eventAddressText}>
-              Lauro Rossi Theatre, Mac
-            </Text>
-          </View>
-        </TouchableOpacity>
-      </SkeletonPlaceholder>
-    );
+    return <EventsSectionItem item={item} onPress={handlePressEvent} />;
   };
   return (
     <>
@@ -101,7 +58,7 @@ const Events = () => {
             </TouchableOpacity>
           </View>
           <FlatList
-            data={[{categoryName: 'All'}, ...EventCategories]}
+            data={[{icon_image: '', title: 'All'}, ...(categories || [])]}
             renderItem={renderCategoryItem}
             horizontal
             showsHorizontalScrollIndicator={false}
@@ -109,31 +66,31 @@ const Events = () => {
           />
           <Section
             title="Recent Events"
-            data={new Array(4).fill(IMAGES.todaysEvent)}
+            data={events}
             renderItem={renderEvents}
             onPressSeeAll={handlePressSeeAll}
           />
           <Section
             title={() => <Text style={styles.sectionTitle}>SPORTS</Text>}
-            data={new Array(4).fill(IMAGES.upcomingEvent)}
+            data={events}
             renderItem={renderEvents}
             onPressSeeAll={handlePressSeeAll}
           />
           <Section
             title={() => <Text style={styles.sectionTitle}>MUSIC</Text>}
-            data={new Array(4).fill(IMAGES.categoryImage)}
+            data={events}
             renderItem={renderEvents}
             onPressSeeAll={handlePressSeeAll}
           />
           <Section
             title={() => <Text style={styles.sectionTitle}>FOOD</Text>}
-            data={new Array(4).fill(IMAGES.categoryImage)}
+            data={events}
             renderItem={renderEvents}
             onPressSeeAll={handlePressSeeAll}
           />
           <Section
             title={() => <Text style={styles.sectionTitle}>ART</Text>}
-            data={new Array(4).fill(IMAGES.categoryImage)}
+            data={events}
             renderItem={renderEvents}
             onPressSeeAll={handlePressSeeAll}
           />

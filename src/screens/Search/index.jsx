@@ -11,13 +11,13 @@ import {
   TouchableOpacity,
   TouchableHighlight,
 } from 'react-native';
-import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
 import {styles} from './style';
 import {COLORS} from '../../utils/constants';
-import {ICONS, IMAGES} from '../../assets';
+import {ICONS} from '../../assets';
 import {EventCategories} from '../../utils/data';
 import {useSearch} from './useSearch';
 import FilterModal from './FilterModal';
+import FlatListItem from '../../components/FlatListItem';
 
 const Search = () => {
   const {
@@ -29,24 +29,14 @@ const Search = () => {
     handlePressBack,
     handlePressResultItem,
   } = useSearch();
-  const renderCategories = ({item, index}) => {
+  const renderSearchResult = ({item, index}) => {
+    return <FlatListItem item={item} onPress={handlePressResultItem} />;
+  };
+  const renderEmptyComponent = () => {
     return (
-      <SkeletonPlaceholder enabled={false}>
-        <TouchableOpacity
-          style={styles.eventListView}
-          onPress={handlePressResultItem}>
-          <Image source={IMAGES.categoryImage} style={styles.eventListImage} />
-          <View style={styles.eventListDetails}>
-            <View>
-              <Text style={styles.eventListTitle}>Sports</Text>
-              <Text style={styles.eventListDesc}>
-                Women's leadership conference
-              </Text>
-            </View>
-            <Text style={styles.eventListTime}>5 hours ago</Text>
-          </View>
-        </TouchableOpacity>
-      </SkeletonPlaceholder>
+      <View style={styles.listEmptyComponent}>
+        <Text style={styles.listEmptyComponentText}>No data found</Text>
+      </View>
     );
   };
   return (
@@ -83,10 +73,11 @@ const Search = () => {
           </TouchableOpacity>
         </View>
         <FlatList
-          data={EventCategories}
-          renderItem={renderCategories}
+          data={[EventCategories] || new Array(4).fill()}
+          renderItem={renderSearchResult}
           scrollEnabled={false}
           style={styles.flatList}
+          ListEmptyComponent={renderEmptyComponent}
         />
         <FilterModal
           visible={modalVisible}

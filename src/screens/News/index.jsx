@@ -9,18 +9,21 @@ import {
   TouchableOpacity,
   FlatList,
 } from 'react-native';
-import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
 import {styles} from './style';
 import {COLORS} from '../../utils/constants';
 import {ICONS, IMAGES} from '../../assets';
 import {EventCategories} from '../../utils/data';
 import Section from '../../components/Section';
 import {useNews} from './useNews';
+import NewsSectionItem from '../../components/NewsSectionItem';
+import CategoryItem from '../../components/CategoryItem';
+import FlatListItem from '../../components/FlatListItem';
 
 const News = () => {
   const {
     selectedCategory,
     scrollRef,
+    events,
     handleSelectCategory,
     handlePressSeeAll,
     handlePressSearch,
@@ -28,76 +31,21 @@ const News = () => {
   } = useNews();
   const renderCategoryItem = ({item, index}) => {
     return (
-      <TouchableOpacity
+      <CategoryItem
+        item={item}
+        index={index}
         onPress={() => handleSelectCategory(index)}
-        style={[
-          styles.eventCategoriesView,
-          {
-            backgroundColor:
-              index === selectedCategory ? COLORS.primary : COLORS.white,
-          },
-        ]}
-        key={index}>
-        {item.icon && (
-          <Image
-            source={item.icon}
-            style={[
-              styles.eventCategoriesImage,
-              {
-                tintColor:
-                  index === selectedCategory ? COLORS.white : COLORS.primary,
-              },
-            ]}
-          />
-        )}
-        <Text
-          style={[
-            styles.eventCategoryTitle,
-            {
-              color: index === selectedCategory ? COLORS.white : COLORS.primary,
-            },
-          ]}>
-          {item.categoryName}
-        </Text>
-      </TouchableOpacity>
+        selectedCategory={selectedCategory}
+      />
     );
   };
   const renderNews = ({item, index}) => {
     return (
-      <SkeletonPlaceholder enabled={false}>
-        <TouchableOpacity
-          style={styles.newsView}
-          key={index}
-          onPress={handlePressNews}>
-          <Image source={item} style={styles.newsImage} />
-          <View style={styles.newsDataView}>
-            <Text style={styles.newsDate}>10</Text>
-            <Text style={styles.newsMonth}>JUNE</Text>
-          </View>
-          <View style={styles.newsCategoryView}>
-            <Text style={styles.newsCategoryTitle}>SPORTS</Text>
-            <Text style={styles.newsCategoryTime}>2 min ago</Text>
-          </View>
-          <Text style={styles.newsTitle}>Appassionata concerts</Text>
-        </TouchableOpacity>
-      </SkeletonPlaceholder>
+      <NewsSectionItem item={item} onPress={handlePressNews} index={index} />
     );
   };
   const renderCategories = ({item, index}) => {
-    return (
-      <SkeletonPlaceholder enabled={false}>
-        <TouchableOpacity style={styles.newsListView} onPress={handlePressNews}>
-          <Image source={IMAGES.categoryImage} style={styles.newsListImage} />
-          <View style={styles.newsListDetails}>
-            <Text style={styles.newsListTitle}>Sports</Text>
-            <Text style={styles.newsListDesc}>
-              Women's leadership conference
-            </Text>
-            <Text style={styles.newsListTime}>5 hours ago</Text>
-          </View>
-        </TouchableOpacity>
-      </SkeletonPlaceholder>
-    );
+    return <FlatListItem item={item} onPress={handlePressNews} />;
   };
   const renderHeaderComponent = title => {
     return (
@@ -107,6 +55,13 @@ const News = () => {
           <Text style={styles.seeAllText}>See All </Text>
           <Image source={ICONS.arrowRight} style={styles.arrowRight} />
         </TouchableOpacity>
+      </View>
+    );
+  };
+  const renderEmptyComponent = () => {
+    return (
+      <View style={styles.listEmptyComponent}>
+        <Text style={styles.listEmptyComponentText}>No data found</Text>
       </View>
     );
   };
@@ -123,7 +78,7 @@ const News = () => {
             </TouchableOpacity>
           </View>
           <FlatList
-            data={[{categoryName: 'All'}, ...EventCategories]}
+            data={[{icon_image: '', title: 'All'}, ...(events || [])]}
             renderItem={renderCategoryItem}
             horizontal
             showsHorizontalScrollIndicator={false}
@@ -136,25 +91,28 @@ const News = () => {
             onPressSeeAll={handlePressSeeAll}
           />
           <FlatList
-            data={EventCategories}
+            data={EventCategories || new Array(2).fill()}
             renderItem={renderCategories}
             scrollEnabled={false}
             style={styles.flatList}
             ListHeaderComponent={() => renderHeaderComponent('SPORTS')}
+            ListEmptyComponent={renderEmptyComponent}
           />
           <FlatList
-            data={EventCategories}
+            data={EventCategories || new Array(2).fill()}
             renderItem={renderCategories}
             scrollEnabled={false}
             style={styles.flatList}
             ListHeaderComponent={() => renderHeaderComponent('MUSIC')}
+            ListEmptyComponent={renderEmptyComponent}
           />
           <FlatList
-            data={EventCategories}
+            data={EventCategories || new Array(2).fill()}
             renderItem={renderCategories}
             scrollEnabled={false}
             style={styles.flatList}
             ListHeaderComponent={() => renderHeaderComponent('FOOD')}
+            ListEmptyComponent={renderEmptyComponent}
           />
         </ScrollView>
       </SafeAreaView>

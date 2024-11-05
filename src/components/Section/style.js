@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {heightScale} from '../../utils/helper';
+import {heightScale, widthScale} from '../../utils/helper';
 import {FONTS} from '../../assets';
 import {COLORS} from '../../utils/constants';
 
@@ -33,5 +33,37 @@ export const styles = StyleSheet.create({
     height: heightScale(100),
     width: heightScale(100),
     tintColor: COLORS.grey,
+  },
+  footerComponent: {
+    flex: 1,
+    backgroundColor: COLORS.primary,
+    width: widthScale(4),
+    borderRadius: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  footerComponentText: {
+    fontFamily: FONTS.InterBold,
+    color: COLORS.white,
+    fontSize: heightScale(60),
+  },
+  arrowRightFooter: {
+    height: heightScale(100),
+    width: heightScale(100),
+    tintColor: COLORS.white,
+  },
+  listEmptyComponent: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: widthScale(1.12),
+    height: heightScale(4),
+  },
+  listEmptyComponentText: {
+    fontFamily: FONTS.InterBold,
+    color: COLORS.primaryLight,
+    fontSize: heightScale(40),
   },
 });

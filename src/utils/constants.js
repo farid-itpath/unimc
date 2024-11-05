@@ -1,3 +1,9 @@
+export const BASE_URL = 'http://192.168.0.11:5020/api';
+export const IMAGES_BASE_URL = 'http://192.168.0.11:5020';
+// export const BASE_URL = 'https://apimaceratauniversity.project-demo.info/api';
+// export const IMAGES_BASE_URL =
+//   'https://apimaceratauniversity.project-demo.info';
+
 export const SCREENS = {
   HOME: {
     id: 1,

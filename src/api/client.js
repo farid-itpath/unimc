@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {BASE_URL} from '../utils/constants/constants';
+import {BASE_URL} from '../utils/constants';
 
 export const METHODS = {
   GET: 'get',
