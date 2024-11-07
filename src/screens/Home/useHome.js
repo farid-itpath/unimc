@@ -27,26 +27,28 @@ export const useHome = () => {
   const handlePressSearch = () => navigation.navigate(SCREENS.SEARCH.name);
   const handlePressSeeAllEvents = () =>
     navigation.navigate(SCREENS.EVENTSLIST.name);
+  const handlePressSeeAllTodaysEvents = () =>
+    navigation.navigate(SCREENS.EVENTSLIST.name, {
+      screenTitle: "Today's Events",
+    });
+  const handlePressSeeAllUpcomingEvents = () =>
+    navigation.navigate(SCREENS.EVENTSLIST.name, {
+      screenTitle: 'Upcoming Events',
+    });
   const handlePressSeeAllNews = () =>
-    navigation.navigate(SCREENS.NEWSLIST.name);
+    navigation.navigate(SCREENS.NEWSLIST.name, {screenTitle: 'News'});
   const handlePressEvent = eventId =>
     navigation.navigate(SCREENS.EVENTDETAILS.name, {eventId});
+  const handlePressNews = newsId =>
+    navigation.navigate(SCREENS.NEWSDETAILS.name, {newsId});
   const handleSelectEventsCategory = index => setSelectedEventsCategory(index);
   const handleSelectNewsCategory = index => setSelectedNewsCategory(index);
-  const getTodayDate = () => {
-    const today = new Date();
-    const year = today.getFullYear();
-    const month = String(today.getMonth() + 1).padStart(2, '0');
-    const day = String(today.getDate()).padStart(2, '0');
-
-    return `${year}-${month}-${day}`;
-  };
   useEffect(() => {
     dispatch(getNewsCategories());
     dispatch(getEventsCategories());
     dispatch(getEvents());
     dispatch(getUpcomingEvents());
-    dispatch(getTodaysEvents(getTodayDate()));
+    dispatch(getTodaysEvents());
     dispatch(getNews());
   }, []);
   return {
@@ -55,6 +57,7 @@ export const useHome = () => {
     selectedNewsCategory,
     handleSelectNewsCategory,
     handlePressSeeAllNews,
+    handlePressNews,
 
     eventCategories,
     eventCategoriesLoading,
@@ -62,6 +65,8 @@ export const useHome = () => {
 
     selectedEventsCategory,
     handlePressSeeAllEvents,
+    handlePressSeeAllTodaysEvents,
+    handlePressSeeAllUpcomingEvents,
     handlePressEvent,
     handleSelectEventsCategory,
 

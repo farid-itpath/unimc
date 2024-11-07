@@ -12,18 +12,18 @@ import {
 import {styles} from './style';
 import {COLORS} from '../../utils/constants';
 import {ICONS, IMAGES} from '../../assets';
-import {EventCategories} from '../../utils/data';
 import Section from '../../components/Section';
 import {useNews} from './useNews';
 import NewsSectionItem from '../../components/NewsSectionItem';
 import CategoryItem from '../../components/CategoryItem';
 import FlatListItem from '../../components/FlatListItem';
+import {timeAgo} from '../../utils/helper';
 
 const News = () => {
   const {
+    categories,
     selectedCategory,
-    scrollRef,
-    events,
+    news,
     handleSelectCategory,
     handlePressSeeAll,
     handlePressSearch,
@@ -41,17 +41,33 @@ const News = () => {
   };
   const renderNews = ({item, index}) => {
     return (
-      <NewsSectionItem item={item} onPress={handlePressNews} index={index} />
+      <NewsSectionItem
+        item={item}
+        onPress={() => handlePressNews(item?.id)}
+        index={index}
+      />
     );
   };
-  const renderCategories = ({item, index}) => {
-    return <FlatListItem item={item} onPress={handlePressNews} />;
+  const renderNewsItem = ({item, index}) => {
+    return (
+      <FlatListItem
+        item={item}
+        itemDate={timeAgo(item?.submittedAt)}
+        itemDesc={item?.news_description}
+        itemImage={item?.news_image}
+        itemTitle={item?.title}
+        onPress={() => handlePressNews(item?.id)}
+        key={index}
+      />
+    );
   };
   const renderHeaderComponent = title => {
     return (
       <View style={styles.sectionHead}>
         <Text style={styles.sectionTitle}>{title}</Text>
-        <TouchableOpacity style={styles.seeAllView} onPress={handlePressSeeAll}>
+        <TouchableOpacity
+          style={styles.seeAllView}
+          onPress={() => handlePressSeeAll(title)}>
           <Text style={styles.seeAllText}>See All </Text>
           <Image source={ICONS.arrowRight} style={styles.arrowRight} />
         </TouchableOpacity>
@@ -70,7 +86,7 @@ const News = () => {
       <SafeAreaView style={styles.statusBarSafeArea} />
       <SafeAreaView style={styles.safeAreaView}>
         <StatusBar backgroundColor={COLORS.primary} />
-        <ScrollView ref={scrollRef} showsVerticalScrollIndicator={false}>
+        <ScrollView showsVerticalScrollIndicator={false}>
           <View style={styles.headerView}>
             <Text style={styles.headerTitle}>News</Text>
             <TouchableOpacity onPress={handlePressSearch}>
@@ -78,7 +94,7 @@ const News = () => {
             </TouchableOpacity>
           </View>
           <FlatList
-            data={[{icon_image: '', title: 'All'}, ...(events || [])]}
+            data={[{icon_image: '', title: 'All'}, ...(categories || [])]}
             renderItem={renderCategoryItem}
             horizontal
             showsHorizontalScrollIndicator={false}
@@ -86,34 +102,52 @@ const News = () => {
           />
           <Section
             title="Recent News"
-            data={new Array(4).fill(IMAGES.todaysEvent)}
+            data={news}
             renderItem={renderNews}
-            onPressSeeAll={handlePressSeeAll}
+            onPressSeeAll={() => handlePressSeeAll('Recent News')}
           />
-          <FlatList
-            data={EventCategories || new Array(2).fill()}
-            renderItem={renderCategories}
-            scrollEnabled={false}
-            style={styles.flatList}
-            ListHeaderComponent={() => renderHeaderComponent('SPORTS')}
-            ListEmptyComponent={renderEmptyComponent}
-          />
-          <FlatList
-            data={EventCategories || new Array(2).fill()}
-            renderItem={renderCategories}
-            scrollEnabled={false}
-            style={styles.flatList}
-            ListHeaderComponent={() => renderHeaderComponent('MUSIC')}
-            ListEmptyComponent={renderEmptyComponent}
-          />
-          <FlatList
-            data={EventCategories || new Array(2).fill()}
-            renderItem={renderCategories}
-            scrollEnabled={false}
-            style={styles.flatList}
-            ListHeaderComponent={() => renderHeaderComponent('FOOD')}
-            ListEmptyComponent={renderEmptyComponent}
-          />
+          {selectedCategory === 0 ? (
+            categories?.map((category, index) => {
+              const categoryData = news?.filter(
+                newsItem => newsItem?.news_category?.title === category?.title,
+              );
+              return categoryData.length ? (
+                <FlatList
+                  data={
+                    news.filter(
+                      newsItem =>
+                        newsItem?.news_category?.title === category?.title,
+                    ) || new Array(2).fill()
+                  }
+                  renderItem={renderNewsItem}
+                  scrollEnabled={false}
+                  style={styles.flatList}
+                  ListHeaderComponent={() =>
+                    renderHeaderComponent(category?.title)
+                  }
+                  ListEmptyComponent={renderEmptyComponent}
+                  key={index}
+                />
+              ) : null;
+            })
+          ) : (
+            <FlatList
+              data={
+                news.filter(
+                  newsItem =>
+                    newsItem?.news_category?.title ===
+                    categories[selectedCategory - 1]?.title,
+                ) || new Array(2).fill()
+              }
+              renderItem={renderNewsItem}
+              scrollEnabled={false}
+              style={styles.flatList}
+              ListHeaderComponent={() =>
+                renderHeaderComponent(categories[selectedCategory - 1]?.title)
+              }
+              ListEmptyComponent={renderEmptyComponent}
+            />
+          )}
         </ScrollView>
       </SafeAreaView>
     </>

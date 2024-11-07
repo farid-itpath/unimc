@@ -17,6 +17,7 @@ import {useHome} from './useHome';
 import CategoryItem from '../../components/CategoryItem';
 import EventsSectionItem from '../../components/EventsSectionItem';
 import FlatListItem from '../../components/FlatListItem';
+import {timeAgo} from '../../utils/helper';
 
 const Home = () => {
   const {
@@ -25,13 +26,16 @@ const Home = () => {
     selectedNewsCategory,
     handlePressSeeAllNews,
     handleSelectNewsCategory,
+    handlePressNews,
 
     eventCategories,
     eventCategoriesLoading,
     eventCategoriesError,
-    
+
     selectedEventsCategory,
-    handlePressSeeAllEvents,
+    handlePressSeeAllTodaysEvents,
+    handlePressSeeAllUpcomingEvents,
+
     handlePressEvent,
     handleSelectEventsCategory,
 
@@ -71,7 +75,15 @@ const Home = () => {
   };
   const renderNews = ({item, index}) => {
     return (
-      <FlatListItem item={item} onPress={handlePressSeeAllEvents} key={index} />
+      <FlatListItem
+        item={item}
+        onPress={() => handlePressNews(item?.id)}
+        key={index}
+        itemImage={item?.news_image}
+        itemTitle={item?.title}
+        itemDesc={item?.news_description}
+        itemDate={timeAgo(item?.submittedAt)}
+      />
     );
   };
   const renderHeaderComponent = title => {
@@ -115,7 +127,7 @@ const Home = () => {
             title="Today's Events"
             data={todaysEvents}
             renderItem={renderEvents}
-            onPressSeeAll={handlePressSeeAllEvents}
+            onPressSeeAll={handlePressSeeAllTodaysEvents}
             showFooterComponent={true}
           />
           <Section
@@ -128,7 +140,7 @@ const Home = () => {
             title="Upcoming Events"
             data={upcomingEvents}
             renderItem={renderEvents}
-            onPressSeeAll={handlePressSeeAllEvents}
+            onPressSeeAll={handlePressSeeAllUpcomingEvents}
             showFooterComponent={true}
           />
           <Section

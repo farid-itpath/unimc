@@ -12,15 +12,17 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
   headerView: {
-    height: heightScale(3),
+    height: heightScale(2.5),
     justifyContent: 'center',
     alignItems: 'center',
   },
   headerImage: {
-    height: heightScale(3),
+    height: heightScale(2.5),
     width: widthScale(1),
     position: 'absolute',
     objectFit: 'fill',
+    borderBottomStartRadius: 20,
+    borderBottomEndRadius: 20,
   },
   innerHeaderView: {
     ...StyleSheet.absoluteFillObject,
@@ -34,7 +36,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: heightScale(40),
     gap: heightScale(40),
-    marginTop: 10,
+    marginTop: heightScale(16),
   },
   screenHeaderText: {
     fontFamily: FONTS.InterMedium,
@@ -87,16 +89,17 @@ export const styles = StyleSheet.create({
   },
   venueIconView: {
     backgroundColor: COLORS.primaryExtraLight,
-    padding: 10,
+    padding: 12,
     borderRadius: 10,
   },
   venueIcon: {
     tintColor: COLORS.primary,
-    height: heightScale(32),
-    width: heightScale(32),
+    height: heightScale(30),
+    width: heightScale(30),
   },
   venueTexts: {
     justifyContent: 'space-between',
+    flexShrink: 1,
   },
   venueFirstText: {
     fontFamily: FONTS.InterMedium,
@@ -128,6 +131,14 @@ export const styles = StyleSheet.create({
     height: heightScale(8),
     width: heightScale(8),
     marginRight: 10,
+    borderRadius: 10,
+  },
+  listVideo: {
+    height: heightScale(8),
+    width: heightScale(8),
+    marginRight: 10,
+    borderRadius: 10,
+    overflow: 'hidden',
   },
   organizerInfoView: {
     paddingHorizontal: heightScale(40),
@@ -167,3 +178,14 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
+
+export const layout = {
+  descriptionLayout: {
+    height: heightScale(4),
+    width: '100%',
+  },
+  eventDetails: {
+    height: 50,
+    width: '100%',
+  },
+};

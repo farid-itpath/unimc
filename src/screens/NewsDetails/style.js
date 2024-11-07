@@ -17,6 +17,8 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   headerImage: {
+    height: heightScale(3),
+    width: widthScale(1),
     position: 'absolute',
     objectFit: 'fill',
   },
@@ -32,12 +34,13 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: heightScale(40),
     gap: heightScale(40),
-    marginTop: 10,
+    marginTop: heightScale(16),
   },
   screenHeaderText: {
     fontFamily: FONTS.InterMedium,
     color: COLORS.white,
     fontSize: heightScale(42),
+    flexShrink: 1,
   },
   eventCategoriesView: {
     flexDirection: 'row',
@@ -123,3 +126,15 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
+
+export const layout = {
+  title: {
+    height: 50,
+    width: '100%',
+  },
+  description: {
+    height: heightScale(4),
+    width: '100%',
+    marginTop: 20,
+  },
+};

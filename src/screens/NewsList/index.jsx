@@ -14,13 +14,29 @@ import {COLORS} from '../../utils/constants';
 import {ICONS} from '../../assets';
 import {useNewsList} from './useNewsList';
 import {styles} from './style';
-import {EventCategories} from '../../utils/data';
 import FlatListItem from '../../components/FlatListItem';
+import {timeAgo} from '../../utils/helper';
 
 const NewsList = () => {
-  const {handlePressSearch, handlePressBack, handlePressNews} = useNewsList();
-  const renderCategories = ({item, index}) => {
-    return <FlatListItem item={item} onPress={handlePressNews} />;
+  const {
+    news,
+    screenTitle,
+    handlePressSearch,
+    handlePressBack,
+    handlePressNews,
+  } = useNewsList();
+  const renderNews = ({item, index}) => {
+    return (
+      <FlatListItem
+        item={item}
+        itemImage={item?.news_image}
+        itemDate={timeAgo(item?.submittedAt)}
+        itemDesc={item?.news_description}
+        itemTitle={item?.title}
+        onPress={handlePressNews}
+        key={index}
+      />
+    );
   };
   const renderEmptyComponent = () => {
     return (
@@ -43,14 +59,20 @@ const NewsList = () => {
             style={styles.backIconView}>
             <Image source={ICONS.back} style={styles.backIcon} />
           </TouchableHighlight>
-          <Text style={styles.headerTitle}>News</Text>
+          <Text style={styles.headerTitle}>{screenTitle}</Text>
           <TouchableOpacity onPress={handlePressSearch}>
             <Image source={ICONS.search} style={styles.searchIcon} />
           </TouchableOpacity>
         </View>
         <FlatList
-          data={[...EventCategories, ...EventCategories] || new Array(4).fill()}
-          renderItem={renderCategories}
+          data={
+            screenTitle === 'Recent News'
+              ? news
+              : news.filter(
+                  newsItem => newsItem?.news_category?.title === screenTitle,
+                )
+          }
+          renderItem={renderNews}
           scrollEnabled={false}
           style={styles.flatList}
           ListEmptyComponent={renderEmptyComponent}

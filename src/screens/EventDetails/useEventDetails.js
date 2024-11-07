@@ -1,7 +1,7 @@
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {getEvent} from '../../redux/reducres/eventsSlice';
+import {clearEvent, getEvent} from '../../redux/reducres/eventsSlice';
 
 export const useEventDetails = () => {
   const navigation = useNavigation();
@@ -30,13 +30,18 @@ export const useEventDetails = () => {
       })}`;
     else return '';
   };
+  const handleVideoError = () => {
+    console.log('Videi error');
+  };
   useEffect(() => {
     dispatch(getEvent(params?.eventId));
-  }, [params?.eventId]);
+    return () => dispatch(clearEvent());
+  }, []);
   return {
     event,
     handlePressBack,
     getEventDate,
     getEventTime,
+    handleVideoError,
   };
 };

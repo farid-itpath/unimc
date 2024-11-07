@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -9,15 +9,16 @@ import {
   Image,
   TouchableHighlight,
 } from 'react-native';
-import {styles} from './style';
+import {layout, styles} from './style';
 import {ICONS, IMAGES} from '../../assets';
 import Section from '../../components/Section';
 import {useEventDetails} from './useEventDetails';
 import {IMAGES_BASE_URL} from '../../utils/constants';
 import Skeleton from 'react-native-reanimated-skeleton';
+import Video from 'react-native-video';
 
 const EventDetails = () => {
-  const {event, handlePressBack, getEventDate, getEventTime} =
+  const {event, handlePressBack, getEventDate, getEventTime, handleVideoError} =
     useEventDetails();
   const renderImages = ({item, index}) => {
     return (
@@ -32,20 +33,30 @@ const EventDetails = () => {
   const renderVideos = ({item, index}) => {
     return (
       <Skeleton isLoading={!item} key={index}>
-        <Image
+        <Video
           source={{uri: `${IMAGES_BASE_URL}${item?.path}`}}
-          style={styles.listImage}
+          onError={handleVideoError}
+          style={styles.listVideo}
+          resizeMode="stretch"
+          paused={true}
         />
       </Skeleton>
     );
   };
+  const images = event?.event_assets?.filter(
+    item => item?.media_type === 'image',
+  );
+  const videos = event?.event_assets?.filter(
+    item => item?.media_type === 'video',
+  );
   return (
     <>
       <SafeAreaView style={styles.statusBarSafeArea} />
       <SafeAreaView style={styles.safeAreaView}>
         <StatusBar
-          backgroundColor={'rgba(0,0,0,0.5)'}
+          backgroundColor={'transparent'}
           barStyle="light-content"
+          translucent
         />
         <ScrollView showsVerticalScrollIndicator={false}>
           <View style={styles.headerView}>
@@ -80,48 +91,68 @@ const EventDetails = () => {
             </Text>
           </View>
           <View style={styles.eventDetailsView}>
-            <Text style={styles.eventTitle}>{event?.title}</Text>
+            {event ? (
+              <Text style={styles.eventTitle}>{event?.title}</Text>
+            ) : (
+              <Skeleton layout={[layout.eventDetails]} />
+            )}
             <View style={styles.venueDetailView}>
               <View style={styles.venueIconView}>
                 <Image source={ICONS.events} style={styles.venueIcon} />
               </View>
-              <View style={styles.venueTexts}>
-                <Text style={styles.venueFirstText}>
-                  {getEventDate(event?.event_date)}
-                </Text>
-                <Text style={styles.venueSecondText}>
-                  {getEventTime(event?.event_date)}
-                </Text>
-              </View>
+              {event ? (
+                <View style={styles.venueTexts}>
+                  <Text style={styles.venueFirstText}>
+                    {getEventDate(event?.event_date)}
+                  </Text>
+                  <Text style={styles.venueSecondText}>
+                    {getEventTime(event?.event_date)}
+                  </Text>
+                </View>
+              ) : (
+                <Skeleton layout={[layout.eventDetails]} />
+              )}
             </View>
             <View style={styles.venueDetailView}>
               <View style={styles.venueIconView}>
                 <Image source={ICONS.location} style={styles.venueIcon} />
               </View>
-              <View style={styles.venueTexts}>
-                <Text style={styles.venueFirstText}>Lauro Rossi Theatre</Text>
-                <Text style={styles.venueSecondText}>{event?.location}</Text>
-              </View>
+              {event ? (
+                <View style={styles.venueTexts}>
+                  <Text style={styles.venueFirstText} numberOfLines={1}>
+                    {event?.location?.split(',')[0]}
+                  </Text>
+                  <Text style={styles.venueSecondText} numberOfLines={1}>
+                    {event?.location?.split(',').slice(1).join(',')}
+                  </Text>
+                </View>
+              ) : (
+                <Skeleton layout={[layout.eventDetails]} />
+              )}
             </View>
           </View>
           <View style={styles.eventInfoView}>
             <Text style={styles.eventInfoTitle}>ABOUT EVENT</Text>
-            <Text style={styles.aboutText}>{event?.description}</Text>
+            {event ? (
+              <Text style={styles.aboutText}>{event?.description}</Text>
+            ) : (
+              <Skeleton layout={[layout.descriptionLayout]} />
+            )}
           </View>
-          <Section
-            data={event?.event_assets?.filter(
-              item => item?.media_type === 'image',
-            )}
-            renderItem={renderImages}
-            title={() => <Text style={styles.eventInfoTitle}>IMAGES</Text>}
-          />
-          <Section
-            data={event?.event_assets?.filter(
-              item => item?.media_type === 'video',
-            )}
-            renderItem={renderVideos}
-            title={() => <Text style={styles.eventInfoTitle}>VIDEOS</Text>}
-          />
+          {images?.length && (
+            <Section
+              data={images}
+              renderItem={renderImages}
+              title={() => <Text style={styles.eventInfoTitle}>IMAGES</Text>}
+            />
+          )}
+          {videos?.length && (
+            <Section
+              data={videos}
+              renderItem={renderVideos}
+              title={() => <Text style={styles.eventInfoTitle}>VIDEOS</Text>}
+            />
+          )}
           <View style={styles.eventInfoView}>
             <Text style={styles.eventInfoTitle}>ORGANIZER</Text>
             <View style={styles.organizerDetailView}>

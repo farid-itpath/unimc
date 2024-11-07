@@ -18,12 +18,12 @@ export const api = {
       }),
     getUpcomingEvents: () =>
       client({
-        url: `/event?isUpcomingEvent=${true}`,
+        url: `/event?status=published&isUpcomingEvent=${true}`,
         method: METHODS.GET,
       }),
-    getTodaysEvents: date =>
+    getTodaysEvents: () =>
       client({
-        url: `/event?todayDate=${date}`,
+        url: `/event?status=published&todayDate=${true}`,
         method: METHODS.GET,
       }),
   },
@@ -35,7 +35,12 @@ export const api = {
       }),
     getNews: () =>
       client({
-        url: '/news',
+        url: '/news?status=published',
+        method: METHODS.GET,
+      }),
+    getSingleNews: id =>
+      client({
+        url: `/news/${id}`,
         method: METHODS.GET,
       }),
   },

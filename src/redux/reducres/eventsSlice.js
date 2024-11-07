@@ -47,9 +47,9 @@ export const getUpcomingEvents = createAsyncThunk(
 
 export const getTodaysEvents = createAsyncThunk(
   'events/getTodaysEvents',
-  async (data, {rejectWithValue}) => {
+  async (_, {rejectWithValue}) => {
     try {
-      return await api.events.getTodaysEvents(data);
+      return await api.events.getTodaysEvents();
     } catch (error) {
       return rejectWithValue(error);
     }
@@ -81,7 +81,11 @@ const initialState = {
 export const eventsSlice = createSlice({
   name: 'events',
   initialState,
-  reducers: {},
+  reducers: {
+    clearEvent: (state, _) => {
+      state.event = null;
+    },
+  },
   extraReducers: builder => {
     builder.addCase(getEventsCategories.fulfilled, (state, action) => {
       state.categories = action.payload?.data?.data?.result;
@@ -144,5 +148,5 @@ export const eventsSlice = createSlice({
     });
   },
 });
-export const {} = eventsSlice.actions;
+export const {clearEvent} = eventsSlice.actions;
 export default eventsSlice.reducer;

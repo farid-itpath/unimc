@@ -1,11 +1,10 @@
-import {useRef, useState} from 'react';
+import {useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {useSelector} from 'react-redux';
 import {SCREENS} from '../../utils/constants';
 
 export const useEvents = () => {
   const [selectedCategory, setSelectedCategory] = useState(0);
-  const scrollRef = useRef();
   const {
     categories,
     categoriesError,
@@ -17,14 +16,14 @@ export const useEvents = () => {
   const navigation = useNavigation();
   const handleSelectCategory = index => {
     setSelectedCategory(index);
-    scrollRef.current.scrollTo({y: 500, animated: true});
   };
-  const handlePressSeeAll = () => navigation.navigate(SCREENS.EVENTSLIST.name);
+  const handlePressSeeAll = title =>
+    navigation.navigate(SCREENS.EVENTSLIST.name, {screenTitle: title});
   const handlePressSearch = () => navigation.navigate(SCREENS.SEARCH.name);
-  const handlePressEvent = () => navigation.navigate(SCREENS.EVENTDETAILS.name);
+  const handlePressEvent = eventId =>
+    navigation.navigate(SCREENS.EVENTDETAILS.name, {eventId});
   return {
     selectedCategory,
-    scrollRef,
     categories,
     categoriesError,
     categoriesLoading,

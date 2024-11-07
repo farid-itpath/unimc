@@ -20,7 +20,6 @@ import EventsSectionItem from '../../components/EventsSectionItem';
 const Events = () => {
   const {
     selectedCategory,
-    scrollRef,
     categories,
     categoriesError,
     categoriesLoading,
@@ -43,14 +42,20 @@ const Events = () => {
     );
   };
   const renderEvents = ({item, index}) => {
-    return <EventsSectionItem item={item} onPress={handlePressEvent} />;
+    return (
+      <EventsSectionItem
+        item={item}
+        onPress={() => handlePressEvent(item?.id)}
+        key={index}
+      />
+    );
   };
   return (
     <>
       <SafeAreaView style={styles.statusBarSafeArea} />
       <SafeAreaView style={styles.safeAreaView}>
         <StatusBar backgroundColor={COLORS.primary} />
-        <ScrollView ref={scrollRef} showsVerticalScrollIndicator={false}>
+        <ScrollView showsVerticalScrollIndicator={false}>
           <View style={styles.headerView}>
             <Text style={styles.headerTitle}>Events</Text>
             <TouchableOpacity onPress={handlePressSearch}>
@@ -68,32 +73,45 @@ const Events = () => {
             title="Recent Events"
             data={events}
             renderItem={renderEvents}
-            onPressSeeAll={handlePressSeeAll}
+            onPressSeeAll={() => handlePressSeeAll('Recent Events')}
           />
-          <Section
-            title={() => <Text style={styles.sectionTitle}>SPORTS</Text>}
-            data={events}
-            renderItem={renderEvents}
-            onPressSeeAll={handlePressSeeAll}
-          />
-          <Section
-            title={() => <Text style={styles.sectionTitle}>MUSIC</Text>}
-            data={events}
-            renderItem={renderEvents}
-            onPressSeeAll={handlePressSeeAll}
-          />
-          <Section
-            title={() => <Text style={styles.sectionTitle}>FOOD</Text>}
-            data={events}
-            renderItem={renderEvents}
-            onPressSeeAll={handlePressSeeAll}
-          />
-          <Section
-            title={() => <Text style={styles.sectionTitle}>ART</Text>}
-            data={events}
-            renderItem={renderEvents}
-            onPressSeeAll={handlePressSeeAll}
-          />
+          {selectedCategory === 0 ? (
+            categories.map((category, index) => {
+              const categoryData = events?.filter(
+                event => event?.event_category?.title === category?.title,
+              );
+              return categoryData.length ? (
+                <Section
+                  title={() => (
+                    <Text style={styles.sectionTitle}>{category?.title}</Text>
+                  )}
+                  data={events?.filter(
+                    event => event?.event_category?.title === category?.title,
+                  )}
+                  renderItem={renderEvents}
+                  onPressSeeAll={() => handlePressSeeAll(category?.title)}
+                  key={index}
+                />
+              ) : null;
+            })
+          ) : (
+            <Section
+              title={() => (
+                <Text style={styles.sectionTitle}>
+                  {categories[selectedCategory - 1]?.title}
+                </Text>
+              )}
+              data={events?.filter(
+                event =>
+                  event?.event_category?.title ===
+                  categories[selectedCategory - 1]?.title,
+              )}
+              renderItem={renderEvents}
+              onPressSeeAll={() =>
+                handlePressSeeAll(categories[selectedCategory - 1]?.title)
+              }
+            />
+          )}
         </ScrollView>
       </SafeAreaView>
     </>

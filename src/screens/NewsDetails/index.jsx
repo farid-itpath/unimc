@@ -8,23 +8,29 @@ import {
   Image,
   TouchableHighlight,
 } from 'react-native';
-import {styles} from './style';
-import {ICONS, IMAGES} from '../../assets';
+import {layout, styles} from './style';
+import {ICONS} from '../../assets';
 import {useNewsDetails} from './useNewsDetails';
+import {IMAGES_BASE_URL} from '../../utils/constants';
+import Skeleton from 'react-native-reanimated-skeleton';
 
 const NewsDetails = () => {
-  const {handlePressBack} = useNewsDetails();
+  const {news, handlePressBack, getPublishTime} = useNewsDetails();
   return (
     <>
       <SafeAreaView style={styles.statusBarSafeArea} />
       <SafeAreaView style={styles.safeAreaView}>
         <StatusBar
-          backgroundColor={'rgba(0,0,0,0.5)'}
+          backgroundColor={'transparent'}
           barStyle="light-content"
+          translucent
         />
         <ScrollView showsVerticalScrollIndicator={false}>
           <View style={styles.headerView}>
-            <Image source={IMAGES.todaysEvent} style={styles.headerImage} />
+            <Image
+              source={{uri: `${IMAGES_BASE_URL}${news?.news_image}`}}
+              style={styles.headerImage}
+            />
             <View style={styles.innerHeaderView}>
               <View style={styles.screenHeaderView}>
                 <TouchableHighlight
@@ -33,8 +39,8 @@ const NewsDetails = () => {
                   underlayColor="rgba(255,255,255,0.3)">
                   <Image source={ICONS.arrowLeft} style={styles.back} />
                 </TouchableHighlight>
-                <Text style={styles.screenHeaderText}>
-                  Women's leadership con
+                <Text style={styles.screenHeaderText} numberOfLines={1}>
+                  {news?.title}
                 </Text>
               </View>
               <View style={styles.eventDataView}>
@@ -44,35 +50,33 @@ const NewsDetails = () => {
             </View>
           </View>
           <View style={styles.eventCategoriesView}>
-            <Image source={ICONS.music} style={styles.eventCategoriesImage} />
-            <Text style={styles.eventCategoryTitle}>Music</Text>
-          </View>
-          <View style={styles.newsDetailsView}>
-            <Text style={styles.newsTitle}>Women Leadership Conclave</Text>
-            <Text style={styles.aboutText}>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s, when an unknown printer took a galley of
-              type and scrambled it to make a type specimen book. It has
-              survived not only five centuries, but also the leap into
-              electronic typesetting, remaining essentially unchanged Lorem
-              Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s, when an unknown printer took a galley of
-              type and scrambled it to make a type specimen book. It has
-              survived not only five centuries, but also the remaining
-              essentially unchanged Lorem Ipsum is simply dummy text of the
-              printing and typesetting industry. Lorem Ipsum has been the
-              industry's standard dummy text ever since the 1500s, when an
-              unknown printer took a galley of type and scrambled it to make a
-              type specimen book. It has survived not only five centuries, but
-              also the leap into electronic typesetting, remaining essentially
-              unchanged
+            <Image
+              source={{
+                uri: `${IMAGES_BASE_URL}${news?.news_category?.icon_image}`,
+              }}
+              style={styles.eventCategoriesImage}
+            />
+            <Text style={styles.eventCategoryTitle}>
+              {news?.news_category?.title}
             </Text>
           </View>
           <View style={styles.newsDetailsView}>
+            {news ? (
+              <Text style={styles.newsTitle}>{news?.title}</Text>
+            ) : (
+              <Skeleton layout={[layout.title]} />
+            )}
+            {news ? (
+              <Text style={styles.aboutText}>{news?.news_description}</Text>
+            ) : (
+              <Skeleton layout={[layout.description]} />
+            )}
+          </View>
+          <View style={styles.newsDetailsView}>
             <Text style={styles.publishInfoTitle}>PUBLISHED</Text>
-            <Text style={styles.publishDate}>14 JUNE, 2021 | 4:00PM</Text>
+            <Text style={styles.publishDate}>
+              {getPublishTime(news?.submittedAt)}
+            </Text>
           </View>
         </ScrollView>
       </SafeAreaView>
