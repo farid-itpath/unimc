@@ -16,13 +16,16 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  headerImageView: {
+    position: 'absolute',
+    borderBottomStartRadius: 20,
+    borderBottomEndRadius: 20,
+    overflow: 'hidden',
+  },
   headerImage: {
     height: heightScale(2.5),
     width: widthScale(1),
-    position: 'absolute',
     objectFit: 'fill',
-    borderBottomStartRadius: 20,
-    borderBottomEndRadius: 20,
   },
   innerHeaderView: {
     ...StyleSheet.absoluteFillObject,

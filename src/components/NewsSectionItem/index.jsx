@@ -3,13 +3,13 @@ import {View, Text, TouchableOpacity, Image} from 'react-native';
 import Skeleton from 'react-native-reanimated-skeleton';
 import {layout, styles} from './style';
 import {timeAgo} from '../../utils/helper';
-import {IMAGES_BASE_URL} from '../../utils/constants';
+import {BASE_URL} from '../../utils/constants';
 
 const NewsSectionItem = ({item, onPress, index}) => {
   return item ? (
     <TouchableOpacity style={styles.newsView} key={index} onPress={onPress}>
       <Image
-        source={{uri: `${IMAGES_BASE_URL}${item?.news_image}`}}
+        source={{uri: `${BASE_URL}${item?.news_image}`}}
         style={styles.newsImage}
       />
       <View style={styles.newsDataView}>

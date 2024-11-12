@@ -2,7 +2,7 @@ import React from 'react';
 import {View, Text, TouchableOpacity, Image} from 'react-native';
 import Skeleton from 'react-native-reanimated-skeleton';
 import {layout, styles} from './style';
-import {IMAGES_BASE_URL} from '../../utils/constants';
+import {BASE_URL} from '../../utils/constants';
 
 const FlatListItem = ({
   item,
@@ -15,7 +15,7 @@ const FlatListItem = ({
   return item ? (
     <TouchableOpacity style={styles.eventListView} onPress={onPress}>
       <Image
-        source={{uri: `${IMAGES_BASE_URL}${itemImage}`}}
+        source={{uri: `${BASE_URL}${itemImage}`}}
         style={styles.eventListImage}
       />
       <View style={styles.eventListDetails}>

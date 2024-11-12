@@ -4,10 +4,10 @@ import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
 import {styles} from './style';
 import {ICONS} from '../../../assets';
 
-const Accordion = ({title}) => {
+const Accordion = ({title, description, onLayout}) => {
   const [collapsed, setCollapsed] = useState(true);
   return (
-    <View style={styles.accordionView}>
+    <View style={styles.accordionView} onLayout={onLayout}>
       <TouchableOpacity
         style={styles.accordionHeaderView}
         onPress={() => setCollapsed(prevState => !prevState)}>
@@ -22,11 +22,7 @@ const Accordion = ({title}) => {
       </TouchableOpacity>
       {collapsed && (
         <SkeletonPlaceholder enabled={false}>
-          <Text style={styles.accordionDesc}>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever
-          </Text>
+          <Text style={styles.accordionDesc}>{description}</Text>
         </SkeletonPlaceholder>
       )}
     </View>

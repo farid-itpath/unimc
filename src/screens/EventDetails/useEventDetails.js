@@ -1,9 +1,15 @@
 import {useNavigation, useRoute} from '@react-navigation/native';
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {clearEvent, getEvent} from '../../redux/reducres/eventsSlice';
+import {SCREENS} from '../../utils/constants';
 
 export const useEventDetails = () => {
+  const [imageModalVisible, setImageModalVisible] = useState(false);
+  const [selectedImage, setSelectedImage] = useState('');
+  const [videoModalVisible, setVideoModalVisible] = useState(false);
+  const [selectedVideo, setSelectedVideo] = useState('');
+  const [modalTitle, setModalTitle] = useState('');
   const navigation = useNavigation();
   const {params} = useRoute();
   const dispatch = useDispatch();
@@ -33,15 +39,50 @@ export const useEventDetails = () => {
   const handleVideoError = () => {
     console.log('Videi error');
   };
+  const handleImagePress = ({url, title}) => {
+    setImageModalVisible(true);
+    setSelectedImage(url);
+    setModalTitle(title);
+  };
+  const handleCloseImageModal = () => {
+    setImageModalVisible(false);
+  };
+  const handleVideoPress = url => {
+    setVideoModalVisible(true);
+    setSelectedVideo(url);
+  };
+  const handleCloseVideoModal = () => {
+    setVideoModalVisible(false);
+  };
+  const handleSeeAllImages = () =>
+    navigation.navigate(SCREENS.IMAGELIST.name, {data: images});
   useEffect(() => {
     dispatch(getEvent(params?.eventId));
     return () => dispatch(clearEvent());
   }, []);
+  const images = event?.event_assets?.filter(
+    item => item?.media_type === 'image',
+  );
+  const videos = event?.event_assets?.filter(
+    item => item?.media_type === 'video',
+  );
   return {
     event,
+    imageModalVisible,
+    selectedImage,
+    videoModalVisible,
+    selectedVideo,
+    modalTitle,
+    images,
+    videos,
     handlePressBack,
     getEventDate,
     getEventTime,
     handleVideoError,
+    handleImagePress,
+    handleCloseImageModal,
+    handleCloseVideoModal,
+    handleVideoPress,
+    handleSeeAllImages,
   };
 };

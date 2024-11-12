@@ -8,6 +8,7 @@ import NewsDetails from '../../screens/NewsDetails';
 import Search from '../../screens/Search';
 import EventsList from '../../screens/EventsList';
 import NewsList from '../../screens/NewsList';
+import ImageList from '../../screens/ImageList';
 
 const Stack = createNativeStackNavigator();
 
@@ -28,6 +29,7 @@ const AppNavigator = () => {
         <Stack.Screen name={SCREENS.SEARCH.name} component={Search} />
         <Stack.Screen name={SCREENS.EVENTSLIST.name} component={EventsList} />
         <Stack.Screen name={SCREENS.NEWSLIST.name} component={NewsList} />
+        <Stack.Screen name={SCREENS.IMAGELIST.name} component={ImageList} />
       </Stack.Navigator>
     </NavigationContainer>
   );

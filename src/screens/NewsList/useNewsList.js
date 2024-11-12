@@ -6,7 +6,8 @@ export const useNewsList = () => {
   const navigation = useNavigation();
   const {screenTitle} = useRoute().params;
   const {news} = useSelector(state => state.news);
-  const handlePressSearch = () => navigation.navigate(SCREENS.SEARCH.name);
+  const handlePressSearch = () =>
+    navigation.navigate(SCREENS.SEARCH.name, {searchIn: 'News'});
   const handlePressBack = () => navigation.goBack();
   const handlePressNews = () => navigation.navigate(SCREENS.NEWSDETAILS.name);
   return {

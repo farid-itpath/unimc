@@ -11,7 +11,7 @@ export const METHODS = {
   PATCH: 'patch',
 };
 const axiosConfig = {
-  baseURL: BASE_URL,
+  baseURL: BASE_URL + '/api',
 };
 function createAxiosInstance() {
   return axios.create(axiosConfig);

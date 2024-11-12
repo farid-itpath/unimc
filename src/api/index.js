@@ -26,6 +26,12 @@ export const api = {
         url: `/event?status=published&todayDate=${true}`,
         method: METHODS.GET,
       }),
+    searchEvents: ({params}) =>
+      client({
+        url: '/event',
+        params,
+        method: METHODS.GET,
+      }),
   },
   news: {
     getNewsCategories: () =>
@@ -41,6 +47,37 @@ export const api = {
     getSingleNews: id =>
       client({
         url: `/news/${id}`,
+        method: METHODS.GET,
+      }),
+    searchNews: ({params}) =>
+      client({
+        url: `/news`,
+        method: METHODS.GET,
+        params,
+      }),
+  },
+  generic: {
+    getEventsAndNews: () =>
+      client({
+        url: '/generic/home',
+        method: METHODS.GET,
+      }),
+    searchEventsAndNews: ({params}) =>
+      client({
+        url: `/generic/home`,
+        method: METHODS.GET,
+        params,
+      }),
+  },
+  about: {
+    getAbout: () =>
+      client({
+        url: '/about-us',
+        method: METHODS.GET,
+      }),
+    getBannerImages: id =>
+      client({
+        url: `/about-us/${id}`,
         method: METHODS.GET,
       }),
   },

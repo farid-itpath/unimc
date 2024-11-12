@@ -30,25 +30,30 @@ export const styles = StyleSheet.create({
   },
   closeIcon: {
     tintColor: COLORS.black,
-    height: heightScale(48),
-    width: heightScale(48),
+    height: heightScale(60),
+    width: heightScale(60),
   },
   optionsContainer: {
     marginTop: heightScale(40),
+    alignItems: 'center',
   },
   optionsRow: {
     flexDirection: 'row',
     gap: widthScale(30),
     marginVertical: 10,
+    flexWrap: 'wrap',
+    width: widthScale(1.2),
+    justifyContent: 'center',
   },
   optionView: {
-    flex: 1,
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
     borderRadius: 20,
     padding: 5,
     borderWidth: 2,
     borderColor: COLORS.primary,
+    width: widthScale(3),
+    alignItems: 'center',
   },
   optionText: {
     fontFamily: FONTS.InterMedium,
@@ -89,5 +94,11 @@ export const styles = StyleSheet.create({
     fontFamily: FONTS.InterMedium,
     color: COLORS.black,
     fontSize: heightScale(50),
+  },
+  titleText: {
+    fontFamily: FONTS.InterMedium,
+    fontSize: heightScale(56),
+    color: COLORS.black,
+    alignSelf: 'flex-start',
   },
 });

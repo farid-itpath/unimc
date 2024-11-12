@@ -8,7 +8,8 @@ export const useEventsList = () => {
   const {todaysEvents, upcomingEvents, events} = useSelector(
     state => state.events,
   );
-  const handlePressSearch = () => navigation.navigate(SCREENS.SEARCH.name);
+  const handlePressSearch = () =>
+    navigation.navigate(SCREENS.SEARCH.name, {searchIn: 'Events'});
   const handlePressBack = () => navigation.goBack();
   const handlePressEvent = () => navigation.navigate(SCREENS.EVENTDETAILS.name);
   return {

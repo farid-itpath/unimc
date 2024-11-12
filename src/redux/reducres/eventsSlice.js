@@ -56,6 +56,17 @@ export const getTodaysEvents = createAsyncThunk(
   },
 );
 
+export const searchEvents = createAsyncThunk(
+  'events/searchEvents',
+  async (data, {rejectWithValue}) => {
+    try {
+      return await api.events.searchEvents(data);
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  },
+);
+
 const initialState = {
   categories: null,
   categoriesLoading: false,
@@ -145,6 +156,18 @@ export const eventsSlice = createSlice({
     builder.addCase(getTodaysEvents.rejected, (state, action) => {
       state.todaysEventsError = action.payload;
       state.todaysEventsLoading = false;
+    });
+
+    builder.addCase(searchEvents.fulfilled, (state, action) => {
+      state.events = action.payload?.data?.data?.result;
+      state.eventsLoading = false;
+    });
+    builder.addCase(searchEvents.pending, (state, _) => {
+      state.eventsLoading = true;
+    });
+    builder.addCase(searchEvents.rejected, (state, action) => {
+      state.eventsError = action.payload;
+      state.eventsLoading = false;
     });
   },
 });

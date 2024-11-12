@@ -54,7 +54,6 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 8,
-    backgroundColor: COLORS.primary,
     padding: 8,
     borderRadius: 20,
   },
@@ -62,19 +61,16 @@ export const styles = StyleSheet.create({
     height: heightScale(40),
     width: heightScale(40),
     borderRadius: heightScale(40) / 2,
-    backgroundColor: COLORS.white,
     justifyContent: 'center',
     alignItems: 'center',
   },
   filterIcon: {
     height: heightScale(60),
     width: heightScale(60),
-    tintColor: COLORS.primary,
   },
   filterText: {
     fontFamily: FONTS.InterMedium,
     fontSize: heightScale(64),
-    color: COLORS.white,
   },
   flatList: {
     paddingHorizontal: heightScale(40),
@@ -91,5 +87,15 @@ export const styles = StyleSheet.create({
     fontFamily: FONTS.InterBold,
     color: COLORS.primaryLight,
     fontSize: heightScale(40),
+  },
+  sectionHead: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  sectionTitle: {
+    fontFamily: FONTS.InterMedium,
+    color: COLORS.black,
+    fontSize: heightScale(50),
   },
 });

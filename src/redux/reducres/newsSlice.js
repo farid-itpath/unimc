@@ -34,6 +34,17 @@ export const getSingleNews = createAsyncThunk(
   },
 );
 
+export const searchNews = createAsyncThunk(
+  'news/searchNews',
+  async (data, {rejectWithValue}) => {
+    try {
+      return await api.news.searchNews(data);
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  },
+);
+
 const initialState = {
   categories: null,
   categoriesLoading: false,
@@ -91,6 +102,18 @@ export const newsSlice = createSlice({
     builder.addCase(getSingleNews.rejected, (state, action) => {
       state.singeNewsError = action.payload;
       state.singleNewsLoading = false;
+    });
+
+    builder.addCase(searchNews.fulfilled, (state, action) => {
+      state.news = action.payload?.data?.data?.result;
+      state.newsLoading = false;
+    });
+    builder.addCase(searchNews.pending, (state, _) => {
+      state.newsLoading = true;
+    });
+    builder.addCase(searchNews.rejected, (state, action) => {
+      state.newsError = action.payload;
+      state.newsLoading = false;
     });
   },
 });

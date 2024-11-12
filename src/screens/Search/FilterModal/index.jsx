@@ -6,17 +6,34 @@ import {
   Image,
   TouchableOpacity,
   TouchableHighlight,
+  ScrollView,
 } from 'react-native';
 import {ICONS} from '../../../assets';
 import {styles} from './style';
 import {COLORS} from '../../../utils/constants';
+import {useSelector} from 'react-redux';
 
 const FilterModal = ({
   visible,
   closeModal,
-  selectedOptions,
+  selectedCategories,
   toggleFitlerItem,
+  searchIn,
+  onPressApply,
 }) => {
+  const {categories: eventCategories} = useSelector(state => state.events);
+  const {categories: newsCategories} = useSelector(state => state.news);
+  const options =
+    searchIn === 'Home'
+      ? [
+          {title: 'Event', data: eventCategories},
+          {title: 'News', data: newsCategories},
+        ]
+      : searchIn === 'Events'
+      ? [{title: 'Event', data: eventCategories}]
+      : searchIn === 'News'
+      ? [{title: 'News', data: newsCategories}]
+      : null;
   return (
     <Modal
       animationType="fade"
@@ -25,130 +42,72 @@ const FilterModal = ({
       onRequestClose={closeModal}
       statusBarTranslucent>
       <View style={styles.modalView}>
-        <View>
-          <View style={styles.header}>
-            <View style={styles.headerEmptyView} />
-            <Text style={styles.headerTitle}>Filters</Text>
-            <TouchableHighlight
-              onPress={closeModal}
-              style={styles.closeIconView}
-              underlayColor={COLORS.primaryExtraLight}>
-              <Image source={ICONS.close} style={styles.closeIcon} />
-            </TouchableHighlight>
-          </View>
-          <View style={styles.optionsContainer}>
-            <View style={styles.optionsRow}>
-              <TouchableOpacity
-                style={[
-                  styles.optionView,
-                  {
-                    backgroundColor: selectedOptions.includes('Sports')
-                      ? COLORS.primary
-                      : COLORS.white,
-                  },
-                ]}
-                onPress={() => toggleFitlerItem('Sports')}>
-                <View style={styles.selectedIconView} />
-                <Text
-                  style={[
-                    styles.optionText,
-                    {
-                      color: selectedOptions.includes('Sports')
-                        ? COLORS.white
-                        : COLORS.primary,
-                    },
-                  ]}>
-                  Sports
-                </Text>
-                <View style={styles.selectedIconView}>
-                  <Image source={ICONS.tick} style={styles.selectedIcon} />
-                </View>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={[
-                  styles.optionView,
-                  {
-                    backgroundColor: selectedOptions.includes('Music')
-                      ? COLORS.primary
-                      : COLORS.white,
-                  },
-                ]}
-                onPress={() => toggleFitlerItem('Music')}>
-                <View style={styles.selectedIconView} />
-                <Text
-                  style={[
-                    styles.optionText,
-                    {
-                      color: selectedOptions.includes('Music')
-                        ? COLORS.white
-                        : COLORS.primary,
-                    },
-                  ]}>
-                  Music
-                </Text>
-                <View style={styles.selectedIconView}>
-                  <Image source={ICONS.tick} style={styles.selectedIcon} />
-                </View>
-              </TouchableOpacity>
-            </View>
-            <View style={styles.optionsRow}>
-              <TouchableOpacity
-                style={[
-                  styles.optionView,
-                  {
-                    backgroundColor: selectedOptions.includes('Food')
-                      ? COLORS.primary
-                      : COLORS.white,
-                  },
-                ]}
-                onPress={() => toggleFitlerItem('Food')}>
-                <View style={styles.selectedIconView} />
-                <Text
-                  style={[
-                    styles.optionText,
-                    {
-                      color: selectedOptions.includes('Food')
-                        ? COLORS.white
-                        : COLORS.primary,
-                    },
-                  ]}>
-                  Food
-                </Text>
-                <View style={styles.selectedIconView}>
-                  <Image source={ICONS.tick} style={styles.selectedIcon} />
-                </View>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={[
-                  styles.optionView,
-                  {
-                    backgroundColor: selectedOptions.includes('Art')
-                      ? COLORS.primary
-                      : COLORS.white,
-                  },
-                ]}
-                onPress={() => toggleFitlerItem('Art')}>
-                <View style={styles.selectedIconView} />
-                <Text
-                  style={[
-                    styles.optionText,
-                    {
-                      color: selectedOptions.includes('Art')
-                        ? COLORS.white
-                        : COLORS.primary,
-                    },
-                  ]}>
-                  Art
-                </Text>
-                <View style={styles.selectedIconView}>
-                  <Image source={ICONS.tick} style={styles.selectedIcon} />
-                </View>
-              </TouchableOpacity>
-            </View>
-          </View>
+        <View style={styles.header}>
+          <View style={styles.headerEmptyView} />
+          <Text style={styles.headerTitle}>Filters</Text>
+          <TouchableHighlight
+            onPress={closeModal}
+            style={styles.closeIconView}
+            underlayColor={COLORS.primaryExtraLight}>
+            <Image source={ICONS.close} style={styles.closeIcon} />
+          </TouchableHighlight>
         </View>
+        <ScrollView showsVerticalScrollIndicator={false}>
+          {options?.map((item, index) => {
+            return (
+              <View style={styles.optionsContainer} key={index}>
+                <Text style={styles.titleText}>{item?.title}</Text>
+                <View style={styles.optionsRow}>
+                  {item?.data?.map((category, index) => {
+                    return (
+                      <TouchableOpacity
+                        key={index}
+                        style={[
+                          styles.optionView,
+                          {
+                            backgroundColor: selectedCategories.includes(
+                              category?.id,
+                            )
+                              ? COLORS.primary
+                              : COLORS.white,
+                          },
+                        ]}
+                        onPress={() =>
+                          toggleFitlerItem(item?.title, category?.id)
+                        }>
+                        <View style={styles.selectedIconView} />
+                        <Text
+                          numberOfLines={1}
+                          style={[
+                            styles.optionText,
+                            {
+                              color: selectedCategories.includes(category?.id)
+                                ? COLORS.white
+                                : COLORS.primary,
+                            },
+                          ]}>
+                          {category?.title}
+                        </Text>
+                        <View style={styles.selectedIconView}>
+                          {selectedCategories.includes(category?.id) && (
+                            <Image
+                              source={ICONS.tick}
+                              style={styles.selectedIcon}
+                            />
+                          )}
+                        </View>
+                      </TouchableOpacity>
+                    );
+                  })}
+                </View>
+              </View>
+            );
+          })}
+        </ScrollView>
         <View style={styles.buttonsContainer}>
-          <TouchableOpacity style={styles.buttonApplyView} onPress={closeModal}>
+          <TouchableOpacity
+            style={styles.buttonApplyView}
+            onPress={onPressApply}>
             <Text style={styles.buttonApplyTitle}>Apply</Text>
           </TouchableOpacity>
           <TouchableHighlight

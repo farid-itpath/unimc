@@ -58,8 +58,8 @@ const Home = () => {
       <CategoryItem
         item={item}
         index={index}
-        onPress={() => handleSelectEventsCategory(index)}
-        selectedCategory={selectedEventsCategory}
+        onPress={() => handleSelectEventsCategory(item?.title)}
+        selectedCategory={false}
       />
     );
   };
@@ -68,8 +68,8 @@ const Home = () => {
       <CategoryItem
         item={item}
         index={index}
-        onPress={() => handleSelectNewsCategory(index)}
-        selectedCategory={selectedNewsCategory}
+        onPress={() => handleSelectNewsCategory(item?.title)}
+        selectedCategory={false}
       />
     );
   };
@@ -123,13 +123,15 @@ const Home = () => {
               <Image source={ICONS.search} style={styles.searchIcon} />
             </TouchableOpacity>
           </View>
-          <Section
-            title="Today's Events"
-            data={todaysEvents}
-            renderItem={renderEvents}
-            onPressSeeAll={handlePressSeeAllTodaysEvents}
-            showFooterComponent={true}
-          />
+          {!!todaysEvents?.length && (
+            <Section
+              title="Today's Events"
+              data={todaysEvents}
+              renderItem={renderEvents}
+              onPressSeeAll={handlePressSeeAllTodaysEvents}
+              showFooterComponent={true}
+            />
+          )}
           <Section
             title="Event Categories"
             data={eventCategories}

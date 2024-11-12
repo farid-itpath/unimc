@@ -37,10 +37,12 @@ const Section = ({
         ) : (
           title()
         )}
-        <TouchableOpacity style={styles.seeAllView} onPress={onPressSeeAll}>
-          <Text style={styles.seeAllText}>See All </Text>
-          <Image source={ICONS.arrowRight} style={styles.arrowRight} />
-        </TouchableOpacity>
+        {!!onPressSeeAll && (
+          <TouchableOpacity style={styles.seeAllView} onPress={onPressSeeAll}>
+            <Text style={styles.seeAllText}>See All </Text>
+            <Image source={ICONS.arrowRight} style={styles.arrowRight} />
+          </TouchableOpacity>
+        )}
       </View>
       <View style={styles.sectionBody}>
         <FlatList

@@ -9,22 +9,27 @@ import {
   getUpcomingEvents,
 } from '../../redux/reducres/eventsSlice';
 import {getNews, getNewsCategories} from '../../redux/reducres/newsSlice';
+import {getEventsAndNews} from '../../redux/reducres/genericSlice';
 
 export const useHome = () => {
   const [selectedEventsCategory, setSelectedEventsCategory] = useState();
   const [selectedNewsCategory, setSelectedNewsCategory] = useState();
   const navigation = useNavigation();
   const dispatch = useDispatch();
+  //getting categories
   const {
     categories: eventCategories,
     categoriesError: eventCategoriesError,
     categoriesLoading: eventCategoriesLoading,
-
-    upcomingEvents,
-    todaysEvents,
   } = useSelector(state => state.events);
-  const {categories: newsCategories, news} = useSelector(state => state.news);
-  const handlePressSearch = () => navigation.navigate(SCREENS.SEARCH.name);
+  const {categories: newsCategories} = useSelector(state => state.news);
+  //getting news and events data
+  const {upcomingEvents, todaysEvents, news} = useSelector(
+    state => state.generic,
+  );
+  //handlers
+  const handlePressSearch = () =>
+    navigation.navigate(SCREENS.SEARCH.name, {searchIn: 'Home'});
   const handlePressSeeAllEvents = () =>
     navigation.navigate(SCREENS.EVENTSLIST.name);
   const handlePressSeeAllTodaysEvents = () =>
@@ -41,11 +46,15 @@ export const useHome = () => {
     navigation.navigate(SCREENS.EVENTDETAILS.name, {eventId});
   const handlePressNews = newsId =>
     navigation.navigate(SCREENS.NEWSDETAILS.name, {newsId});
-  const handleSelectEventsCategory = index => setSelectedEventsCategory(index);
-  const handleSelectNewsCategory = index => setSelectedNewsCategory(index);
+  const handleSelectEventsCategory = title =>
+    navigation.navigate(SCREENS.EVENTSLIST.name, {screenTitle: title});
+  const handleSelectNewsCategory = title =>
+    navigation.navigate(SCREENS.NEWSLIST.name, {screenTitle: title});
+  //effect handlers
   useEffect(() => {
     dispatch(getNewsCategories());
     dispatch(getEventsCategories());
+    dispatch(getEventsAndNews());
     dispatch(getEvents());
     dispatch(getUpcomingEvents());
     dispatch(getTodaysEvents());

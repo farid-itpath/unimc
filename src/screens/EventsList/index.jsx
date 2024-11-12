@@ -74,7 +74,7 @@ const EventsList = () => {
               ? upcomingEvents
               : screenTitle === "Today's Events"
               ? todaysEvents
-              : events.filter(
+              : events?.filter(
                   event => event?.event_category?.title === screenTitle,
                 )
           }

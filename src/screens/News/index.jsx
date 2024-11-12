@@ -111,7 +111,7 @@ const News = () => {
               const categoryData = news?.filter(
                 newsItem => newsItem?.news_category?.title === category?.title,
               );
-              return categoryData.length ? (
+              return categoryData?.length ? (
                 <FlatList
                   data={
                     news.filter(
@@ -133,7 +133,7 @@ const News = () => {
           ) : (
             <FlatList
               data={
-                news.filter(
+                news?.filter(
                   newsItem =>
                     newsItem?.news_category?.title ===
                     categories[selectedCategory - 1]?.title,

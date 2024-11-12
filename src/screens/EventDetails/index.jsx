@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {
   View,
   Text,
@@ -13,42 +13,60 @@ import {layout, styles} from './style';
 import {ICONS, IMAGES} from '../../assets';
 import Section from '../../components/Section';
 import {useEventDetails} from './useEventDetails';
-import {IMAGES_BASE_URL} from '../../utils/constants';
+import {BASE_URL} from '../../utils/constants';
 import Skeleton from 'react-native-reanimated-skeleton';
 import Video from 'react-native-video';
+import ImagePreviewModal from '../../components/ImagePreviewModal';
+import VideoPreviewModal from '../../components/VideoPreviewModal';
 
 const EventDetails = () => {
-  const {event, handlePressBack, getEventDate, getEventTime, handleVideoError} =
-    useEventDetails();
+  const {
+    event,
+    imageModalVisible,
+    selectedImage,
+    videoModalVisible,
+    selectedVideo,
+    modalTitle,
+    images,
+    videos,
+    handlePressBack,
+    getEventDate,
+    getEventTime,
+    handleVideoError,
+    handleImagePress,
+    handleCloseImageModal,
+    handleCloseVideoModal,
+    handleVideoPress,
+    handleSeeAllImages,
+  } = useEventDetails();
   const renderImages = ({item, index}) => {
     return (
       <Skeleton isLoading={!item} key={index}>
-        <Image
-          source={{uri: `${IMAGES_BASE_URL}${item?.path}`}}
-          style={styles.listImage}
-        />
+        <TouchableOpacity
+          onPress={() => handleImagePress({url: item?.path, title: 'Preview'})}>
+          <Image
+            source={{uri: `${BASE_URL}${item?.path}`}}
+            style={styles.listImage}
+          />
+        </TouchableOpacity>
       </Skeleton>
     );
   };
   const renderVideos = ({item, index}) => {
     return (
       <Skeleton isLoading={!item} key={index}>
-        <Video
-          source={{uri: `${IMAGES_BASE_URL}${item?.path}`}}
-          onError={handleVideoError}
-          style={styles.listVideo}
-          resizeMode="stretch"
-          paused={true}
-        />
+        <TouchableOpacity onPress={() => handleVideoPress(item?.path)}>
+          <Video
+            source={{uri: `${BASE_URL}${item?.path}`}}
+            onError={handleVideoError}
+            style={styles.listVideo}
+            resizeMode="stretch"
+            paused={true}
+          />
+        </TouchableOpacity>
       </Skeleton>
     );
   };
-  const images = event?.event_assets?.filter(
-    item => item?.media_type === 'image',
-  );
-  const videos = event?.event_assets?.filter(
-    item => item?.media_type === 'video',
-  );
   return (
     <>
       <SafeAreaView style={styles.statusBarSafeArea} />
@@ -60,10 +78,12 @@ const EventDetails = () => {
         />
         <ScrollView showsVerticalScrollIndicator={false}>
           <View style={styles.headerView}>
-            <Image
-              source={{uri: `${IMAGES_BASE_URL}${event?.thumbnail_image}`}}
-              style={styles.headerImage}
-            />
+            <View style={styles.headerImageView}>
+              <Image
+                source={{uri: `${BASE_URL}${event?.thumbnail_image}`}}
+                style={styles.headerImage}
+              />
+            </View>
             <View style={styles.innerHeaderView}>
               <View style={styles.screenHeaderView}>
                 <TouchableHighlight
@@ -74,7 +94,13 @@ const EventDetails = () => {
                 </TouchableHighlight>
                 <Text style={styles.screenHeaderText}>{event?.title}</Text>
               </View>
-              <TouchableOpacity>
+              <TouchableOpacity
+                onPress={() =>
+                  handleImagePress({
+                    url: event?.qr_code_image,
+                    title: 'QR Code',
+                  })
+                }>
                 <Image source={ICONS.qr} style={styles.qrIcon} />
               </TouchableOpacity>
             </View>
@@ -82,7 +108,7 @@ const EventDetails = () => {
           <View style={styles.eventCategoriesView}>
             <Image
               source={{
-                uri: `${IMAGES_BASE_URL}${event?.event_category?.icon_image}`,
+                uri: `${BASE_URL}${event?.event_category?.icon_image}`,
               }}
               style={styles.eventCategoriesImage}
             />
@@ -144,6 +170,7 @@ const EventDetails = () => {
               data={images}
               renderItem={renderImages}
               title={() => <Text style={styles.eventInfoTitle}>IMAGES</Text>}
+              onPressSeeAll={handleSeeAllImages}
             />
           )}
           {videos?.length && (
@@ -151,6 +178,7 @@ const EventDetails = () => {
               data={videos}
               renderItem={renderVideos}
               title={() => <Text style={styles.eventInfoTitle}>VIDEOS</Text>}
+              onPressSeeAll={() => console.log('hello')}
             />
           )}
           <View style={styles.eventInfoView}>
@@ -171,6 +199,17 @@ const EventDetails = () => {
               </View>
             </View>
           </View>
+          <ImagePreviewModal
+            visible={imageModalVisible}
+            closeModal={handleCloseImageModal}
+            imageUrl={selectedImage}
+            title={modalTitle}
+          />
+          <VideoPreviewModal
+            visible={videoModalVisible}
+            closeModal={handleCloseVideoModal}
+            videoUrl={selectedVideo}
+          />
         </ScrollView>
       </SafeAreaView>
     </>

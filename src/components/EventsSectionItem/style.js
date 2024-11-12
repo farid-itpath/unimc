@@ -41,7 +41,7 @@ export const styles = StyleSheet.create({
   },
   eventTitle: {
     fontFamily: FONTS.InterMedium,
-    fontSize: heightScale(60),
+    fontSize: heightScale(52),
     color: COLORS.black,
     padding: 5,
     marginVertical: 5,
@@ -59,7 +59,7 @@ export const styles = StyleSheet.create({
   },
   eventAddressText: {
     fontFamily: FONTS.InterMedium,
-    fontSize: heightScale(64),
+    fontSize: heightScale(68),
     color: COLORS.grey,
     flexGrow: 1,
   },

@@ -11,7 +11,7 @@ import {
 import {layout, styles} from './style';
 import {ICONS} from '../../assets';
 import {useNewsDetails} from './useNewsDetails';
-import {IMAGES_BASE_URL} from '../../utils/constants';
+import {BASE_URL} from '../../utils/constants';
 import Skeleton from 'react-native-reanimated-skeleton';
 
 const NewsDetails = () => {
@@ -28,7 +28,7 @@ const NewsDetails = () => {
         <ScrollView showsVerticalScrollIndicator={false}>
           <View style={styles.headerView}>
             <Image
-              source={{uri: `${IMAGES_BASE_URL}${news?.news_image}`}}
+              source={{uri: `${BASE_URL}${news?.news_image}`}}
               style={styles.headerImage}
             />
             <View style={styles.innerHeaderView}>
@@ -52,7 +52,7 @@ const NewsDetails = () => {
           <View style={styles.eventCategoriesView}>
             <Image
               source={{
-                uri: `${IMAGES_BASE_URL}${news?.news_category?.icon_image}`,
+                uri: `${BASE_URL}${news?.news_category?.icon_image}`,
               }}
               style={styles.eventCategoriesImage}
             />

@@ -13,14 +13,25 @@ import {COLORS} from '../../utils/constants';
 import Carousel from './Carousel';
 import Accordion from './Accordion';
 import {useAbout} from './useAbout';
-import {AboutSections} from '../../utils/data';
 
 const About = () => {
-  const {selectedCategory, scrollRef, handleSelectCategory} = useAbout();
+  const {
+    selectedCategory,
+    scrollRef,
+    aboutData,
+    aboutCategories,
+    aboutBannerImages,
+    handleSelectCategory,
+    handleLayout,
+    scrollToView,
+  } = useAbout();
   const renderCategoryItem = ({item, index}) => {
     return (
       <TouchableOpacity
-        onPress={() => handleSelectCategory(index)}
+        onPress={() => {
+          handleSelectCategory(index);
+          scrollToView(index);
+        }}
         style={[
           styles.eventCategoriesView,
           {
@@ -36,7 +47,7 @@ const About = () => {
               color: index === selectedCategory ? COLORS.white : COLORS.primary,
             },
           ]}>
-          {item.title}
+          {item}
         </Text>
       </TouchableOpacity>
     );
@@ -51,18 +62,23 @@ const About = () => {
             <Text style={styles.headerTitle}>About Macerata</Text>
           </View>
           <FlatList
-            data={[{title: 'All'}, ...AboutSections]}
+            data={['All', ...(aboutCategories || [])]}
             renderItem={renderCategoryItem}
             horizontal
             showsHorizontalScrollIndicator={false}
             contentContainerStyle={styles.flatListContainer}
           />
-          <Carousel />
-          <Accordion title="About Macerata" />
-          <Accordion title="History of Macerata" />
-          <Accordion title="Tourist of Macerata" />
-          <Accordion title="Cultural routes of Macerata" />
-          <Accordion title="Tours of Macerata" />
+          <Carousel data={aboutBannerImages} />
+          {aboutData?.map((item, index) => {
+            return (
+              <Accordion
+                title={item?.title}
+                description={item?.description}
+                key={index}
+                onLayout={event => handleLayout(event, index)}
+              />
+            );
+          })}
         </ScrollView>
       </SafeAreaView>
     </>

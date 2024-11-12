@@ -32,3 +32,18 @@ export const timeAgo = date => {
     }
   } else return '';
 };
+
+export const debounce = func => {
+  let timeout;
+  return function (...args) {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func.apply(this, args), 300);
+  };
+};
+
+export const filterParams = params =>
+  Object.fromEntries(
+    Object.entries(params).filter(
+      ([key, value]) => value != null && value !== '' && value !== 'all',
+    ),
+  );

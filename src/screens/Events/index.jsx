@@ -76,11 +76,11 @@ const Events = () => {
             onPressSeeAll={() => handlePressSeeAll('Recent Events')}
           />
           {selectedCategory === 0 ? (
-            categories.map((category, index) => {
+            categories?.map((category, index) => {
               const categoryData = events?.filter(
                 event => event?.event_category?.title === category?.title,
               );
-              return categoryData.length ? (
+              return categoryData?.length ? (
                 <Section
                   title={() => (
                     <Text style={styles.sectionTitle}>{category?.title}</Text>
