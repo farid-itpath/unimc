@@ -1,7 +1,7 @@
 import {StyleSheet} from 'react-native';
 import {COLORS} from '../../utils/constants';
-import {heightScale, widthScale} from '../../utils/helper';
 import {FONTS} from '../../assets';
+import {heightScale, widthScale} from '../../utils/helper';
 
 export const styles = StyleSheet.create({
   safeAreaView: {
@@ -39,24 +39,26 @@ export const styles = StyleSheet.create({
     color: COLORS.black,
     marginVertical: heightScale(100),
   },
-  flatList: {
-    paddingHorizontal: heightScale(40),
-    marginTop: heightScale(40),
+  formContainer: {
+    padding: 20,
   },
-  listEmptyComponent: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: widthScale(1.12),
-    height: heightScale(4),
+  textInput: {
+    borderWidth: 1.5,
+    borderColor: COLORS.grey,
+    fontSize: heightScale(56),
+    color: COLORS.black,
+    fontFamily: FONTS.InterMedium,
+    borderRadius: 10,
+    padding: 10,
   },
-  listEmptyComponentText: {
-    fontFamily: FONTS.InterBold,
-    color: COLORS.primaryLight,
-    fontSize: heightScale(40),
+  textArea: {
+    height: 100,
+    textAlignVertical: 'top',
   },
-  languageSection: {
-    paddingHorizontal: widthScale(16),
+  errorText: {
+    color: COLORS.error,
+    fontSize: heightScale(76),
+    marginBottom: 10,
   },
   buttonApplyView: {
     justifyContent: 'center',

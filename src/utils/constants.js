@@ -60,6 +60,10 @@ export const SCREENS = {
     id: 14,
     name: 'Settings',
   },
+  CONTACT_US: {
+    id: 15,
+    name: 'Contact_Us',
+  },
 };
 
 export const COLORS = {
@@ -71,6 +75,7 @@ export const COLORS = {
   grey: '#747688',
   lightGrey: '#8193AE',
   extraLightGrey: '#F0F0F0',
+  error: '#ff0000',
 };
 
 export const LANGUAGES = [

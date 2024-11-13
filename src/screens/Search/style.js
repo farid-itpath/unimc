@@ -80,13 +80,13 @@ export const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    width: widthScale(1.12),
-    height: heightScale(4),
+    height: heightScale(2),
   },
   listEmptyComponentText: {
     fontFamily: FONTS.InterBold,
     color: COLORS.primaryLight,
     fontSize: heightScale(40),
+    textAlign: 'center',
   },
   sectionHead: {
     flexDirection: 'row',

@@ -10,6 +10,7 @@ import EventsList from '../../screens/EventsList';
 import NewsList from '../../screens/NewsList';
 import ImageList from '../../screens/ImageList';
 import Settings from '../../screens/Settings';
+import ContactUs from '../../screens/ContactUs';
 
 const Stack = createNativeStackNavigator();
 
@@ -32,6 +33,7 @@ const AppNavigator = () => {
         <Stack.Screen name={SCREENS.NEWSLIST.name} component={NewsList} />
         <Stack.Screen name={SCREENS.IMAGELIST.name} component={ImageList} />
         <Stack.Screen name={SCREENS.SETTINGS.name} component={Settings} />
+        <Stack.Screen name={SCREENS.CONTACT_US.name} component={ContactUs} />
       </Stack.Navigator>
     </NavigationContainer>
   );

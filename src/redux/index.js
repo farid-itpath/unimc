@@ -6,7 +6,7 @@ import {reducers} from './reducres';
 const persistConfig = {
   key: 'unimc_root',
   storage: AsyncStorage,
-  whitelist: [],
+  whitelist: ['language'],
 };
 
 const persistedReducer = persistReducer(persistConfig, reducers);

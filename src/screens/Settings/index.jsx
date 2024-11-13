@@ -7,15 +7,18 @@ import {
   ScrollView,
   Image,
   TouchableHighlight,
+  TouchableOpacity,
 } from 'react-native';
 import './../../locale/i18n';
-import {COLORS, LANGUAGES} from '../../utils/constants';
+import {COLORS, LANGUAGES, SCREENS} from '../../utils/constants';
 import {ICONS} from '../../assets';
 import {styles} from './style';
 import {useSettings} from './useSettings';
 import {LanguageItem} from './LanguageItem';
+import {useSelector} from 'react-redux';
+import {heightScale} from '../../utils/helper';
 
-const Settings = () => {
+const Settings = ({navigation}) => {
   const {selectedLanguage, handleChangeLanguage, handleBackPress, t} =
     useSettings();
   return (
@@ -36,6 +39,7 @@ const Settings = () => {
           <View />
         </View>
         <View style={styles.languageSection}>
+          <Text style={styles.headerTitle1}>{t('Select Language')}</Text>
           {LANGUAGES.map((item, index) => (
             <LanguageItem
               key={index}
@@ -46,6 +50,17 @@ const Settings = () => {
               flag={item.flag}
             />
           ))}
+
+          <View style={{marginTop: heightScale(100)}}>
+            <Text style={styles.headerTitle1}>
+              {t('Having a problem? Contact us.')}
+            </Text>
+            <TouchableOpacity
+              style={styles.buttonApplyView}
+              onPress={() => navigation.navigate(SCREENS.CONTACT_US.name)}>
+              <Text style={styles.buttonApplyTitle}>{t('Contact Us')}</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </ScrollView>
     </SafeAreaView>

@@ -11,11 +11,11 @@ import {
   TouchableHighlight,
 } from 'react-native';
 import {COLORS} from '../../utils/constants';
-import {ICONS} from '../../assets';
+import {ICONS, IMAGES} from '../../assets';
 import {useEventsList} from './useEventsList';
 import {styles} from './style';
 import FlatListItem from '../../components/FlatListItem';
-import {getEventDate} from '../../utils/helper';
+import {getEventDate, heightScale} from '../../utils/helper';
 
 const EventsList = () => {
   const {
@@ -45,6 +45,13 @@ const EventsList = () => {
   const renderEmptyComponent = () => {
     return (
       <View style={styles.listEmptyComponent}>
+        <Image
+          source={IMAGES.noData}
+          style={{
+            width: heightScale(6.5),
+            height: heightScale(6.5),
+          }}
+        />
         <Text style={styles.listEmptyComponentText}>{t('no_data_found')}</Text>
       </View>
     );

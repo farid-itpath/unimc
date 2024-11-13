@@ -1,8 +1,9 @@
 import React, {useCallback} from 'react';
 import {View, Text, Image, FlatList, TouchableOpacity} from 'react-native';
 import {styles} from './style';
-import {ICONS} from '../../assets';
+import {ICONS, IMAGES} from '../../assets';
 import {useTranslation} from 'react-i18next';
+import {heightScale} from '../../utils/helper';
 
 const Section = ({
   data,
@@ -27,6 +28,13 @@ const Section = ({
   const renderEmptyComponent = () => {
     return (
       <View style={styles.listEmptyComponent}>
+        <Image
+          source={IMAGES.noData}
+          style={{
+            width: heightScale(6.5),
+            height: heightScale(6.5),
+          }}
+        />
         <Text style={styles.listEmptyComponentText}>{t('no_data_found')}</Text>
       </View>
     );

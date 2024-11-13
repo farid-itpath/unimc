@@ -18,5 +18,13 @@
   "todays_events": "Today's Events",
   "event_categories": "Event Categories",
   "upcoming_events": "Upcoming Events",
-  "news_categories": "News Categories"
+  "news_categories": "News Categories",
+  "home": "Home",
+  "about": "About",
+  "name": "Name",
+  "email": "Email",
+  "message": "Message",
+  "contact_us": "Contact Us",
+  "having_a_problem": "Having a peoblem? Contact Us.",
+  "select_language": "Select Language"
 }

@@ -66,8 +66,8 @@ export const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    width: widthScale(1.12),
-    height: heightScale(4),
+    // width: widthScale(1.12),
+    // height: heightScale(4),
   },
   listEmptyComponentText: {
     fontFamily: FONTS.InterBold,

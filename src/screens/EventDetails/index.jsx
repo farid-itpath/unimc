@@ -8,6 +8,9 @@ import {
   TouchableOpacity,
   Image,
   TouchableHighlight,
+  Linking,
+  Alert,
+  Platform,
 } from 'react-native';
 import {layout, styles} from './style';
 import {ICONS, IMAGES} from '../../assets';
@@ -18,6 +21,7 @@ import Skeleton from 'react-native-reanimated-skeleton';
 import Video from 'react-native-video';
 import ImagePreviewModal from '../../components/ImagePreviewModal';
 import VideoPreviewModal from '../../components/VideoPreviewModal';
+import {showLocation} from 'react-native-map-link';
 
 const EventDetails = () => {
   const {
@@ -40,6 +44,7 @@ const EventDetails = () => {
     handleVideoPress,
     handleSeeAllImages,
   } = useEventDetails();
+  console.log('selectedVideo', selectedVideo);
   const renderImages = ({item, index}) => {
     return (
       <Skeleton isLoading={!item} key={index}>
@@ -57,16 +62,36 @@ const EventDetails = () => {
     return (
       <Skeleton isLoading={!item} key={index}>
         <TouchableOpacity onPress={() => handleVideoPress(item?.path)}>
-          <Video
-            source={{uri: `${BASE_URL}${item?.path}`}}
-            onError={handleVideoError}
+          <Image
+            source={{uri: `${BASE_URL}${event?.thumbnail_image}`}}
             style={styles.listVideo}
-            resizeMode="stretch"
-            paused={true}
           />
         </TouchableOpacity>
       </Skeleton>
     );
+  };
+
+  const openMap = (latitude, longitude) => {
+    const scheme = Platform.select({
+      ios: 'maps://0,0?q=',
+      android: 'google.navigation:q=',
+    });
+    const latLng = `${latitude},${longitude}`;
+    const label = 'Custom Label';
+    const url = Platform.select({
+      ios: `${scheme}${label}@${latLng}`,
+      android: `${scheme}${latLng}`,
+    });
+    console.log('url: ', url);
+    Linking.canOpenURL(url)
+      .then(supported => {
+        if (supported) {
+          Linking.openURL(url);
+        } else {
+          Alert.alert('Error', 'Map app is not supported on this device');
+        }
+      })
+      .catch(err => console.error('An error occurred', err));
   };
   return (
     <>
@@ -145,14 +170,22 @@ const EventDetails = () => {
                 <Image source={ICONS.location} style={styles.venueIcon} />
               </View>
               {event ? (
-                <View style={styles.venueTexts}>
+                <TouchableOpacity
+                  onPress={() => {
+                    const locationQuery = encodeURIComponent(event?.location);
+                    const url = `https://www.google.com/maps/search/?api=1&query=${locationQuery}`;
+                    Linking.openURL(url).catch(err =>
+                      console.error('Error opening map', err),
+                    );
+                  }}
+                  style={styles.venueTexts}>
                   <Text style={styles.venueFirstText} numberOfLines={1}>
                     {event?.location?.split(',')[0]}
                   </Text>
                   <Text style={styles.venueSecondText} numberOfLines={1}>
                     {event?.location?.split(',').slice(1).join(',')}
                   </Text>
-                </View>
+                </TouchableOpacity>
               ) : (
                 <Skeleton layout={[layout.eventDetails]} />
               )}

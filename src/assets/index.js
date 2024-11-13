@@ -26,6 +26,7 @@ export const IMAGES = {
   categoryImage: require('./images/category-image.png'),
   italy: require('./images/italy.png'),
   english: require('./images/english.png'),
+  noData: require('./images/noData.png'),
 };
 export const FONTS = {
   InterBlack: 'Inter-Black',

@@ -17,7 +17,7 @@ import {useHome} from './useHome';
 import CategoryItem from '../../components/CategoryItem';
 import EventsSectionItem from '../../components/EventsSectionItem';
 import FlatListItem from '../../components/FlatListItem';
-import {timeAgo} from '../../utils/helper';
+import {heightScale, timeAgo} from '../../utils/helper';
 
 const Home = () => {
   const {
@@ -104,6 +104,13 @@ const Home = () => {
   const renderEmptyComponent = () => {
     return (
       <View style={styles.listEmptyComponent}>
+        <Image
+          source={IMAGES.noData}
+          style={{
+            width: heightScale(6.5),
+            height: heightScale(6.5),
+          }}
+        />
         <Text style={styles.listEmptyComponentText}>{t('no_data_found')}</Text>
       </View>
     );

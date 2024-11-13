@@ -1,11 +1,13 @@
 import React from 'react';
 import {Modal, Text, View, Image, TouchableHighlight} from 'react-native';
 import VideoPlayer from 'react-native-video-controls';
+import {useTranslation} from 'react-i18next';
 import {styles} from './style';
 import {BASE_URL, COLORS} from '../../utils/constants';
 import {ICONS} from '../../assets';
 
 const VideoPreviewModal = ({visible, closeModal, videoUrl}) => {
+  const {t} = useTranslation();
   return (
     <Modal
       animationType="fade"

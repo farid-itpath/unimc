@@ -8,19 +8,20 @@ import {COLORS, SCREENS} from '../../utils/constants';
 import {styles} from './style';
 import {ICONS} from '../../assets';
 import {heightScale} from '../../utils/helper';
+import {useTranslation} from 'react-i18next';
 
 const Tab = createBottomTabNavigator();
-
 const BottomTabNavigator = () => {
+  const {t} = useTranslation();
   const getIconByRouteName = name => {
     switch (name) {
-      case SCREENS.HOME.name:
+      case t(SCREENS.HOME.name.toLowerCase()):
         return ICONS.home;
-      case SCREENS.EVENTS.name:
+      case t(SCREENS.EVENTS.name.toLowerCase()):
         return ICONS.events;
-      case SCREENS.NEWS.name:
+      case t(SCREENS.NEWS.name.toLowerCase()):
         return ICONS.news;
-      case SCREENS.ABOUT.name:
+      case t(SCREENS.ABOUT.name.toLowerCase()):
         return ICONS.about;
     }
   };
@@ -53,10 +54,16 @@ const BottomTabNavigator = () => {
           );
         },
       })}>
-      <Tab.Screen name={SCREENS.HOME.name} component={Home} />
-      <Tab.Screen name={SCREENS.EVENTS.name} component={Events} />
-      <Tab.Screen name={SCREENS.NEWS.name} component={News} />
-      <Tab.Screen name={SCREENS.ABOUT.name} component={About} />
+      <Tab.Screen name={t(SCREENS.HOME.name.toLowerCase())} component={Home} />
+      <Tab.Screen
+        name={t(SCREENS.EVENTS.name.toLowerCase())}
+        component={Events}
+      />
+      <Tab.Screen name={t(SCREENS.NEWS.name.toLowerCase())} component={News} />
+      <Tab.Screen
+        name={t(SCREENS.ABOUT.name.toLowerCase())}
+        component={About}
+      />
     </Tab.Navigator>
   );
 };

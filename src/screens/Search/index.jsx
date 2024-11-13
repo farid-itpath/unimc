@@ -13,10 +13,11 @@ import {
 } from 'react-native';
 import {styles} from './style';
 import {COLORS} from '../../utils/constants';
-import {ICONS} from '../../assets';
+import {ICONS, IMAGES} from '../../assets';
 import {useSearch} from './useSearch';
 import FilterModal from './FilterModal';
 import FlatListItem from '../../components/FlatListItem';
+import {heightScale, widthScale} from '../../utils/helper';
 
 const Search = () => {
   const {
@@ -65,6 +66,13 @@ const Search = () => {
   const renderEmptyComponent = () => {
     return (
       <View style={styles.listEmptyComponent}>
+        <Image
+          source={IMAGES.noData}
+          style={{
+            width: heightScale(3.5),
+            height: heightScale(3.5),
+          }}
+        />
         <Text style={styles.listEmptyComponentText}>{t('no_data_found')}</Text>
       </View>
     );
@@ -160,7 +168,6 @@ const Search = () => {
             renderItem={renderEventsResult}
             scrollEnabled={false}
             style={styles.flatList}
-            ListEmptyComponent={renderEmptyComponent}
             ListHeaderComponent={() => renderHeaderComponent('Events')}
           />
         ) : null}
@@ -170,10 +177,10 @@ const Search = () => {
             renderItem={renderNewsResult}
             scrollEnabled={false}
             style={styles.flatList}
-            ListEmptyComponent={renderEmptyComponent}
             ListHeaderComponent={() => renderHeaderComponent('News')}
           />
         ) : null}
+        {!news?.length && !events?.length ? renderEmptyComponent() : null}
       </ScrollView>
       <FilterModal
         visible={modalVisible}
