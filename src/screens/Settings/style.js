@@ -21,7 +21,7 @@ export const styles = StyleSheet.create({
   backIcon: {
     height: heightScale(48),
     width: heightScale(48),
-    tintColor: COLORS.black,
+    tintColor: COLORS.primary,
   },
   searchIcon: {
     height: heightScale(36),
@@ -48,5 +48,8 @@ export const styles = StyleSheet.create({
     fontFamily: FONTS.InterBold,
     color: COLORS.primaryLight,
     fontSize: heightScale(40),
+  },
+  languageSection: {
+    paddingHorizontal: widthScale(16),
   },
 });

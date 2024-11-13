@@ -1,0 +1,22 @@
+{
+  "settings": "Settings",
+  "about_macerata": "About Macerata",
+  "about_event": "About Event",
+  "images": "Images",
+  "videos": "Videos",
+  "organizer": "Organizer",
+  "published_on": "Published on",
+  "events": "Events",
+  "no_data_found": "No data found",
+  "see_all": "See All",
+  "news": "News",
+  "published": "Published",
+  "filters": "Filters",
+  "apply": "Apply",
+  "cancel": "Cancel",
+  "preview": "Preview",
+  "todays_events": "Today's Events",
+  "event_categories": "Event Categories",
+  "upcoming_events": "Upcoming Events",
+  "news_categories": "News Categories"
+}

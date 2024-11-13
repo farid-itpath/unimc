@@ -9,6 +9,7 @@ import {
 import {searchEvents} from '../../redux/reducres/eventsSlice';
 import {searchNews} from '../../redux/reducres/newsSlice';
 import {debounce, filterParams} from '../../utils/helper';
+import {useTranslation} from 'react-i18next';
 
 export const useSearch = () => {
   //states
@@ -26,6 +27,7 @@ export const useSearch = () => {
   } = useSelector(state => state.generic);
   const {events} = useSelector(state => state.events);
   const {news} = useSelector(state => state.news);
+  const {t} = useTranslation();
   //handlers
   const handleOpenFilterModal = () => setModalVisible(true);
   const handleCloseFilterModal = () => setModalVisible(false);
@@ -127,6 +129,7 @@ export const useSearch = () => {
         : events,
     news: searchIn === 'Home' ? genericNews : news,
     searchIn,
+    t,
     handleOpenFilterModal,
     handleCloseFilterModal,
     toggleFitlerItem,

@@ -4,8 +4,10 @@ import Pinchable from 'react-native-pinchable';
 import {styles} from './style';
 import {BASE_URL, COLORS} from '../../utils/constants';
 import {ICONS} from '../../assets';
+import {useTranslation} from 'react-i18next';
 
 const ImagePreviewModal = ({visible, closeModal, imageUrl, title}) => {
+  const {t} = useTranslation();
   return (
     <Modal
       animationType="fade"
@@ -17,7 +19,7 @@ const ImagePreviewModal = ({visible, closeModal, imageUrl, title}) => {
         <View>
           <View style={styles.header}>
             <View style={styles.headerEmptyView} />
-            <Text style={styles.headerTitle}>{title || 'Preview'}</Text>
+            <Text style={styles.headerTitle}>{title || t('preview')}</Text>
             <TouchableHighlight
               onPress={closeModal}
               style={styles.closeIconView}

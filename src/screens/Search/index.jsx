@@ -27,6 +27,7 @@ const Search = () => {
     events,
     news,
     searchIn,
+    t,
     handleOpenFilterModal,
     handleCloseFilterModal,
     toggleFitlerItem,
@@ -64,7 +65,7 @@ const Search = () => {
   const renderEmptyComponent = () => {
     return (
       <View style={styles.listEmptyComponent}>
-        <Text style={styles.listEmptyComponentText}>No data found</Text>
+        <Text style={styles.listEmptyComponentText}>{t('no_data_found')}</Text>
       </View>
     );
   };
@@ -149,7 +150,7 @@ const Search = () => {
                       : COLORS.primary,
                 },
               ]}>
-              Filters
+              {t('filters')}
             </Text>
           </TouchableOpacity>
         </View>

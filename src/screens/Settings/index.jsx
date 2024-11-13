@@ -6,18 +6,18 @@ import {
   StatusBar,
   ScrollView,
   Image,
-  TouchableOpacity,
-  FlatList,
   TouchableHighlight,
 } from 'react-native';
-import {COLORS} from '../../utils/constants';
+import './../../locale/i18n';
+import {COLORS, LANGUAGES} from '../../utils/constants';
 import {ICONS} from '../../assets';
-import {useEventsList} from './useEventsList';
 import {styles} from './style';
-import FlatListItem from '../../components/FlatListItem';
-import {getEventDate} from '../../utils/helper';
+import {useSettings} from './useSettings';
+import {LanguageItem} from './LanguageItem';
 
 const Settings = () => {
+  const {selectedLanguage, handleChangeLanguage, handleBackPress, t} =
+    useSettings();
   return (
     <SafeAreaView style={styles.safeAreaView}>
       <StatusBar
@@ -27,15 +27,25 @@ const Settings = () => {
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.headerView}>
           <TouchableHighlight
-            // onPress={handlePressBack}
+            onPress={handleBackPress}
             underlayColor={COLORS.primaryExtraLight}
             style={styles.backIconView}>
             <Image source={ICONS.back} style={styles.backIcon} />
           </TouchableHighlight>
-          <Text style={styles.headerTitle}>{screenTitle}</Text>
-          <TouchableOpacity onPress={handlePressSearch}>
-            <Image source={ICONS.search} style={styles.searchIcon} />
-          </TouchableOpacity>
+          <Text style={styles.headerTitle}>{t('settings')}</Text>
+          <View />
+        </View>
+        <View style={styles.languageSection}>
+          {LANGUAGES.map((item, index) => (
+            <LanguageItem
+              key={index}
+              selected={selectedLanguage}
+              label={item.title}
+              code={item.code}
+              onPress={() => handleChangeLanguage(item.code)}
+              flag={item.flag}
+            />
+          ))}
         </View>
       </ScrollView>
     </SafeAreaView>

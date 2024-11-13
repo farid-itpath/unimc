@@ -45,7 +45,7 @@ const EventsList = () => {
   const renderEmptyComponent = () => {
     return (
       <View style={styles.listEmptyComponent}>
-        <Text style={styles.listEmptyComponentText}>No data found</Text>
+        <Text style={styles.listEmptyComponentText}>{t('no_data_found')}</Text>
       </View>
     );
   };

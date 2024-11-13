@@ -26,6 +26,7 @@ const Events = () => {
     events,
     eventsLoading,
     eventsError,
+    t,
     handleSelectCategory,
     handlePressSeeAll,
     handlePressSearch,
@@ -57,7 +58,7 @@ const Events = () => {
         <StatusBar backgroundColor={COLORS.primary} />
         <ScrollView showsVerticalScrollIndicator={false}>
           <View style={styles.headerView}>
-            <Text style={styles.headerTitle}>Events</Text>
+            <Text style={styles.headerTitle}>{t('events')}</Text>
             <TouchableOpacity onPress={handlePressSearch}>
               <Image source={ICONS.search} style={styles.searchIcon} />
             </TouchableOpacity>

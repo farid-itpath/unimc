@@ -15,7 +15,7 @@ import {BASE_URL} from '../../utils/constants';
 import Skeleton from 'react-native-reanimated-skeleton';
 
 const NewsDetails = () => {
-  const {news, handlePressBack, getPublishTime} = useNewsDetails();
+  const {news, t, handlePressBack, getPublishTime} = useNewsDetails();
   return (
     <>
       <SafeAreaView style={styles.statusBarSafeArea} />
@@ -43,10 +43,10 @@ const NewsDetails = () => {
                   {news?.title}
                 </Text>
               </View>
-              <View style={styles.eventDataView}>
+              {/* <View style={styles.eventDataView}>
                 <Text style={styles.eventDate}>10</Text>
                 <Text style={styles.eventMonth}>JUNE</Text>
-              </View>
+              </View> */}
             </View>
           </View>
           <View style={styles.eventCategoriesView}>
@@ -73,7 +73,7 @@ const NewsDetails = () => {
             )}
           </View>
           <View style={styles.newsDetailsView}>
-            <Text style={styles.publishInfoTitle}>PUBLISHED</Text>
+            <Text style={styles.publishInfoTitle}>{t('published')}</Text>
             <Text style={styles.publishDate}>
               {getPublishTime(news?.submittedAt)}
             </Text>

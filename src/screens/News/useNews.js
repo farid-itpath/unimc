@@ -1,6 +1,7 @@
 import {useCallback, useState} from 'react';
 import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import {useDispatch, useSelector} from 'react-redux';
+import {useTranslation} from 'react-i18next';
 import {SCREENS} from '../../utils/constants';
 import {getNews, getNewsCategories} from '../../redux/reducres/newsSlice';
 
@@ -9,6 +10,7 @@ export const useNews = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const {categories, news} = useSelector(state => state.news);
+  const {t} = useTranslation();
   const handleSelectCategory = index => {
     setSelectedCategory(index);
   };
@@ -29,6 +31,8 @@ export const useNews = () => {
     selectedCategory,
 
     news,
+
+    t,
 
     handleSelectCategory,
     handlePressSeeAll,

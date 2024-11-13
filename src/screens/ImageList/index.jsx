@@ -20,6 +20,7 @@ const ImageList = () => {
     images,
     isModalVisible,
     selectedImage,
+    t,
     handlePressImage,
     closeModal,
     handlePressBack,
@@ -53,7 +54,7 @@ const ImageList = () => {
             style={styles.backIconView}>
             <Image source={ICONS.back} style={styles.backIcon} />
           </TouchableHighlight>
-          <Text style={styles.headerTitle}>Images</Text>
+          <Text style={styles.headerTitle}>{t('images')}</Text>
           <TouchableOpacity />
         </View>
         <FlatList

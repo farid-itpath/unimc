@@ -42,6 +42,8 @@ const Home = () => {
     upcomingEvents,
     todaysEvents,
 
+    t,
+
     handlePressSearch,
   } = useHome();
   const renderEvents = ({item, index}) => {
@@ -93,7 +95,7 @@ const Home = () => {
         <TouchableOpacity
           style={styles.seeAllView}
           onPress={handlePressSeeAllNews}>
-          <Text style={styles.seeAllText}>See All </Text>
+          <Text style={styles.seeAllText}>{t('see_all')} </Text>
           <Image source={ICONS.arrowRight} style={styles.arrowRight} />
         </TouchableOpacity>
       </View>
@@ -102,7 +104,7 @@ const Home = () => {
   const renderEmptyComponent = () => {
     return (
       <View style={styles.listEmptyComponent}>
-        <Text style={styles.listEmptyComponentText}>No data found</Text>
+        <Text style={styles.listEmptyComponentText}>{t('no_data_found')}</Text>
       </View>
     );
   };
@@ -125,7 +127,7 @@ const Home = () => {
           </View>
           {!!todaysEvents?.length && (
             <Section
-              title="Today's Events"
+              title={t('todays_events')}
               data={todaysEvents}
               renderItem={renderEvents}
               onPressSeeAll={handlePressSeeAllTodaysEvents}
@@ -133,20 +135,20 @@ const Home = () => {
             />
           )}
           <Section
-            title="Event Categories"
+            title={t('event_categories')}
             data={eventCategories}
             renderItem={renderEventCategories}
             showFooterComponent={false}
           />
           <Section
-            title="Upcoming Events"
+            title={t('upcoming_events')}
             data={upcomingEvents}
             renderItem={renderEvents}
             onPressSeeAll={handlePressSeeAllUpcomingEvents}
             showFooterComponent={true}
           />
           <Section
-            title="News Categories"
+            title={t('news_categories')}
             data={newsCategories}
             renderItem={renderNewsCategories}
             showFooterComponent={false}
@@ -156,7 +158,7 @@ const Home = () => {
             renderItem={renderNews}
             scrollEnabled={false}
             style={styles.flatList}
-            ListHeaderComponent={() => renderHeaderComponent('News')}
+            ListHeaderComponent={() => renderHeaderComponent(t('news'))}
             ListEmptyComponent={renderEmptyComponent}
           />
         </ScrollView>

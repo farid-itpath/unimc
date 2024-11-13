@@ -16,6 +16,7 @@ export const ICONS = {
   tick: require('./icons/tick.png'),
   close: require('./icons/close.png'),
   art: require('./icons/art.png'),
+  settings: require('./icons/settings.png'),
 };
 export const IMAGES = {
   logo: require('./images/logo.png'),
@@ -23,6 +24,8 @@ export const IMAGES = {
   todaysEvent: require('./images/todays-event.png'),
   upcomingEvent: require('./images/upcoming-event.png'),
   categoryImage: require('./images/category-image.png'),
+  italy: require('./images/italy.png'),
+  english: require('./images/english.png'),
 };
 export const FONTS = {
   InterBlack: 'Inter-Black',

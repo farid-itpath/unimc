@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import {styles} from './style';
 import {COLORS} from '../../utils/constants';
-import {ICONS, IMAGES} from '../../assets';
+import {ICONS} from '../../assets';
 import Section from '../../components/Section';
 import {useNews} from './useNews';
 import NewsSectionItem from '../../components/NewsSectionItem';
@@ -24,6 +24,7 @@ const News = () => {
     categories,
     selectedCategory,
     news,
+    t,
     handleSelectCategory,
     handlePressSeeAll,
     handlePressSearch,
@@ -68,7 +69,7 @@ const News = () => {
         <TouchableOpacity
           style={styles.seeAllView}
           onPress={() => handlePressSeeAll(title)}>
-          <Text style={styles.seeAllText}>See All </Text>
+          <Text style={styles.seeAllText}>{t('see_all')} </Text>
           <Image source={ICONS.arrowRight} style={styles.arrowRight} />
         </TouchableOpacity>
       </View>
@@ -77,7 +78,7 @@ const News = () => {
   const renderEmptyComponent = () => {
     return (
       <View style={styles.listEmptyComponent}>
-        <Text style={styles.listEmptyComponentText}>No data found</Text>
+        <Text style={styles.listEmptyComponentText}>{t('no_data_found')}</Text>
       </View>
     );
   };
@@ -88,7 +89,7 @@ const News = () => {
         <StatusBar backgroundColor={COLORS.primary} />
         <ScrollView showsVerticalScrollIndicator={false}>
           <View style={styles.headerView}>
-            <Text style={styles.headerTitle}>News</Text>
+            <Text style={styles.headerTitle}>{t('news')}</Text>
             <TouchableOpacity onPress={handlePressSearch}>
               <Image source={ICONS.search} style={styles.searchIcon} />
             </TouchableOpacity>

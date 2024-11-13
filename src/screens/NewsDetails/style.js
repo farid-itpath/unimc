@@ -108,6 +108,7 @@ export const styles = StyleSheet.create({
     textDecorationLine: 'underline',
     color: COLORS.primary,
     marginBottom: 8,
+    textTransform: 'uppercase',
   },
   publishDate: {
     fontFamily: FONTS.InterMedium,

@@ -2,6 +2,7 @@ import React, {useCallback} from 'react';
 import {View, Text, Image, FlatList, TouchableOpacity} from 'react-native';
 import {styles} from './style';
 import {ICONS} from '../../assets';
+import {useTranslation} from 'react-i18next';
 
 const Section = ({
   data,
@@ -10,13 +11,14 @@ const Section = ({
   onPressSeeAll,
   showFooterComponent,
 }) => {
+  const {t} = useTranslation();
   const renderFooterComponent = useCallback(() => {
     return (
       <TouchableOpacity
         style={styles.footerComponent}
         activeOpacity={0.8}
         onPress={onPressSeeAll}>
-        <Text style={styles.footerComponentText}>See All </Text>
+        <Text style={styles.footerComponentText}>{t('see_all')}</Text>
         <Image source={ICONS.arrowRight} style={styles.arrowRightFooter} />
         <Image source={ICONS.arrowRight} style={styles.arrowRightFooter} />
       </TouchableOpacity>
@@ -25,7 +27,7 @@ const Section = ({
   const renderEmptyComponent = () => {
     return (
       <View style={styles.listEmptyComponent}>
-        <Text style={styles.listEmptyComponentText}>No data found</Text>
+        <Text style={styles.listEmptyComponentText}>{t('no_data_found')}</Text>
       </View>
     );
   };
@@ -39,7 +41,7 @@ const Section = ({
         )}
         {!!onPressSeeAll && (
           <TouchableOpacity style={styles.seeAllView} onPress={onPressSeeAll}>
-            <Text style={styles.seeAllText}>See All </Text>
+            <Text style={styles.seeAllText}>{t('see_all')} </Text>
             <Image source={ICONS.arrowRight} style={styles.arrowRight} />
           </TouchableOpacity>
         )}

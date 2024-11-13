@@ -29,6 +29,7 @@ const EventDetails = () => {
     modalTitle,
     images,
     videos,
+    t,
     handlePressBack,
     getEventDate,
     getEventTime,
@@ -158,7 +159,7 @@ const EventDetails = () => {
             </View>
           </View>
           <View style={styles.eventInfoView}>
-            <Text style={styles.eventInfoTitle}>ABOUT EVENT</Text>
+            <Text style={styles.eventInfoTitle}>{t('about_event')}</Text>
             {event ? (
               <Text style={styles.aboutText}>{event?.description}</Text>
             ) : (
@@ -169,7 +170,9 @@ const EventDetails = () => {
             <Section
               data={images}
               renderItem={renderImages}
-              title={() => <Text style={styles.eventInfoTitle}>IMAGES</Text>}
+              title={() => (
+                <Text style={styles.eventInfoTitle}>{t('images')}</Text>
+              )}
               onPressSeeAll={handleSeeAllImages}
             />
           )}
@@ -177,12 +180,14 @@ const EventDetails = () => {
             <Section
               data={videos}
               renderItem={renderVideos}
-              title={() => <Text style={styles.eventInfoTitle}>VIDEOS</Text>}
+              title={() => (
+                <Text style={styles.eventInfoTitle}>{t('videos')}</Text>
+              )}
               onPressSeeAll={() => console.log('hello')}
             />
           )}
           <View style={styles.eventInfoView}>
-            <Text style={styles.eventInfoTitle}>ORGANIZER</Text>
+            <Text style={styles.eventInfoTitle}>{t('organizer')}</Text>
             <View style={styles.organizerDetailView}>
               <Image
                 source={IMAGES.categoryImage}
@@ -192,9 +197,9 @@ const EventDetails = () => {
                 <Text style={styles.organizerFirstText}>
                   {event?.creator?.first_name} {event?.creator?.last_name}
                 </Text>
-                <Text style={styles.organizerSecondText}>Organizer</Text>
+                <Text style={styles.organizerSecondText}>{t('organizer')}</Text>
                 <Text style={styles.organizerSecondText}>
-                  Published on: {getEventDate(event?.createdAt)}
+                  {t('published_on')}: {getEventDate(event?.createdAt)}
                 </Text>
               </View>
             </View>

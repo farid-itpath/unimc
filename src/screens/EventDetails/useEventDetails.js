@@ -3,6 +3,7 @@ import {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {clearEvent, getEvent} from '../../redux/reducres/eventsSlice';
 import {SCREENS} from '../../utils/constants';
+import {useTranslation} from 'react-i18next';
 
 export const useEventDetails = () => {
   const [imageModalVisible, setImageModalVisible] = useState(false);
@@ -13,6 +14,7 @@ export const useEventDetails = () => {
   const navigation = useNavigation();
   const {params} = useRoute();
   const dispatch = useDispatch();
+  const {t} = useTranslation();
   const {event} = useSelector(state => state.events);
   const handlePressBack = () => navigation.goBack();
   const getEventDate = date => {
@@ -74,6 +76,7 @@ export const useEventDetails = () => {
     selectedVideo,
     modalTitle,
     images,
+    t,
     videos,
     handlePressBack,
     getEventDate,

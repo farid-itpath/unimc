@@ -12,6 +12,7 @@ import {ICONS} from '../../../assets';
 import {styles} from './style';
 import {COLORS} from '../../../utils/constants';
 import {useSelector} from 'react-redux';
+import {useTranslation} from 'react-i18next';
 
 const FilterModal = ({
   visible,
@@ -23,6 +24,7 @@ const FilterModal = ({
 }) => {
   const {categories: eventCategories} = useSelector(state => state.events);
   const {categories: newsCategories} = useSelector(state => state.news);
+  const {t} = useTranslation();
   const options =
     searchIn === 'Home'
       ? [
@@ -44,7 +46,7 @@ const FilterModal = ({
       <View style={styles.modalView}>
         <View style={styles.header}>
           <View style={styles.headerEmptyView} />
-          <Text style={styles.headerTitle}>Filters</Text>
+          <Text style={styles.headerTitle}>{t('filters')}</Text>
           <TouchableHighlight
             onPress={closeModal}
             style={styles.closeIconView}
@@ -108,13 +110,13 @@ const FilterModal = ({
           <TouchableOpacity
             style={styles.buttonApplyView}
             onPress={onPressApply}>
-            <Text style={styles.buttonApplyTitle}>Apply</Text>
+            <Text style={styles.buttonApplyTitle}>{t('apply')}</Text>
           </TouchableOpacity>
           <TouchableHighlight
             onPress={closeModal}
             style={styles.buttonCancelView}
             underlayColor={COLORS.primaryExtraLight}>
-            <Text style={styles.buttonCancelTitle}>Cancel</Text>
+            <Text style={styles.buttonCancelTitle}>{t('cancel')}</Text>
           </TouchableHighlight>
         </View>
       </View>

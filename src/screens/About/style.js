@@ -26,6 +26,15 @@ export const styles = StyleSheet.create({
     fontSize: heightScale(48),
     color: COLORS.white,
   },
+  settingsIcon: {
+    height: heightScale(44),
+    width: heightScale(44),
+    tintColor: COLORS.white,
+  },
+  settingsView: {
+    padding: 5,
+    borderRadius: (heightScale(40) + 10) / 2,
+  },
   eventCategoriesView: {
     flexDirection: 'row',
     alignItems: 'center',

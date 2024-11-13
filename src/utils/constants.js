@@ -1,3 +1,5 @@
+import {IMAGES} from '../assets';
+
 // export const BASE_URL = 'http://192.168.0.11:5020';
 export const BASE_URL = 'https://apimaceratauniversity.project-demo.info';
 
@@ -54,6 +56,10 @@ export const SCREENS = {
     id: 13,
     name: 'VideoList',
   },
+  SETTINGS: {
+    id: 14,
+    name: 'Settings',
+  },
 };
 
 export const COLORS = {
@@ -66,3 +72,8 @@ export const COLORS = {
   lightGrey: '#8193AE',
   extraLightGrey: '#F0F0F0',
 };
+
+export const LANGUAGES = [
+  {title: 'Italy', code: 'it', flag: IMAGES.italy},
+  {title: 'English', code: 'en', flag: IMAGES.english},
+];

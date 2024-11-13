@@ -10,12 +10,14 @@ import {
 } from '../../redux/reducres/eventsSlice';
 import {getNews, getNewsCategories} from '../../redux/reducres/newsSlice';
 import {getEventsAndNews} from '../../redux/reducres/genericSlice';
+import {useTranslation} from 'react-i18next';
 
 export const useHome = () => {
   const [selectedEventsCategory, setSelectedEventsCategory] = useState();
   const [selectedNewsCategory, setSelectedNewsCategory] = useState();
   const navigation = useNavigation();
   const dispatch = useDispatch();
+  const {t} = useTranslation();
   //getting categories
   const {
     categories: eventCategories,
@@ -81,6 +83,8 @@ export const useHome = () => {
 
     upcomingEvents,
     todaysEvents,
+
+    t,
 
     handlePressSearch,
   };

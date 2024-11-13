@@ -3,6 +3,7 @@ import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import {useDispatch, useSelector} from 'react-redux';
 import {SCREENS} from '../../utils/constants';
 import {getEvents, getEventsCategories} from '../../redux/reducres/eventsSlice';
+import {useTranslation} from 'react-i18next';
 
 export const useEvents = () => {
   const [selectedCategory, setSelectedCategory] = useState(0);
@@ -16,6 +17,7 @@ export const useEvents = () => {
   } = useSelector(state => state.events);
   const dispatch = useDispatch();
   const navigation = useNavigation();
+  const {t} = useTranslation();
   const handleSelectCategory = index => {
     setSelectedCategory(index);
   };
@@ -39,6 +41,7 @@ export const useEvents = () => {
     events,
     eventsLoading,
     eventsError,
+    t,
     handleSelectCategory,
     handlePressSeeAll,
     handlePressSearch,

@@ -17,7 +17,7 @@ const VideoPreviewModal = ({visible, closeModal, videoUrl}) => {
         <View style={{flex: 1}}>
           <View style={styles.header}>
             <View style={styles.headerEmptyView} />
-            <Text style={styles.headerTitle}>Preview</Text>
+            <Text style={styles.headerTitle}>{t('preview')}</Text>
             <TouchableHighlight
               onPress={closeModal}
               style={styles.closeIconView}

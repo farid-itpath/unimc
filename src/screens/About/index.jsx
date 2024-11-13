@@ -7,12 +7,15 @@ import {
   ScrollView,
   FlatList,
   TouchableOpacity,
+  Image,
+  TouchableHighlight,
 } from 'react-native';
 import {styles} from './style';
 import {COLORS} from '../../utils/constants';
 import Carousel from './Carousel';
 import Accordion from './Accordion';
 import {useAbout} from './useAbout';
+import {ICONS} from '../../assets';
 
 const About = () => {
   const {
@@ -21,9 +24,11 @@ const About = () => {
     aboutData,
     aboutCategories,
     aboutBannerImages,
+    t,
     handleSelectCategory,
     handleLayout,
     scrollToView,
+    handlePressSettings,
   } = useAbout();
   const renderCategoryItem = ({item, index}) => {
     return (
@@ -59,7 +64,13 @@ const About = () => {
         <StatusBar backgroundColor={COLORS.primary} />
         <ScrollView ref={scrollRef} showsVerticalScrollIndicator={false}>
           <View style={styles.headerView}>
-            <Text style={styles.headerTitle}>About Macerata</Text>
+            <Text style={styles.headerTitle}>{t('about_macerata')}</Text>
+            <TouchableHighlight
+              underlayColor={COLORS.primaryExtraLight}
+              style={styles.settingsView}
+              onPress={handlePressSettings}>
+              <Image source={ICONS.settings} style={styles.settingsIcon} />
+            </TouchableHighlight>
           </View>
           <FlatList
             data={['All', ...(aboutCategories || [])]}
