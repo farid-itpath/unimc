@@ -180,7 +180,13 @@ const Search = () => {
             ListHeaderComponent={() => renderHeaderComponent('News')}
           />
         ) : null}
-        {!news?.length && !events?.length ? renderEmptyComponent() : null}
+        {searchIn === 'Home'
+          ? !news?.length && !events?.length
+            ? renderEmptyComponent()
+            : null
+          : !news?.length || !events?.length
+          ? renderEmptyComponent()
+          : null}
       </ScrollView>
       <FilterModal
         visible={modalVisible}

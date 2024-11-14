@@ -27,5 +27,6 @@ export const styles = StyleSheet.create({
     fontFamily: FONTS.InterMedium,
     fontSize: heightScale(60),
     marginTop: 8,
+    color: COLORS.grey,
   },
 });

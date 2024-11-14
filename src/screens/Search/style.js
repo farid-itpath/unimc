@@ -22,7 +22,7 @@ export const styles = StyleSheet.create({
   backIcon: {
     height: heightScale(48),
     width: heightScale(48),
-    tintColor: COLORS.black,
+    tintColor: COLORS.primary,
   },
   searchInputView: {
     flex: 1,
@@ -38,6 +38,7 @@ export const styles = StyleSheet.create({
     flex: 1,
     fontFamily: FONTS.InterMedium,
     fontSize: heightScale(52),
+    color: COLORS.grey,
   },
   searchIcon: {
     tintColor: COLORS.primary,

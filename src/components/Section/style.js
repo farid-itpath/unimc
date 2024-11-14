@@ -25,6 +25,7 @@ export const styles = StyleSheet.create({
   seeAllText: {
     fontFamily: FONTS.InterMedium,
     fontSize: heightScale(60),
+    color: COLORS.grey,
   },
   flatListContainer: {
     paddingHorizontal: heightScale(40),

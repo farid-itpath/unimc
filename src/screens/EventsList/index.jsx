@@ -16,8 +16,10 @@ import {useEventsList} from './useEventsList';
 import {styles} from './style';
 import FlatListItem from '../../components/FlatListItem';
 import {getEventDate, heightScale} from '../../utils/helper';
+import {useTranslation} from 'react-i18next';
 
 const EventsList = () => {
+  const {t} = useTranslation();
   const {
     todaysEvents,
     upcomingEvents,
