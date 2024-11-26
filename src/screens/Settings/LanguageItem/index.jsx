@@ -4,7 +4,8 @@ import {COLORS} from '../../../utils/constants';
 
 export const LanguageItem = ({label, selected, onPress, code, flag}) => {
   return (
-    <View
+    <TouchableOpacity
+      onPress={onPress}
       style={[
         styles.languageItem,
         {
@@ -13,15 +14,15 @@ export const LanguageItem = ({label, selected, onPress, code, flag}) => {
         },
       ]}>
       <Image source={flag} style={styles.flag} />
-      <TouchableOpacity style={styles.radioButton} onPress={onPress}>
+      <View style={styles.radioButton}>
         <View
           style={[
             styles.radioButtonIcon,
             selected === code && styles.radioButtonIconSelected,
           ]}
         />
-      </TouchableOpacity>
+      </View>
       <Text style={styles.languageTitle}>{label}</Text>
-    </View>
+    </TouchableOpacity>
   );
 };

@@ -80,5 +80,14 @@ export const api = {
         url: `/about-us/${id}`,
         method: METHODS.GET,
       }),
+    contactUs: data =>
+      client({
+        url: `/contact-us`,
+        method: METHODS.POST,
+        data: data,
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      }),
   },
 };

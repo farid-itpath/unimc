@@ -8,6 +8,7 @@ import {useTranslation} from 'react-i18next';
 export const useAbout = () => {
   const [selectedCategory, setSelectedCategory] = useState(0);
   const [viewPositions, setViewPositions] = useState({});
+  const [collapsed, setCollapse] = useState([]);
   const scrollRef = useRef();
   const navigation = useNavigation();
   const dispatch = useDispatch();
@@ -15,6 +16,18 @@ export const useAbout = () => {
     useSelector(state => state.about);
   const {t} = useTranslation();
   const handleSelectCategory = index => {
+    if (index === 0) {
+      setCollapse(prevState => {
+        const newState = [...prevState];
+        return newState.map(_ => true);
+      });
+    } else {
+      setCollapse(prevState => {
+        const newState = [...prevState];
+        newState[index - 1] = true;
+        return newState;
+      });
+    }
     setSelectedCategory(index);
     scrollRef.current.scrollTo({y: 500, animated: true});
   };
@@ -37,12 +50,22 @@ export const useAbout = () => {
     }
   };
   const handlePressSettings = () => navigation.navigate(SCREENS.SETTINGS.name);
+  const handleToggleCollapse = index => {
+    setCollapse(prevState => {
+      const newState = [...prevState];
+      newState[index] = !newState[index];
+      return newState;
+    });
+  };
   useEffect(() => {
     dispatch(getAbout());
   }, []);
   useEffect(() => {
     dispatch(getBannerImages(aboutImagesId));
   }, [aboutImagesId]);
+  useEffect(() => {
+    setCollapse(new Array(aboutCategories?.length).fill(true));
+  }, [aboutCategories]);
   return {
     selectedCategory,
     scrollRef,
@@ -50,9 +73,11 @@ export const useAbout = () => {
     aboutCategories,
     aboutBannerImages,
     t,
+    collapsed,
     handleSelectCategory,
     handleLayout,
     scrollToView,
     handlePressSettings,
+    handleToggleCollapse,
   };
 };

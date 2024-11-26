@@ -1,5 +1,5 @@
-import {useEffect, useState} from 'react';
-import {useNavigation} from '@react-navigation/native';
+import {useCallback, useState} from 'react';
+import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import {useDispatch, useSelector} from 'react-redux';
 import {SCREENS} from '../../utils/constants';
 import {
@@ -53,15 +53,17 @@ export const useHome = () => {
   const handleSelectNewsCategory = title =>
     navigation.navigate(SCREENS.NEWSLIST.name, {screenTitle: title});
   //effect handlers
-  useEffect(() => {
-    dispatch(getNewsCategories());
-    dispatch(getEventsCategories());
-    dispatch(getEventsAndNews());
-    dispatch(getEvents());
-    dispatch(getUpcomingEvents());
-    dispatch(getTodaysEvents());
-    dispatch(getNews());
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      dispatch(getNewsCategories());
+      dispatch(getEventsCategories());
+      dispatch(getEventsAndNews());
+      dispatch(getEvents());
+      dispatch(getUpcomingEvents());
+      dispatch(getTodaysEvents());
+      dispatch(getNews());
+    }, []),
+  );
   return {
     newsCategories,
     news,

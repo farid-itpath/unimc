@@ -57,5 +57,10 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	  <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+  <string>We need access to your location to show you the event's location.</string>
+  <key>NSLocationTemporaryUsageDescriptionDictionary</key>
+  <key>NSLocationWhenInUseUsageDescription</key>
+  <string>We need access to your location to show you the event's location.</string>
 </dict>
 </plist>

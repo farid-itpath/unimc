@@ -4,6 +4,7 @@ import Skeleton from 'react-native-reanimated-skeleton';
 import {layout, styles} from './style';
 import {timeAgo} from '../../utils/helper';
 import {BASE_URL} from '../../utils/constants';
+import RenderHTML from 'react-native-render-html';
 
 const NewsSectionItem = ({item, onPress, index}) => {
   return item ? (
@@ -24,9 +25,26 @@ const NewsSectionItem = ({item, onPress, index}) => {
           {timeAgo(item?.submittedAt)}
         </Text>
       </View>
-      <Text style={styles.newsTitle} numberOfLines={1}>
-        {item?.news_description}
-      </Text>
+      <View style={styles.htmlContent}>
+        <RenderHTML
+          contentWidth={1}
+          source={{html: item?.news_description}}
+          tagsStyles={{
+            p: {
+              marginTop: 0,
+              marginBottom: 0,
+              paddingTop: 0,
+              paddingBottom: 0,
+            },
+            span: {
+              marginTop: 0,
+              marginBottom: 0,
+              paddingTop: 0,
+              paddingBottom: 0,
+            },
+          }}
+        />
+      </View>
     </TouchableOpacity>
   ) : (
     <Skeleton isLoading layout={[layout]} />

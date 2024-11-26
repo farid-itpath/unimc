@@ -14,7 +14,7 @@ export const styles = StyleSheet.create({
     color: COLORS.black,
   },
   tabBarView: {
-    width: widthScale(8),
+    width: widthScale(5),
     justifyContent: 'center',
     alignItems: 'center',
   },

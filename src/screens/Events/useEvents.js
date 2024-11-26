@@ -1,4 +1,4 @@
-import {useCallback, useEffect, useState} from 'react';
+import {useCallback, useState} from 'react';
 import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import {useDispatch, useSelector} from 'react-redux';
 import {SCREENS} from '../../utils/constants';
@@ -15,6 +15,7 @@ export const useEvents = () => {
     eventsLoading,
     eventsError,
   } = useSelector(state => state.events);
+  const {upcomingEvents} = useSelector(state => state.generic);
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const {t} = useTranslation();
@@ -38,6 +39,7 @@ export const useEvents = () => {
     categories,
     categoriesError,
     categoriesLoading,
+    upcomingEvents,
     events,
     eventsLoading,
     eventsError,

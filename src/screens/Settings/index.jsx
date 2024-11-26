@@ -15,7 +15,6 @@ import {ICONS} from '../../assets';
 import {styles} from './style';
 import {useSettings} from './useSettings';
 import {LanguageItem} from './LanguageItem';
-import {useSelector} from 'react-redux';
 import {heightScale} from '../../utils/helper';
 
 const Settings = ({navigation}) => {
@@ -39,7 +38,7 @@ const Settings = ({navigation}) => {
           <View />
         </View>
         <View style={styles.languageSection}>
-          <Text style={styles.headerTitle1}>{t('Select Language')}</Text>
+          <Text style={styles.headerTitle1}>{t('select_language')}</Text>
           {LANGUAGES.map((item, index) => (
             <LanguageItem
               key={index}
@@ -52,13 +51,11 @@ const Settings = ({navigation}) => {
           ))}
 
           <View style={{marginTop: heightScale(100)}}>
-            <Text style={styles.headerTitle1}>
-              {t('Having a problem? Contact us.')}
-            </Text>
+            <Text style={styles.headerTitle1}>{t('having_a_problem')}</Text>
             <TouchableOpacity
               style={styles.buttonApplyView}
               onPress={() => navigation.navigate(SCREENS.CONTACT_US.name)}>
-              <Text style={styles.buttonApplyTitle}>{t('Contact Us')}</Text>
+              <Text style={styles.buttonApplyTitle}>{t('contact_us')}</Text>
             </TouchableOpacity>
           </View>
         </View>

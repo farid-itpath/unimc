@@ -18,7 +18,7 @@ export const styles = StyleSheet.create({
     borderRadius: 10,
   },
   eventListDetails: {
-    justifyContent: 'space-between',
+    // justifyContent: 'space-between',
     flexShrink: 1,
     width: '100%',
   },
@@ -27,7 +27,8 @@ export const styles = StyleSheet.create({
     fontSize: heightScale(72),
     fontFamily: FONTS.InterBold,
     color: COLORS.primary,
-    marginBottom: 5,
+    // marginBottom: 5,
+    flex: 1,
   },
   eventListDesc: {
     fontFamily: FONTS.InterBold,
@@ -36,9 +37,15 @@ export const styles = StyleSheet.create({
   },
   eventListTime: {
     fontFamily: FONTS.InterMedium,
-    marginBottom: 10,
+    // marginBottom: 10,
     fontSize: heightScale(64),
     color: COLORS.grey,
+    flex: 1,
+  },
+  htmlContent: {
+    height: 45,
+    overflow: 'hidden',
+    flex: 4,
   },
 });
 

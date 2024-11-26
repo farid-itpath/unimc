@@ -24,6 +24,7 @@ const Events = () => {
     categoriesError,
     categoriesLoading,
     events,
+    upcomingEvents,
     eventsLoading,
     eventsError,
     t,
@@ -64,7 +65,7 @@ const Events = () => {
             </TouchableOpacity>
           </View>
           <FlatList
-            data={[{icon_image: '', title: 'All'}, ...(categories || [])]}
+            data={[{icon_image: '', title: t('all')}, ...(categories || [])]}
             renderItem={renderCategoryItem}
             horizontal
             showsHorizontalScrollIndicator={false}
@@ -72,9 +73,10 @@ const Events = () => {
           />
           <Section
             title="Recent Events"
-            data={events}
+            data={upcomingEvents}
             renderItem={renderEvents}
             onPressSeeAll={() => handlePressSeeAll('Recent Events')}
+            showFooterComponent={true}
           />
           {selectedCategory === 0 ? (
             categories?.map((category, index) => {
@@ -92,6 +94,7 @@ const Events = () => {
                   renderItem={renderEvents}
                   onPressSeeAll={() => handlePressSeeAll(category?.title)}
                   key={index}
+                  showFooterComponent={true}
                 />
               ) : null;
             })
@@ -111,6 +114,7 @@ const Events = () => {
               onPressSeeAll={() =>
                 handlePressSeeAll(categories[selectedCategory - 1]?.title)
               }
+              showFooterComponent={true}
             />
           )}
         </ScrollView>

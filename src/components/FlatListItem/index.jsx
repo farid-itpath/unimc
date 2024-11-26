@@ -1,6 +1,7 @@
 import React from 'react';
 import {View, Text, TouchableOpacity, Image} from 'react-native';
 import Skeleton from 'react-native-reanimated-skeleton';
+import {RenderHTML} from 'react-native-render-html';
 import {layout, styles} from './style';
 import {BASE_URL} from '../../utils/constants';
 
@@ -19,13 +20,28 @@ const FlatListItem = ({
         style={styles.eventListImage}
       />
       <View style={styles.eventListDetails}>
-        <View>
-          <Text style={styles.eventListTitle} numberOfLines={1}>
-            {itemTitle}
-          </Text>
-          <Text style={styles.eventListDesc} numberOfLines={2}>
-            {itemDesc}
-          </Text>
+        <Text style={styles.eventListTitle} numberOfLines={1}>
+          {itemTitle}
+        </Text>
+        <View style={styles.htmlContent}>
+          <RenderHTML
+            contentWidth={1}
+            source={{html: itemDesc}}
+            tagsStyles={{
+              p: {
+                marginTop: 0,
+                marginBottom: 0,
+                paddingTop: 0,
+                paddingBottom: 0,
+              },
+              span: {
+                marginTop: 0,
+                marginBottom: 0,
+                paddingTop: 0,
+                paddingBottom: 0,
+              },
+            }}
+          />
         </View>
         <Text style={styles.eventListTime}>{itemDate}</Text>
       </View>

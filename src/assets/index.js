@@ -17,6 +17,7 @@ export const ICONS = {
   close: require('./icons/close.png'),
   art: require('./icons/art.png'),
   settings: require('./icons/settings.png'),
+  play: require('./icons/play.png'),
 };
 export const IMAGES = {
   logo: require('./images/logo.png'),

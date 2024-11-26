@@ -888,6 +888,14 @@ PODS:
   - React-Mapbuffer (0.73.6):
     - glog
     - React-debug
+  - react-native-geolocation (3.4.0):
+    - glog
+    - RCT-Folly (= 2022.05.16.00)
+    - React-Core
+  - react-native-pinchable (0.2.1):
+    - React-Core
+  - react-native-render-html (6.3.4):
+    - React-Core
   - react-native-safe-area-context (4.14.0):
     - React-Core
   - react-native-video (5.2.1):
@@ -1068,6 +1076,8 @@ PODS:
     - glog
     - RCT-Folly (= 2022.05.16.00)
     - React-Core
+  - RNPermissions (5.1.0):
+    - React-Core
   - RNReanimated (3.16.1):
     - glog
     - RCT-Folly (= 2022.05.16.00)
@@ -1133,6 +1143,9 @@ DEPENDENCIES:
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector-modern`)
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
   - React-Mapbuffer (from `../node_modules/react-native/ReactCommon`)
+  - "react-native-geolocation (from `../node_modules/@react-native-community/geolocation`)"
+  - react-native-pinchable (from `../node_modules/react-native-pinchable`)
+  - react-native-render-html (from `../node_modules/react-native-render-html`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - react-native-video (from `../node_modules/react-native-video`)
   - React-nativeconfig (from `../node_modules/react-native/ReactCommon`)
@@ -1157,6 +1170,7 @@ DEPENDENCIES:
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - "RNCAsyncStorage (from `../node_modules/@react-native-async-storage/async-storage`)"
   - "RNCMaskedView (from `../node_modules/@react-native-masked-view/masked-view`)"
+  - RNPermissions (from `../node_modules/react-native-permissions`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNSVG (from `../node_modules/react-native-svg`)
@@ -1226,6 +1240,12 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/logger"
   React-Mapbuffer:
     :path: "../node_modules/react-native/ReactCommon"
+  react-native-geolocation:
+    :path: "../node_modules/@react-native-community/geolocation"
+  react-native-pinchable:
+    :path: "../node_modules/react-native-pinchable"
+  react-native-render-html:
+    :path: "../node_modules/react-native-render-html"
   react-native-safe-area-context:
     :path: "../node_modules/react-native-safe-area-context"
   react-native-video:
@@ -1274,6 +1294,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-async-storage/async-storage"
   RNCMaskedView:
     :path: "../node_modules/@react-native-masked-view/masked-view"
+  RNPermissions:
+    :path: "../node_modules/react-native-permissions"
   RNReanimated:
     :path: "../node_modules/react-native-reanimated"
   RNScreens:
@@ -1314,6 +1336,9 @@ SPEC CHECKSUMS:
   React-jsinspector: 85583ef014ce53d731a98c66a0e24496f7a83066
   React-logger: 3eb80a977f0d9669468ef641a5e1fabbc50a09ec
   React-Mapbuffer: 84ea43c6c6232049135b1550b8c60b2faac19fab
+  react-native-geolocation: 167798574694849024cb093222bd158e84ac8d21
+  react-native-pinchable: b4381b0807d15c12b14bfacd927128f52d96f0f1
+  react-native-render-html: 984dfe2294163d04bf5fe25d7c9f122e60e05ebe
   react-native-safe-area-context: 4532f1a0c5d34a46b9324ccaaedcb5582a302b7d
   react-native-video: c26780b224543c62d5e1b2a7244a5cd1b50e8253
   React-nativeconfig: b4d4e9901d4cabb57be63053fd2aa6086eb3c85f
@@ -1338,12 +1363,13 @@ SPEC CHECKSUMS:
   ReactCommon: 2aa35648354bd4c4665b9a5084a7d37097b89c10
   RNCAsyncStorage: d35c79ffba52c1013013e16b1fc295aec2feabb6
   RNCMaskedView: c8e1f01fc0f41ddf4e16246aef1143b3311588ca
+  RNPermissions: 56d27e188700b9bfa6915dbfa048ca4ebba99dc3
   RNReanimated: 51ba6c9ecdde77caf364c7e5ae59a089c7dd98b3
   RNScreens: 69850d4519d95b9359cec15a67bb5f9d0bd75262
   RNSVG: 8b1a777d54096b8c2a0fd38fc9d5a454332bbb4d
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
   Yoga: d17d2cc8105eed528474683b42e2ea310e1daf61
 
-PODFILE CHECKSUM: cca8f0c29c0e1eaa8652684fd9022ebdcf59be87
+PODFILE CHECKSUM: 203deaaaf68dff2e9145887c8fc97d162176e5d0
 
 COCOAPODS: 1.14.3

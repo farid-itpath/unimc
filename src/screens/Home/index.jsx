@@ -84,7 +84,7 @@ const Home = () => {
         itemImage={item?.news_image}
         itemTitle={item?.title}
         itemDesc={item?.news_description}
-        itemDate={timeAgo(item?.submittedAt)}
+        itemDate={timeAgo(item?.publishedAt)}
       />
     );
   };

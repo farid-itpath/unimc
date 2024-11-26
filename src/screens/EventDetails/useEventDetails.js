@@ -2,8 +2,11 @@ import {useNavigation, useRoute} from '@react-navigation/native';
 import {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {clearEvent, getEvent} from '../../redux/reducres/eventsSlice';
-import {SCREENS} from '../../utils/constants';
+import {BASE_URL, SCREENS} from '../../utils/constants';
 import {useTranslation} from 'react-i18next';
+import {check, PERMISSIONS, request, RESULTS} from 'react-native-permissions';
+import {Alert, Linking, Platform} from 'react-native';
+import Geolocation from '@react-native-community/geolocation';
 
 export const useEventDetails = () => {
   const [imageModalVisible, setImageModalVisible] = useState(false);
@@ -50,7 +53,10 @@ export const useEventDetails = () => {
     setImageModalVisible(false);
   };
   const handleVideoPress = url => {
-    setVideoModalVisible(true);
+    // setVideoModalVisible(true);
+    navigation.navigate(SCREENS.VIDEOPLAY.name, {
+      videoUrl: `${BASE_URL}${url}`,
+    });
     setSelectedVideo(url);
   };
   const handleCloseVideoModal = () => {
@@ -58,6 +64,48 @@ export const useEventDetails = () => {
   };
   const handleSeeAllImages = () =>
     navigation.navigate(SCREENS.IMAGELIST.name, {data: images});
+  const handleSeeAllVideos = () =>
+    navigation.navigate(SCREENS.VIDEOLIST.name, {data: videos});
+  const requestLocationPermission = async () => {
+    let permission;
+
+    if (Platform.OS === 'ios') {
+      permission = PERMISSIONS.IOS.LOCATION_WHEN_IN_USE;
+    } else {
+      permission = PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION;
+    }
+
+    const result = await request(permission);
+
+    if (result === RESULTS.GRANTED) {
+      console.log('Location permission granted');
+    } else {
+      console.log('Location permission denied');
+      Alert.alert(
+        'Permission Denied',
+        'You need to enable location permissions to use this feature.',
+      );
+    }
+  };
+  const handlePressLocation = async () => {
+    const granted = await check(
+      Platform.select({
+        ios: PERMISSIONS.IOS.LOCATION_WHEN_IN_USE,
+        android: PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION,
+      }),
+    );
+    if (granted === 'granted') {
+      Geolocation.getCurrentPosition(location => {
+        const locationQuery = encodeURIComponent(event?.location);
+        const url = `https://www.google.com/maps/dir/?api=1&origin=${location?.coords?.latitude},${location?.coords?.longitude}&destination=${locationQuery}`;
+        Linking.openURL(url).catch(err =>
+          console.error('Error opening map', err),
+        );
+      });
+    } else {
+      requestLocationPermission();
+    }
+  };
   useEffect(() => {
     dispatch(getEvent(params?.eventId));
     return () => dispatch(clearEvent());
@@ -87,5 +135,7 @@ export const useEventDetails = () => {
     handleCloseVideoModal,
     handleVideoPress,
     handleSeeAllImages,
+    handleSeeAllVideos,
+    handlePressLocation,
   };
 };

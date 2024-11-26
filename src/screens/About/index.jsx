@@ -24,11 +24,13 @@ const About = () => {
     aboutData,
     aboutCategories,
     aboutBannerImages,
+    collapsed,
     t,
     handleSelectCategory,
     handleLayout,
     scrollToView,
     handlePressSettings,
+    handleToggleCollapse,
   } = useAbout();
   const renderCategoryItem = ({item, index}) => {
     return (
@@ -73,7 +75,7 @@ const About = () => {
             </TouchableHighlight>
           </View>
           <FlatList
-            data={['All', ...(aboutCategories || [])]}
+            data={[t('all'), ...(aboutCategories || [])]}
             renderItem={renderCategoryItem}
             horizontal
             showsHorizontalScrollIndicator={false}
@@ -87,6 +89,8 @@ const About = () => {
                 description={item?.description}
                 key={index}
                 onLayout={event => handleLayout(event, index)}
+                toggleCollapse={() => handleToggleCollapse(index)}
+                collapsed={collapsed[index]}
               />
             );
           })}

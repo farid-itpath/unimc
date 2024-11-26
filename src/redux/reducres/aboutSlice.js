@@ -23,6 +23,17 @@ export const getBannerImages = createAsyncThunk(
   },
 );
 
+export const contactUs = createAsyncThunk(
+  'about/contactUs',
+  async (data, {rejectWithValue}) => {
+    try {
+      return await api.about.contactUs(data);
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  },
+);
+
 const initialState = {
   aboutData: null,
   aboutLoading: false,
@@ -32,6 +43,10 @@ const initialState = {
   aboutBannerImages: null,
   aboutBannerImagesLoading: false,
   aboutBannerImagesError: null,
+
+  contactUsLoading: false,
+  contactUsError: '',
+  contactUsMessage: '',
 };
 
 export const aboutSlice = createSlice({
@@ -71,6 +86,19 @@ export const aboutSlice = createSlice({
       .addCase(getBannerImages.rejected, (state, action) => {
         state.aboutBannerImagesLoading = false;
         state.aboutBannerImagesError = action.payload;
+      });
+
+    builder
+      .addCase(contactUs.fulfilled, (state, action) => {
+        state.contactUsMessage = action.payload?.data?.message;
+        state.contactUsLoading = false;
+      })
+      .addCase(contactUs.pending, (state, _) => {
+        state.contactUsLoading = true;
+      })
+      .addCase(contactUs.rejected, (state, action) => {
+        state.contactUsLoading = false;
+        state.contactUsError = action.payload;
       });
   },
 });

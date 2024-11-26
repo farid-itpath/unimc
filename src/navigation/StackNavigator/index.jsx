@@ -11,6 +11,8 @@ import NewsList from '../../screens/NewsList';
 import ImageList from '../../screens/ImageList';
 import Settings from '../../screens/Settings';
 import ContactUs from '../../screens/ContactUs';
+import VideoList from '../../screens/VideoList';
+import VideoPlay from '../../screens/VideoPlay';
 
 const Stack = createNativeStackNavigator();
 
@@ -32,8 +34,10 @@ const AppNavigator = () => {
         <Stack.Screen name={SCREENS.EVENTSLIST.name} component={EventsList} />
         <Stack.Screen name={SCREENS.NEWSLIST.name} component={NewsList} />
         <Stack.Screen name={SCREENS.IMAGELIST.name} component={ImageList} />
+        <Stack.Screen name={SCREENS.VIDEOLIST.name} component={VideoList} />
         <Stack.Screen name={SCREENS.SETTINGS.name} component={Settings} />
         <Stack.Screen name={SCREENS.CONTACT_US.name} component={ContactUs} />
+        <Stack.Screen name={SCREENS.VIDEOPLAY.name} component={VideoPlay} />
       </Stack.Navigator>
     </NavigationContainer>
   );

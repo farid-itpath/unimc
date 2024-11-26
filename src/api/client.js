@@ -1,5 +1,6 @@
 import axios from 'axios';
 import {BASE_URL} from '../utils/constants';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const METHODS = {
   GET: 'get',
@@ -52,6 +53,15 @@ export const clientWithHeaders = ({
   }).then(res => {
     return res;
   });
+
+request.interceptors.request.use(async config => {
+  const root = await AsyncStorage.getItem('persist:unimc_root');
+  const languageSlice = await JSON.parse(root);
+  const language = await JSON.parse(languageSlice.language);
+
+  config.headers['languagecode'] = language.language;
+  return config;
+});
 
 request.interceptors.response.use(
   res => {

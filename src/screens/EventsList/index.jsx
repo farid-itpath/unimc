@@ -39,7 +39,7 @@ const EventsList = () => {
           getEventDate(item?.event_date).month
         }`}
         itemDesc={item?.description}
-        onPress={handlePressEvent}
+        onPress={() => handlePressEvent(item?.id)}
         key={index}
       />
     );
@@ -47,13 +47,7 @@ const EventsList = () => {
   const renderEmptyComponent = () => {
     return (
       <View style={styles.listEmptyComponent}>
-        <Image
-          source={IMAGES.noData}
-          style={{
-            width: heightScale(6.5),
-            height: heightScale(6.5),
-          }}
-        />
+        <Image source={IMAGES.noData} style={styles.noDataImage} />
         <Text style={styles.listEmptyComponentText}>{t('no_data_found')}</Text>
       </View>
     );

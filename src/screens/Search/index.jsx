@@ -17,7 +17,7 @@ import {ICONS, IMAGES} from '../../assets';
 import {useSearch} from './useSearch';
 import FilterModal from './FilterModal';
 import FlatListItem from '../../components/FlatListItem';
-import {heightScale, widthScale} from '../../utils/helper';
+import {getEventDate, heightScale, timeAgo} from '../../utils/helper';
 
 const Search = () => {
   const {
@@ -43,8 +43,10 @@ const Search = () => {
         item
         itemImage={item?.thumbnail_image}
         itemTitle={item?.title}
-        itemDesc={item?.news_description}
-        itemDate={item?.publishedAt}
+        itemDesc={item?.description}
+        itemDate={`${getEventDate(item?.event_date).date} ${
+          getEventDate(item?.event_date).month
+        }`}
         onPress={() => handlePressResultItem({type: 'event', id: item?.id})}
         key={index}
       />
@@ -56,8 +58,8 @@ const Search = () => {
         item
         itemImage={item?.news_image}
         itemTitle={item?.title}
-        itemDesc={item?.description}
-        itemDate={item?.event_date}
+        itemDesc={item?.news_description}
+        itemDate={timeAgo(item?.publishedAt)}
         onPress={() => handlePressResultItem({type: 'news', id: item?.id})}
         key={index}
       />
@@ -69,8 +71,8 @@ const Search = () => {
         <Image
           source={IMAGES.noData}
           style={{
-            width: heightScale(3.5),
-            height: heightScale(3.5),
+            width: heightScale(6.5),
+            height: heightScale(6.5),
           }}
         />
         <Text style={styles.listEmptyComponentText}>{t('no_data_found')}</Text>
@@ -90,7 +92,10 @@ const Search = () => {
         backgroundColor={COLORS.extraLightGrey}
         barStyle="dark-content"
       />
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{flexGrow: 1}}
+        scrollEnabled={true}>
         <View style={styles.searchView}>
           <TouchableHighlight
             onPress={handlePressBack}

@@ -34,7 +34,7 @@ const NewsList = () => {
         itemDate={timeAgo(item?.submittedAt)}
         itemDesc={item?.news_description}
         itemTitle={item?.title}
-        onPress={handlePressNews}
+        onPress={() => handlePressNews(item?.id)}
         key={index}
       />
     );
@@ -74,7 +74,7 @@ const NewsList = () => {
         </View>
         <FlatList
           data={
-            screenTitle === 'Recent News'
+            screenTitle === 'News' || screenTitle === 'Recent News'
               ? news
               : news.filter(
                   newsItem => newsItem?.news_category?.title === screenTitle,

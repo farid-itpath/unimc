@@ -45,6 +45,7 @@ export const styles = StyleSheet.create({
     fontFamily: FONTS.InterMedium,
     color: COLORS.white,
     fontSize: heightScale(42),
+    flexShrink: 1,
   },
   eventCategoriesView: {
     flexDirection: 'row',
@@ -144,12 +145,20 @@ export const styles = StyleSheet.create({
     borderRadius: 10,
     overflow: 'hidden',
   },
+  playIcon: {
+    height: 20,
+    width: 20,
+    position: 'absolute',
+    left: heightScale(8) / 2 - 10,
+    top: heightScale(8) / 2 - 10,
+  },
   organizerInfoView: {
     paddingHorizontal: heightScale(40),
   },
   organizerImage: {
     height: heightScale(14),
     width: heightScale(14),
+    borderRadius: 5,
   },
   organizerTexts: {
     justifyContent: 'space-between',

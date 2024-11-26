@@ -12,14 +12,19 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
   headerView: {
-    height: heightScale(3),
+    height: heightScale(2.5),
     justifyContent: 'center',
     alignItems: 'center',
   },
-  headerImage: {
-    height: heightScale(3),
-    width: widthScale(1),
+  headerImageView: {
     position: 'absolute',
+    borderBottomStartRadius: 20,
+    borderBottomEndRadius: 20,
+    overflow: 'hidden',
+  },
+  headerImage: {
+    height: heightScale(2.5),
+    width: widthScale(1),
     objectFit: 'fill',
   },
   innerHeaderView: {

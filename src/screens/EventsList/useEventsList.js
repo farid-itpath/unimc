@@ -11,7 +11,8 @@ export const useEventsList = () => {
   const handlePressSearch = () =>
     navigation.navigate(SCREENS.SEARCH.name, {searchIn: 'Events'});
   const handlePressBack = () => navigation.goBack();
-  const handlePressEvent = () => navigation.navigate(SCREENS.EVENTDETAILS.name);
+  const handlePressEvent = id =>
+    navigation.navigate(SCREENS.EVENTDETAILS.name, {eventId: id});
   return {
     todaysEvents,
     upcomingEvents,

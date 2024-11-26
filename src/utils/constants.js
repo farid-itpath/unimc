@@ -64,6 +64,10 @@ export const SCREENS = {
     id: 15,
     name: 'Contact_Us',
   },
+  VIDEOPLAY: {
+    id: 16,
+    name: 'VideoPlay',
+  },
 };
 
 export const COLORS = {

@@ -102,7 +102,7 @@ const News = () => {
             </TouchableOpacity>
           </View>
           <FlatList
-            data={[{icon_image: '', title: 'All'}, ...(categories || [])]}
+            data={[{icon_image: '', title: t('all')}, ...(categories || [])]}
             renderItem={renderCategoryItem}
             horizontal
             showsHorizontalScrollIndicator={false}
@@ -113,6 +113,7 @@ const News = () => {
             data={news}
             renderItem={renderNews}
             onPressSeeAll={() => handlePressSeeAll('Recent News')}
+            showFooterComponent={true}
           />
           {selectedCategory === 0 ? (
             categories?.map((category, index) => {

@@ -62,6 +62,11 @@ export const styles = StyleSheet.create({
     fontSize: heightScale(64),
     color: COLORS.grey,
   },
+  htmlContent: {
+    height: 38,
+    overflow: 'hidden',
+    flex: 4,
+  },
 });
 
 export const layout = {

@@ -49,4 +49,8 @@ export const styles = StyleSheet.create({
     color: COLORS.primaryLight,
     fontSize: heightScale(40),
   },
+  noDataImage: {
+    width: heightScale(6.5),
+    height: heightScale(6.5),
+  },
 });

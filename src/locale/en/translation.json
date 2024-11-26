@@ -26,5 +26,13 @@
   "message": "Message",
   "contact_us": "Contact Us",
   "having_a_problem": "Having a peoblem? Contact Us.",
-  "select_language": "Select Language"
+  "select_language": "Select Language",
+  "video": "Video",
+  "all": "All",
+  "submit": "Submit",
+  "name_is_required": "Name is required",
+  "invalid_email_address": "Invalid email address",
+  "email_is_required": "Email is required",
+  "message_must_be_at_least_50_characters": "Message must be at least 50 characters",
+  "message_is_required": "Message is required"
 }

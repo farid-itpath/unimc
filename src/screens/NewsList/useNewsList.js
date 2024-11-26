@@ -11,7 +11,8 @@ export const useNewsList = () => {
   const handlePressSearch = () =>
     navigation.navigate(SCREENS.SEARCH.name, {searchIn: 'News'});
   const handlePressBack = () => navigation.goBack();
-  const handlePressNews = () => navigation.navigate(SCREENS.NEWSDETAILS.name);
+  const handlePressNews = id =>
+    navigation.navigate(SCREENS.NEWSDETAILS.name, {newsId: id});
   return {
     news,
     screenTitle,

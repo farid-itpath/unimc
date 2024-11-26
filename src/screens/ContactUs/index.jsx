@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {
   View,
   Text,
@@ -9,32 +9,28 @@ import {
   Image,
   TextInput,
   TouchableOpacity,
+  ActivityIndicator,
 } from 'react-native';
+import {Formik} from 'formik';
 import {styles} from './style';
 import {COLORS} from '../../utils/constants';
 import {ICONS} from '../../assets';
-import {useTranslation} from 'react-i18next';
-import {Formik} from 'formik';
-import * as Yup from 'yup';
-import {heightScale} from '../../utils/helper';
+import CustomModal from './Modal';
+import {useContactUs} from './useContactUs';
 
-const ContactUs = ({navigation}) => {
-  const {t} = useTranslation();
-  const [focusedField, setFocusedField] = useState('');
-
-  const handleBackPress = () => navigation.goBack();
-  const handleSubmit = values => {
-    console.log('Form Data:', values);
-  };
-  const validationSchema = Yup.object().shape({
-    name: Yup.string().required(t('Name is required')),
-    email: Yup.string()
-      .email(t('Invalid email address'))
-      .required(t('Email is required')),
-    message: Yup.string()
-      .min(50, t('Message must be at least 50 characters'))
-      .required(t('Message is required')),
-  });
+const ContactUs = () => {
+  const {
+    t,
+    focusedField,
+    setFocusedField,
+    contactUsLoading,
+    contactUsMessage,
+    modalVisible,
+    validationSchema,
+    handleBackPress,
+    handleSubmit,
+    handleModalClose,
+  } = useContactUs();
 
   return (
     <SafeAreaView style={styles.safeAreaView}>
@@ -50,11 +46,11 @@ const ContactUs = ({navigation}) => {
             style={styles.backIconView}>
             <Image source={ICONS.back} style={styles.backIcon} />
           </TouchableHighlight>
-          <Text style={styles.headerTitle}>{t('Contact Us')}</Text>
+          <Text style={styles.headerTitle}>{t('contact_us')}</Text>
           <View />
         </View>
         <Formik
-          initialValues={{name: '', email: '', message: ''}}
+          initialValues={{full_name: '', email: '', message: ''}}
           validationSchema={validationSchema}
           onSubmit={handleSubmit}>
           {({
@@ -66,35 +62,34 @@ const ContactUs = ({navigation}) => {
             touched,
           }) => (
             <View style={styles.formContainer}>
-              {/* Name Input */}
-              <View style={{gap: 5, marginBottom: heightScale(40)}}>
+              <View style={styles.textInputView}>
                 <TextInput
                   style={[
                     styles.textInput,
-                    focusedField === 'name' && {borderColor: COLORS.primary},
+                    focusedField === 'full_name' && {
+                      borderColor: COLORS.primary,
+                    },
                   ]}
-                  placeholder={t('Name')}
-                  onChangeText={handleChange('name')}
+                  placeholder={t('name')}
+                  onChangeText={handleChange('full_name')}
                   onBlur={() => {
-                    handleBlur('name');
+                    handleBlur('full_name');
                     setFocusedField('');
                   }}
-                  onFocus={() => setFocusedField('name')}
-                  value={values.name}
+                  onFocus={() => setFocusedField('full_name')}
+                  value={values.full_name}
                 />
-                {touched.name && errors.name && (
-                  <Text style={styles.errorText}>*{t(errors.name)}</Text>
+                {touched.full_name && errors.full_name && (
+                  <Text style={styles.errorText}>*{t(errors.full_name)}</Text>
                 )}
               </View>
-
-              {/* Email Input */}
-              <View style={{gap: 5, marginBottom: heightScale(40)}}>
+              <View style={styles.textInputView}>
                 <TextInput
                   style={[
                     styles.textInput,
                     focusedField === 'email' && {borderColor: COLORS.primary},
                   ]}
-                  placeholder={t('Email')}
+                  placeholder={t('email')}
                   placeholderTextColor={COLORS.grey}
                   keyboardType="email-address"
                   onChangeText={handleChange('email')}
@@ -109,16 +104,14 @@ const ContactUs = ({navigation}) => {
                   <Text style={styles.errorText}>*{t(errors.email)}</Text>
                 )}
               </View>
-
-              {/* Message Input */}
-              <View style={{gap: 5, marginBottom: heightScale(40)}}>
+              <View style={styles.textInputView}>
                 <TextInput
                   style={[
                     styles.textInput,
                     styles.textArea,
                     focusedField === 'message' && {borderColor: COLORS.primary},
                   ]}
-                  placeholder={t('Message')}
+                  placeholder={t('message')}
                   multiline
                   numberOfLines={4}
                   onChangeText={handleChange('message')}
@@ -133,17 +126,23 @@ const ContactUs = ({navigation}) => {
                   <Text style={styles.errorText}>*{t(errors.message)}</Text>
                 )}
               </View>
-
-              {/* Submit Button */}
               <TouchableOpacity
+                disabled={contactUsLoading}
                 style={styles.buttonApplyView}
                 onPress={handleSubmit}>
-                <Text style={styles.buttonApplyTitle}>{t('Submit')}</Text>
+                <Text style={styles.buttonApplyTitle}>{t('submit')}</Text>
+                {contactUsLoading && <ActivityIndicator color={COLORS.white} />}
               </TouchableOpacity>
             </View>
           )}
         </Formik>
       </ScrollView>
+      <CustomModal
+        visible={!!(modalVisible && contactUsMessage)}
+        onClose={handleModalClose}
+        AllowButtonText={'OK'}
+        message={contactUsMessage}
+      />
     </SafeAreaView>
   );
 };
