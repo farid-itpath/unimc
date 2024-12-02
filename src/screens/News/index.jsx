@@ -55,9 +55,11 @@ const News = () => {
       <FlatListItem
         item={item}
         itemDate={timeAgo(item?.publishedAt)}
-        itemDesc={item?.news_description}
+        // itemDesc={item?.news_description}
+        // itemTitle={item?.title}
+        itemTitle={item?.news_category?.title}
+        itemDesc={item?.title}
         itemImage={item?.news_image}
-        itemTitle={item?.title}
         onPress={() => handlePressNews(item?.id)}
         key={index}
       />

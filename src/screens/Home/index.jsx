@@ -76,14 +76,15 @@ const Home = () => {
     );
   };
   const renderNews = ({item, index}) => {
+    console.log('item: ', item?.title);
     return (
       <FlatListItem
         item={item}
         onPress={() => handlePressNews(item?.id)}
         key={index}
         itemImage={item?.news_image}
-        itemTitle={item?.title}
-        itemDesc={item?.news_description}
+        itemTitle={item?.news_category?.title}
+        itemDesc={item?.title}
         itemDate={timeAgo(item?.publishedAt)}
       />
     );

@@ -4,6 +4,8 @@ import Skeleton from 'react-native-reanimated-skeleton';
 import {RenderHTML} from 'react-native-render-html';
 import {layout, styles} from './style';
 import {BASE_URL, COLORS} from '../../utils/constants';
+import {heightScale} from '../../utils/helper';
+import {FONTS} from '../../assets';
 
 const FlatListItem = ({
   item,
@@ -24,7 +26,16 @@ const FlatListItem = ({
           {itemTitle}
         </Text>
         <View style={styles.htmlContent}>
-          <RenderHTML
+          <Text
+            style={{
+              fontSize: heightScale(60),
+              fontFamily: FONTS.InterSemiBold,
+              color: COLORS.black,
+            }}
+            numberOfLines={2}>
+            {itemDesc}
+          </Text>
+          {/* <RenderHTML
             contentWidth={1}
             source={{html: itemDesc}}
             tagsStyles={{
@@ -46,7 +57,7 @@ const FlatListItem = ({
                 color: COLORS.black,
               },
             }}
-          />
+          /> */}
         </View>
         <Text style={styles.eventListTime}>{itemDate}</Text>
       </View>
