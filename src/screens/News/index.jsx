@@ -50,10 +50,11 @@ const News = () => {
     );
   };
   const renderNewsItem = ({item, index}) => {
+    console.log('item: ', item);
     return (
       <FlatListItem
         item={item}
-        itemDate={timeAgo(item?.submittedAt)}
+        itemDate={timeAgo(item?.publishedAt)}
         itemDesc={item?.news_description}
         itemImage={item?.news_image}
         itemTitle={item?.title}

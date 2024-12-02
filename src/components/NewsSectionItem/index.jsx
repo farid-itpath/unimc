@@ -22,7 +22,7 @@ const NewsSectionItem = ({item, onPress, index}) => {
           {item?.news_category?.title}
         </Text>
         <Text style={styles.newsCategoryTime}>
-          {timeAgo(item?.submittedAt)}
+          {timeAgo(item?.publishedAt)}
         </Text>
       </View>
       <View style={styles.htmlContent}>

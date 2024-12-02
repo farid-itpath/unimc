@@ -78,6 +78,7 @@ const ContactUs = () => {
                   }}
                   onFocus={() => setFocusedField('full_name')}
                   value={values.full_name}
+                  placeholderTextColor={COLORS.grey}
                 />
                 {touched.full_name && errors.full_name && (
                   <Text style={styles.errorText}>*{t(errors.full_name)}</Text>
@@ -115,6 +116,7 @@ const ContactUs = () => {
                   multiline
                   numberOfLines={4}
                   onChangeText={handleChange('message')}
+                  placeholderTextColor={COLORS.grey}
                   onBlur={() => {
                     handleBlur('message');
                     setFocusedField('');

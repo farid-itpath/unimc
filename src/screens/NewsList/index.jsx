@@ -31,7 +31,7 @@ const NewsList = () => {
       <FlatListItem
         item={item}
         itemImage={item?.news_image}
-        itemDate={timeAgo(item?.submittedAt)}
+        itemDate={timeAgo(item?.publishedAt)}
         itemDesc={item?.news_description}
         itemTitle={item?.title}
         onPress={() => handlePressNews(item?.id)}
