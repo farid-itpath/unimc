@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -7,6 +7,7 @@ import {
   TouchableHighlight,
   SafeAreaView,
   StatusBar,
+  ActivityIndicator,
 } from 'react-native';
 import {useTranslation} from 'react-i18next';
 import Video, {videoRef} from 'react-native-video';
@@ -20,6 +21,7 @@ const VideoPlay = ({route}) => {
   const handlePressBack = () => navigation.goBack();
   const {t} = useTranslation();
   const params = route.params;
+  const [loading, setLoading] = useState(false);
   return (
     <SafeAreaView style={styles.safeAreaView}>
       <StatusBar backgroundColor={COLORS.black} barStyle="light-content" />
@@ -34,6 +36,7 @@ const VideoPlay = ({route}) => {
           <Text style={styles.headerTitle}>{t('video')}</Text>
           <TouchableOpacity />
         </View>
+        {loading && <ActivityIndicator size="large" color={COLORS.primary} style={styles.activity}/>}
         <Video
           source={{uri: params?.videoUrl}}
           ref={videoRef}
@@ -41,6 +44,8 @@ const VideoPlay = ({route}) => {
           alwaysShowControl
           resizeMode="contain"
           controls={true}
+          onLoadStart={() => setLoading(true)}
+          onLoad={() => setLoading(false)}
         />
       </View>
     </SafeAreaView>

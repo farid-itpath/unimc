@@ -4,6 +4,7 @@ import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
 import {styles} from './style';
 import {ICONS} from '../../../assets';
 import RenderHTML from 'react-native-render-html';
+import {COLORS} from '../../../utils/constants';
 
 const Accordion = ({
   title,
@@ -12,6 +13,7 @@ const Accordion = ({
   collapsed,
   toggleCollapse,
 }) => {
+  console.log('description: ', description);
   return (
     <View style={styles.accordionView} onLayout={onLayout}>
       <TouchableOpacity
@@ -38,12 +40,20 @@ const Accordion = ({
                   marginBottom: 0,
                   paddingTop: 0,
                   paddingBottom: 0,
+                  color: COLORS.black,
                 },
                 span: {
                   marginTop: 0,
                   marginBottom: 0,
                   paddingTop: 0,
                   paddingBottom: 0,
+                  color: COLORS.black,
+                },
+                li: {
+                  color: COLORS.black,
+                },
+                body: {
+                  color: COLORS.black,
                 },
               }}
             />

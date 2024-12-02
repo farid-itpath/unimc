@@ -3,7 +3,7 @@ import {View, Text, TouchableOpacity, Image} from 'react-native';
 import Skeleton from 'react-native-reanimated-skeleton';
 import {RenderHTML} from 'react-native-render-html';
 import {layout, styles} from './style';
-import {BASE_URL} from '../../utils/constants';
+import {BASE_URL, COLORS} from '../../utils/constants';
 
 const FlatListItem = ({
   item,
@@ -33,12 +33,17 @@ const FlatListItem = ({
                 marginBottom: 0,
                 paddingTop: 0,
                 paddingBottom: 0,
+                color: COLORS.black,
               },
               span: {
                 marginTop: 0,
                 marginBottom: 0,
                 paddingTop: 0,
                 paddingBottom: 0,
+                color: COLORS.black,
+              },
+              li: {
+                color: COLORS.black,
               },
             }}
           />

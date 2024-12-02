@@ -83,6 +83,6 @@ export const COLORS = {
 };
 
 export const LANGUAGES = [
-  {title: 'Italy', code: 'it', flag: IMAGES.italy},
+  {title: 'Italic', code: 'it', flag: IMAGES.italy},
   {title: 'English', code: 'en', flag: IMAGES.english},
 ];

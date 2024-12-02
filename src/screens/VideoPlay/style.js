@@ -100,4 +100,9 @@ export const styles = StyleSheet.create({
   video: {
     flex: 1,
   },
+  activity: {
+    position: 'absolute',
+    top: heightScale(2),
+    left: widthScale(2),
+  },
 });

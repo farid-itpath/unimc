@@ -32,6 +32,7 @@ const About = () => {
     handlePressSettings,
     handleToggleCollapse,
   } = useAbout();
+  console.log('aboutData: ', aboutData);
   const renderCategoryItem = ({item, index}) => {
     return (
       <TouchableOpacity

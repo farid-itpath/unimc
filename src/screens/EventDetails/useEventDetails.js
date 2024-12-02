@@ -66,6 +66,30 @@ export const useEventDetails = () => {
     navigation.navigate(SCREENS.IMAGELIST.name, {data: images});
   const handleSeeAllVideos = () =>
     navigation.navigate(SCREENS.VIDEOLIST.name, {data: videos});
+  const showPermissionAlert = () => {
+    Alert.alert(
+      'Permission Denied',
+      'You need to enable location permissions to use this feature.',
+      [
+        {
+          text: 'Cancel',
+          onPress: () => console.log('Cancel Pressed'),
+          style: 'cancel',
+        },
+        {
+          text: 'Go to Settings',
+          onPress: () => {
+            if (Platform.OS === 'ios') {
+              Linking.openSettings();
+            } else {
+              Linking.openSettings();
+            }
+          },
+        },
+      ],
+      {cancelable: false},
+    );
+  };
   const requestLocationPermission = async () => {
     let permission;
 
@@ -81,10 +105,11 @@ export const useEventDetails = () => {
       console.log('Location permission granted');
     } else {
       console.log('Location permission denied');
-      Alert.alert(
-        'Permission Denied',
-        'You need to enable location permissions to use this feature.',
-      );
+      showPermissionAlert();
+      // Alert.alert(
+      //   'Permission Denied',
+      //   'You need to enable location permissions to use this feature.',
+      // );
     }
   };
   const handlePressLocation = async () => {

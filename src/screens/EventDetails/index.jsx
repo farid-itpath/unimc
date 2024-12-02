@@ -13,7 +13,7 @@ import {layout, styles} from './style';
 import {ICONS} from '../../assets';
 import Section from '../../components/Section';
 import {useEventDetails} from './useEventDetails';
-import {BASE_URL} from '../../utils/constants';
+import {BASE_URL, COLORS} from '../../utils/constants';
 import Skeleton from 'react-native-reanimated-skeleton';
 import ImagePreviewModal from '../../components/ImagePreviewModal';
 import VideoPreviewModal from '../../components/VideoPreviewModal';
@@ -175,12 +175,17 @@ const EventDetails = () => {
                     marginBottom: 0,
                     paddingTop: 0,
                     paddingBottom: 0,
+                    color: COLORS.black,
                   },
                   span: {
                     marginTop: 0,
                     marginBottom: 0,
                     paddingTop: 0,
                     paddingBottom: 0,
+                    color: COLORS.black,
+                  },
+                  li: {
+                    color: COLORS.black,
                   },
                 }}
               />
