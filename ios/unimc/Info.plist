@@ -31,8 +31,6 @@
 		<key>NSAllowsLocalNetworking</key>
 		<true/>
 	</dict>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Inter-Black.ttf</string>
@@ -57,9 +55,10 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	  <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+  <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
   <string>We need access to your location to show you the event's location.</string>
   <key>NSLocationTemporaryUsageDescriptionDictionary</key>
+  <string>We need access to your location to show you the event's location.</string>
   <key>NSLocationWhenInUseUsageDescription</key>
   <string>We need access to your location to show you the event's location.</string>
 </dict>

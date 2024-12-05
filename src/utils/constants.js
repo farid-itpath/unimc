@@ -120,6 +120,7 @@ const defaultTagStyles = {
   paddingTop: 0,
   paddingBottom: 0,
   color: COLORS.black,
+  textAlign: 'justify',
 };
 export const tagsStyles = Object.fromEntries(
   commonHTMLTags.map(tag => [tag, defaultTagStyles]),
