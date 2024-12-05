@@ -42,8 +42,8 @@ const Search = () => {
       <FlatListItem
         item
         itemImage={item?.thumbnail_image}
-        itemTitle={item?.title}
-        itemDesc={item?.description}
+        itemTitle={item?.event_category?.title}
+        itemDesc={item?.title}
         itemDate={`${getEventDate(item?.event_date).date} ${
           getEventDate(item?.event_date).month
         }`}
@@ -57,9 +57,9 @@ const Search = () => {
       <FlatListItem
         item
         itemImage={item?.news_image}
-        itemTitle={item?.title}
-        itemDesc={item?.news_description}
-        itemDate={timeAgo(item?.publishedAt)}
+        itemTitle={item?.news_category?.title}
+        itemDesc={item?.title}
+        itemDate={timeAgo(item?.publishedAt, t)}
         onPress={() => handlePressResultItem({type: 'news', id: item?.id})}
         key={index}
       />
@@ -92,10 +92,7 @@ const Search = () => {
         backgroundColor={COLORS.extraLightGrey}
         barStyle="dark-content"
       />
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={{flexGrow: 1}}
-        scrollEnabled={true}>
+      <View style={styles.headerView}>
         <View style={styles.searchView}>
           <TouchableHighlight
             onPress={handlePressBack}
@@ -167,6 +164,11 @@ const Search = () => {
             </Text>
           </TouchableOpacity>
         </View>
+      </View>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.scrollView}
+        scrollEnabled={true}>
         {(searchIn === 'Home' || searchIn === 'Events') && events?.length ? (
           <FlatList
             data={events || new Array(4).fill()}

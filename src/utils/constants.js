@@ -86,3 +86,41 @@ export const LANGUAGES = [
   {title: 'Italic', code: 'it', flag: IMAGES.italy},
   {title: 'English', code: 'en', flag: IMAGES.english},
 ];
+
+const commonHTMLTags = [
+  'p',
+  'span',
+  'div',
+  'strong',
+  'em',
+  'b',
+  'i',
+  'ul',
+  'li',
+  'ol',
+  'a',
+  'h1',
+  'h2',
+  'h3',
+  'h4',
+  'h5',
+  'h6',
+  'table',
+  'tr',
+  'td',
+  'th',
+  'thead',
+  'tbody',
+  'blockquote',
+];
+
+const defaultTagStyles = {
+  marginTop: 0,
+  marginBottom: 0,
+  paddingTop: 0,
+  paddingBottom: 0,
+  color: COLORS.black,
+};
+export const tagsStyles = Object.fromEntries(
+  commonHTMLTags.map(tag => [tag, defaultTagStyles]),
+);

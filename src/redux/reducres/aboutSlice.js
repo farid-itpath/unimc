@@ -98,7 +98,7 @@ export const aboutSlice = createSlice({
       })
       .addCase(contactUs.rejected, (state, action) => {
         state.contactUsLoading = false;
-        state.contactUsError = action.payload;
+        state.contactUsMessage = action.payload?.message?.message;
       });
   },
 });

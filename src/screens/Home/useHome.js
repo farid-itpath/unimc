@@ -1,6 +1,7 @@
 import {useCallback, useState} from 'react';
 import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import {useDispatch, useSelector} from 'react-redux';
+import {useTranslation} from 'react-i18next';
 import {SCREENS} from '../../utils/constants';
 import {
   getEvents,
@@ -10,7 +11,6 @@ import {
 } from '../../redux/reducres/eventsSlice';
 import {getNews, getNewsCategories} from '../../redux/reducres/newsSlice';
 import {getEventsAndNews} from '../../redux/reducres/genericSlice';
-import {useTranslation} from 'react-i18next';
 
 export const useHome = () => {
   const [selectedEventsCategory, setSelectedEventsCategory] = useState();
@@ -36,14 +36,14 @@ export const useHome = () => {
     navigation.navigate(SCREENS.EVENTSLIST.name);
   const handlePressSeeAllTodaysEvents = () =>
     navigation.navigate(SCREENS.EVENTSLIST.name, {
-      screenTitle: "Today's Events",
+      screenTitle: t('todays_events'),
     });
   const handlePressSeeAllUpcomingEvents = () =>
     navigation.navigate(SCREENS.EVENTSLIST.name, {
-      screenTitle: 'Upcoming Events',
+      screenTitle: t('upcoming_events'),
     });
   const handlePressSeeAllNews = () =>
-    navigation.navigate(SCREENS.NEWSLIST.name, {screenTitle: 'News'});
+    navigation.navigate(SCREENS.NEWSLIST.name, {screenTitle: t('news')});
   const handlePressEvent = eventId =>
     navigation.navigate(SCREENS.EVENTDETAILS.name, {eventId});
   const handlePressNews = newsId =>

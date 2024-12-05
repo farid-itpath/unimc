@@ -32,7 +32,6 @@ const About = () => {
     handlePressSettings,
     handleToggleCollapse,
   } = useAbout();
-  console.log('aboutData: ', aboutData);
   const renderCategoryItem = ({item, index}) => {
     return (
       <TouchableOpacity
@@ -65,16 +64,19 @@ const About = () => {
       <SafeAreaView style={styles.statusBarSafeArea} />
       <SafeAreaView style={styles.safeAreaView}>
         <StatusBar backgroundColor={COLORS.primary} />
-        <ScrollView ref={scrollRef} showsVerticalScrollIndicator={false}>
-          <View style={styles.headerView}>
-            <Text style={styles.headerTitle}>{t('about_macerata')}</Text>
-            <TouchableHighlight
-              underlayColor={COLORS.primaryExtraLight}
-              style={styles.settingsView}
-              onPress={handlePressSettings}>
-              <Image source={ICONS.settings} style={styles.settingsIcon} />
-            </TouchableHighlight>
-          </View>
+        <View style={styles.headerView}>
+          <Text style={styles.headerTitle}>{t('about_macerata')}</Text>
+          <TouchableHighlight
+            underlayColor={COLORS.primaryExtraLight}
+            style={styles.settingsView}
+            onPress={handlePressSettings}>
+            <Image source={ICONS.settings} style={styles.settingsIcon} />
+          </TouchableHighlight>
+        </View>
+        <ScrollView
+          ref={scrollRef}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={styles.scrollView}>
           <FlatList
             data={[t('all'), ...(aboutCategories || [])]}
             renderItem={renderCategoryItem}

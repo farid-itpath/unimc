@@ -34,5 +34,15 @@
   "invalid_email_address": "Indirizzo email non valido",
   "email_is_required": "L'email è obbligatoria",
   "message_must_be_at_least_50_characters": "Il messaggio deve contenere almeno 50 caratteri",
-  "message_is_required": "Il messaggio è obbligatorio"
+  "message_is_required": "Il messaggio è obbligatorio",
+  "recent_events": "Eventi recenti",
+  "recent_news": "Notizie recenti",
+  "seconds": "secondi",
+  "ago": "fa",
+  "mins": "minuti",
+  "min": "minuto",
+  "hours": "ore",
+  "hour": "ora",
+  "days": "giorni",
+  "day": "giorno"
 }

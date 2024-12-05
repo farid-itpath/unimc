@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    paddingTop: 20,
+    // paddingTop: 20,
   },
   title: {
     fontSize: 24,
@@ -68,7 +68,14 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: heightScale(40),
     marginVertical: heightScale(72),
-    marginTop: heightScale(20),
+    // marginTop: heightScale(20),
+    height: heightScale(8),
+    shadowColor: '#000',
+    shadowOffset: {width: 0, height: 2},
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+    backgroundColor: COLORS.extraLightGrey,
   },
   backIconView: {
     padding: 8,
@@ -77,7 +84,7 @@ export const styles = StyleSheet.create({
   backIcon: {
     height: heightScale(48),
     width: heightScale(48),
-    tintColor: COLORS.black,
+    tintColor: COLORS.primary,
   },
   searchIcon: {
     height: heightScale(36),

@@ -28,13 +28,13 @@ const FilterModal = ({
   const options =
     searchIn === 'Home'
       ? [
-          {title: 'Event', data: eventCategories},
-          {title: 'News', data: newsCategories},
+          {title: t('events'), data: eventCategories},
+          {title: t('news'), data: newsCategories},
         ]
       : searchIn === 'Events'
-      ? [{title: 'Event', data: eventCategories}]
+      ? [{title: t('events'), data: eventCategories}]
       : searchIn === 'News'
-      ? [{title: 'News', data: newsCategories}]
+      ? [{title: t('news'), data: newsCategories}]
       : null;
   return (
     <Modal
@@ -77,7 +77,7 @@ const FilterModal = ({
                         onPress={() =>
                           toggleFitlerItem(item?.title, category?.id)
                         }>
-                        <View style={styles.selectedIconView} />
+                        {/* <View style={styles.selectedIconView} /> */}
                         <Text
                           numberOfLines={1}
                           style={[
@@ -90,14 +90,14 @@ const FilterModal = ({
                           ]}>
                           {category?.title}
                         </Text>
-                        <View style={styles.selectedIconView}>
+                        {/* <View style={styles.selectedIconView}>
                           {selectedCategories.includes(category?.id) && (
                             <Image
                               source={ICONS.tick}
                               style={styles.selectedIcon}
                             />
                           )}
-                        </View>
+                        </View> */}
                       </TouchableOpacity>
                     );
                   })}

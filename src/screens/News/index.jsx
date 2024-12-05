@@ -50,11 +50,10 @@ const News = () => {
     );
   };
   const renderNewsItem = ({item, index}) => {
-    console.log('item: ', item);
     return (
       <FlatListItem
         item={item}
-        itemDate={timeAgo(item?.publishedAt)}
+        itemDate={timeAgo(item?.publishedAt, t)}
         // itemDesc={item?.news_description}
         // itemTitle={item?.title}
         itemTitle={item?.news_category?.title}
@@ -97,13 +96,15 @@ const News = () => {
       <SafeAreaView style={styles.statusBarSafeArea} />
       <SafeAreaView style={styles.safeAreaView}>
         <StatusBar backgroundColor={COLORS.primary} />
-        <ScrollView showsVerticalScrollIndicator={false}>
-          <View style={styles.headerView}>
-            <Text style={styles.headerTitle}>{t('news')}</Text>
-            <TouchableOpacity onPress={handlePressSearch}>
-              <Image source={ICONS.search} style={styles.searchIcon} />
-            </TouchableOpacity>
-          </View>
+        <View style={styles.headerView}>
+          <Text style={styles.headerTitle}>{t('news')}</Text>
+          <TouchableOpacity onPress={handlePressSearch}>
+            <Image source={ICONS.search} style={styles.searchIcon} />
+          </TouchableOpacity>
+        </View>
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={styles.scrollView}>
           <FlatList
             data={[{icon_image: '', title: t('all')}, ...(categories || [])]}
             renderItem={renderCategoryItem}
@@ -112,10 +113,10 @@ const News = () => {
             contentContainerStyle={styles.flatListContainer}
           />
           <Section
-            title="Recent News"
+            title={t('recent_news')}
             data={news}
             renderItem={renderNews}
-            onPressSeeAll={() => handlePressSeeAll('Recent News')}
+            onPressSeeAll={() => handlePressSeeAll(t('recent_news'))}
             showFooterComponent={true}
           />
           {selectedCategory === 0 ? (

@@ -15,16 +15,15 @@ import {ICONS, IMAGES} from '../../assets';
 import {useEventsList} from './useEventsList';
 import {styles} from './style';
 import FlatListItem from '../../components/FlatListItem';
-import {getEventDate, heightScale} from '../../utils/helper';
-import {useTranslation} from 'react-i18next';
+import {getEventDate} from '../../utils/helper';
 
 const EventsList = () => {
-  const {t} = useTranslation();
   const {
     todaysEvents,
     upcomingEvents,
     events,
     screenTitle,
+    t,
     handlePressSearch,
     handlePressBack,
     handlePressEvent,
@@ -34,11 +33,11 @@ const EventsList = () => {
       <FlatListItem
         item={item}
         itemImage={item?.thumbnail_image}
-        itemTitle={item?.title}
+        itemTitle={item?.event_category?.title}
         itemDate={`${getEventDate(item?.event_date).date} - ${
           getEventDate(item?.event_date).month
         }`}
-        itemDesc={item?.description}
+        itemDesc={item?.title}
         onPress={() => handlePressEvent(item?.id)}
         key={index}
       />
@@ -58,24 +57,27 @@ const EventsList = () => {
         backgroundColor={COLORS.extraLightGrey}
         barStyle="dark-content"
       />
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={styles.headerView}>
-          <TouchableHighlight
-            onPress={handlePressBack}
-            underlayColor={COLORS.primaryExtraLight}
-            style={styles.backIconView}>
-            <Image source={ICONS.back} style={styles.backIcon} />
-          </TouchableHighlight>
-          <Text style={styles.headerTitle}>{screenTitle}</Text>
-          <TouchableOpacity onPress={handlePressSearch}>
-            <Image source={ICONS.search} style={styles.searchIcon} />
-          </TouchableOpacity>
-        </View>
+      <View style={styles.headerView}>
+        <TouchableHighlight
+          onPress={handlePressBack}
+          underlayColor={COLORS.primaryExtraLight}
+          style={styles.backIconView}>
+          <Image source={ICONS.back} style={styles.backIcon} />
+        </TouchableHighlight>
+        <Text style={styles.headerTitle}>{screenTitle}</Text>
+        <TouchableOpacity onPress={handlePressSearch}>
+          <Image source={ICONS.search} style={styles.searchIcon} />
+        </TouchableOpacity>
+      </View>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.scrollView}>
         <FlatList
           data={
-            screenTitle === 'Upcoming Events' || screenTitle === 'Recent Events'
+            screenTitle === t('upcoming_events') ||
+            screenTitle === t('recent_events')
               ? upcomingEvents
-              : screenTitle === "Today's Events"
+              : screenTitle === t('todays_events')
               ? todaysEvents
               : events?.filter(
                   event => event?.event_category?.title === screenTitle,

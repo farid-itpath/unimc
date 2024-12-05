@@ -3,7 +3,7 @@ import {View, Text, TouchableOpacity, Image} from 'react-native';
 import Skeleton from 'react-native-reanimated-skeleton';
 import {RenderHTML} from 'react-native-render-html';
 import {layout, styles} from './style';
-import {BASE_URL, COLORS} from '../../utils/constants';
+import {BASE_URL, COLORS, tagsStyles} from '../../utils/constants';
 import {heightScale} from '../../utils/helper';
 import {FONTS} from '../../assets';
 

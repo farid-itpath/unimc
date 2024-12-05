@@ -34,5 +34,15 @@
   "invalid_email_address": "Invalid email address",
   "email_is_required": "Email is required",
   "message_must_be_at_least_50_characters": "Message must be at least 50 characters",
-  "message_is_required": "Message is required"
+  "message_is_required": "Message is required",
+  "recent_events": "Recent Events",
+  "recent_news": "Recent News",
+  "seconds": "seconds",
+  "ago": "ago",
+  "mins": "mins",
+  "min": "min",
+  "hours": "hours",
+  "hour": "hour",
+  "days": "days",
+  "day": "day"
 }

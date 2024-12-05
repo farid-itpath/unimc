@@ -1,6 +1,7 @@
 import {useNavigation, useRoute} from '@react-navigation/native';
-import {SCREENS} from '../../utils/constants';
 import {useSelector} from 'react-redux';
+import {useTranslation} from 'react-i18next';
+import {SCREENS} from '../../utils/constants';
 
 export const useEventsList = () => {
   const navigation = useNavigation();
@@ -8,6 +9,7 @@ export const useEventsList = () => {
   const {todaysEvents, upcomingEvents, events} = useSelector(
     state => state.events,
   );
+  const {t} = useTranslation();
   const handlePressSearch = () =>
     navigation.navigate(SCREENS.SEARCH.name, {searchIn: 'Events'});
   const handlePressBack = () => navigation.goBack();
@@ -18,6 +20,8 @@ export const useEventsList = () => {
     upcomingEvents,
     events,
     screenTitle,
+
+    t,
 
     handlePressSearch,
     handlePressBack,

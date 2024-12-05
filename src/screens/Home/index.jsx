@@ -76,7 +76,6 @@ const Home = () => {
     );
   };
   const renderNews = ({item, index}) => {
-    console.log('item: ', item?.title);
     return (
       <FlatListItem
         item={item}
@@ -85,7 +84,7 @@ const Home = () => {
         itemImage={item?.news_image}
         itemTitle={item?.news_category?.title}
         itemDesc={item?.title}
-        itemDate={timeAgo(item?.publishedAt)}
+        itemDate={timeAgo(item?.publishedAt, t)}
       />
     );
   };
@@ -125,14 +124,16 @@ const Home = () => {
           translucent={false}
           barStyle={'light-content'}
         />
-        <ScrollView showsVerticalScrollIndicator={false}>
-          <View style={styles.headerView}>
-            <View style={styles.emptyView} />
-            <Image source={IMAGES.logoHome} style={styles.logo} />
-            <TouchableOpacity onPress={handlePressSearch}>
-              <Image source={ICONS.search} style={styles.searchIcon} />
-            </TouchableOpacity>
-          </View>
+        <View style={styles.headerView}>
+          <View style={styles.emptyView} />
+          <Image source={IMAGES.logoHome} style={styles.logo} />
+          <TouchableOpacity onPress={handlePressSearch}>
+            <Image source={ICONS.search} style={styles.searchIcon} />
+          </TouchableOpacity>
+        </View>
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={styles.scrollView}>
           {!!todaysEvents?.length && (
             <Section
               title={t('todays_events')}

@@ -24,7 +24,7 @@ export const useEventDetails = () => {
     const d = new Date(date);
     if (date)
       return `${d.getDate()} ${new Intl.DateTimeFormat('en', {
-        month: 'short',
+        month: 'long',
       })
         .format(d)
         .toUpperCase()}, ${d.getFullYear()}`;

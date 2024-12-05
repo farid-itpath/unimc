@@ -3,12 +3,12 @@ export const api = {
   events: {
     getEventsCategories: () =>
       client({
-        url: '/event-category',
+        url: '/event-category?isExistCategory=true',
         method: METHODS.GET,
       }),
     getEvents: () =>
       client({
-        url: '/event',
+        url: '/event?status=published',
         method: METHODS.GET,
       }),
     getEvent: id =>
@@ -36,7 +36,7 @@ export const api = {
   news: {
     getNewsCategories: () =>
       client({
-        url: '/news-category',
+        url: '/news-category/?isExistCategory=true',
         method: METHODS.GET,
       }),
     getNews: () =>
@@ -51,7 +51,7 @@ export const api = {
       }),
     searchNews: ({params}) =>
       client({
-        url: `/news`,
+        url: `/news?status=published`,
         method: METHODS.GET,
         params,
       }),

@@ -35,7 +35,7 @@ export const styles = StyleSheet.create({
   },
   optionsContainer: {
     marginTop: heightScale(40),
-    alignItems: 'center',
+    // alignItems: 'center',
   },
   optionsRow: {
     flexDirection: 'row',
@@ -43,7 +43,7 @@ export const styles = StyleSheet.create({
     marginVertical: 10,
     flexWrap: 'wrap',
     width: widthScale(1.2),
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
   },
   optionView: {
     flexDirection: 'row',
@@ -52,12 +52,15 @@ export const styles = StyleSheet.create({
     padding: 5,
     borderWidth: 2,
     borderColor: COLORS.primary,
-    width: widthScale(3),
+    // width: widthScale(3),
     alignItems: 'center',
+    paddingHorizontal: widthScale(32),
   },
   optionText: {
     fontFamily: FONTS.InterMedium,
     fontSize: heightScale(56),
+    // width: widthScale(5),
+    textAlign: 'center',
   },
   selectedIconView: {
     height: heightScale(40),

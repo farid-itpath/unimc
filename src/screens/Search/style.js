@@ -8,6 +8,23 @@ export const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: COLORS.extraLightGrey,
   },
+  headerView: {
+    position: 'absolute',
+    zIndex: 10,
+    width: '100%',
+    backgroundColor: COLORS.extraLightGrey,
+    paddingBottom: 10,
+    shadowColor: '#000',
+    shadowOffset: {width: 0, height: 2},
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  scrollView: {
+    marginTop: heightScale(8),
+    paddingBottom: heightScale(8),
+    flexGrow: 1,
+  },
   searchView: {
     flexDirection: 'row',
     alignItems: 'center',

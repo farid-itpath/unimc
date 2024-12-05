@@ -14,7 +14,7 @@ export const styles = StyleSheet.create({
   itemImage: {
     height: heightScale(4.2),
     width: widthScale(1.1),
-    objectFit: 'fill',
+    objectFit: 'cover',
     borderRadius: 20,
   },
   itemText: {

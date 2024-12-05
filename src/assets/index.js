@@ -18,6 +18,7 @@ export const ICONS = {
   art: require('./icons/art.png'),
   settings: require('./icons/settings.png'),
   play: require('./icons/play.png'),
+  publisher: require('./icons/publisher.png'),
 };
 export const IMAGES = {
   logo: require('./images/logo.png'),

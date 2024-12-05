@@ -14,7 +14,7 @@ export const styles = StyleSheet.create({
   eventImage: {
     height: heightScale(7),
     width: widthScale(2),
-    objectFit: 'fill',
+    objectFit: 'cover',
     borderRadius: 10,
     alignSelf: 'center',
   },

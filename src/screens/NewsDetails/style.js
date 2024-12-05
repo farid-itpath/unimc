@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0.5)',
   },
   safeAreaView: {
-    flex: 1,
+    // flex: 1,
   },
   headerView: {
     height: heightScale(2.5),
@@ -25,7 +25,7 @@ export const styles = StyleSheet.create({
   headerImage: {
     height: heightScale(2.5),
     width: widthScale(1),
-    objectFit: 'fill',
+    objectFit: 'cover',
   },
   innerHeaderView: {
     ...StyleSheet.absoluteFillObject,
@@ -119,6 +119,7 @@ export const styles = StyleSheet.create({
     fontFamily: FONTS.InterMedium,
     fontSize: heightScale(72),
     color: COLORS.grey,
+    textTransform: 'capitalize',
   },
   back: {
     height: heightScale(48),
@@ -142,5 +143,9 @@ export const layout = {
     height: heightScale(4),
     width: '100%',
     marginTop: 20,
+  },
+  publishDate: {
+    height: heightScale(72),
+    width: widthScale(3),
   },
 };

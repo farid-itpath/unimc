@@ -20,6 +20,13 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingHorizontal: widthScale(12),
+    position: 'absolute',
+    zIndex: 10,
+    width: '100%',
+  },
+  scrollView: {
+    marginTop: heightScale(12),
+    paddingBottom: heightScale(12),
   },
   headerTitle: {
     fontFamily: FONTS.InterBold,

@@ -29,6 +29,7 @@ export const styles = StyleSheet.create({
   },
   flatListContainer: {
     paddingHorizontal: heightScale(40),
+    minWidth: '100%',
   },
   arrowRight: {
     height: heightScale(100),

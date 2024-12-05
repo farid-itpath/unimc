@@ -32,14 +32,14 @@ export const useSearch = () => {
   const handleOpenFilterModal = () => setModalVisible(true);
   const handleCloseFilterModal = () => setModalVisible(false);
   const toggleFitlerItem = (itemType, filterItem) => {
-    if (itemType === 'Event') {
+    if (itemType === t('events')) {
       setSelectedOptions(
         selectedEventCategories.includes(filterItem)
           ? selectedEventCategories.filter(item => item !== filterItem)
           : [...selectedEventCategories, filterItem],
       );
     }
-    if (itemType === 'News') {
+    if (itemType === t('news')) {
       setSelectedNewsCategories(
         selectedNewsCategories.includes(filterItem)
           ? selectedNewsCategories.filter(item => item !== filterItem)
@@ -64,6 +64,7 @@ export const useSearch = () => {
             search: term,
             event_category_ids: selectedEventCategories.join(','),
             news_category_ids: selectedNewsCategories.join(','),
+            status: 'published',
           }),
         }),
       );
@@ -74,6 +75,7 @@ export const useSearch = () => {
           params: filterParams({
             search: term,
             event_category_ids: selectedEventCategories.join(','),
+            status: 'published',
           }),
         }),
       );
@@ -84,6 +86,7 @@ export const useSearch = () => {
           params: {
             search: term,
             news_category_ids: selectedNewsCategories.join(','),
+            status: 'published',
           },
         }),
       );
@@ -91,9 +94,22 @@ export const useSearch = () => {
   });
   const handlePressApply = () => {
     searchInputRef.current.clear();
-    // if (searchIn === 'Home') {
-    //   dispatch(searchEventsAndNews({params: {search: term}}));
-    // }
+    if (searchIn === 'Home') {
+      const params = {};
+      if (selectedEventCategories.length > 0) {
+        params.event_category_ids = selectedEventCategories.join(',');
+      }
+
+      if (selectedNewsCategories.length > 0) {
+        params.news_category_ids = selectedNewsCategories.join(',');
+      }
+      params.status = 'published';
+      dispatch(
+        searchEventsAndNews({
+          params: filterParams(params),
+        }),
+      );
+    }
     if (searchIn === 'Events') {
       dispatch(
         searchEvents({

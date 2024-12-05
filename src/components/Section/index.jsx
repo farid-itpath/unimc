@@ -62,7 +62,7 @@ const Section = ({
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={styles.flatListContainer}
           ListFooterComponent={
-            data?.length && showFooterComponent && renderFooterComponent
+            data?.length > 2 && showFooterComponent && renderFooterComponent
           }
           ListEmptyComponent={renderEmptyComponent}
         />

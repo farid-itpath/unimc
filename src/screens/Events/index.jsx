@@ -57,13 +57,15 @@ const Events = () => {
       <SafeAreaView style={styles.statusBarSafeArea} />
       <SafeAreaView style={styles.safeAreaView}>
         <StatusBar backgroundColor={COLORS.primary} />
-        <ScrollView showsVerticalScrollIndicator={false}>
-          <View style={styles.headerView}>
-            <Text style={styles.headerTitle}>{t('events')}</Text>
-            <TouchableOpacity onPress={handlePressSearch}>
-              <Image source={ICONS.search} style={styles.searchIcon} />
-            </TouchableOpacity>
-          </View>
+        <View style={styles.headerView}>
+          <Text style={styles.headerTitle}>{t('events')}</Text>
+          <TouchableOpacity onPress={handlePressSearch}>
+            <Image source={ICONS.search} style={styles.searchIcon} />
+          </TouchableOpacity>
+        </View>
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={styles.scrollView}>
           <FlatList
             data={[{icon_image: '', title: t('all')}, ...(categories || [])]}
             renderItem={renderCategoryItem}
@@ -72,10 +74,10 @@ const Events = () => {
             contentContainerStyle={styles.flatListContainer}
           />
           <Section
-            title="Recent Events"
+            title={t('recent_events')}
             data={upcomingEvents}
             renderItem={renderEvents}
-            onPressSeeAll={() => handlePressSeeAll('Recent Events')}
+            onPressSeeAll={() => handlePressSeeAll(t('recent_events'))}
             showFooterComponent={true}
           />
           {selectedCategory === 0 ? (

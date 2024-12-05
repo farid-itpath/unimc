@@ -1,5 +1,5 @@
 import {useEffect} from 'react';
-import {Platform} from 'react-native';
+import {Linking, Platform} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {
   useAnimatedStyle,
@@ -16,12 +16,35 @@ export const useSplash = () => {
   const opacity = useSharedValue(0);
   const {language} = useSelector(state => state.language);
   i18n.changeLanguage(language);
-  useEffect(() => {
-    const timeout = setTimeout(() => {
+  const navigationWithDelay = async () => {
+    const url = await Linking.getInitialURL();
+    if (url) {
+      const parts = url.split('/');
+      const uniqueId = parts[parts.length - 1];
+      if (uniqueId) {
+        navigation.reset({
+          index: 1,
+          routes: [
+            {name: SCREENS.BOTTOMTAB.name},
+            {name: SCREENS.EVENTDETAILS.name, params: {eventId: uniqueId}},
+          ],
+        });
+      } else {
+        navigation.reset({
+          index: 0,
+          routes: [{name: SCREENS.BOTTOMTAB.name}],
+        });
+      }
+    } else {
       navigation.reset({
         index: 0,
         routes: [{name: SCREENS.BOTTOMTAB.name}],
       });
+    }
+  };
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      navigationWithDelay();
     }, 2000);
     return () => clearTimeout(timeout);
   }, []);

@@ -9,15 +9,17 @@ import {
   Image,
   TouchableHighlight,
 } from 'react-native';
+import Skeleton from 'react-native-reanimated-skeleton';
+import RenderHTML from 'react-native-render-html';
 import {layout, styles} from './style';
 import {ICONS} from '../../assets';
 import Section from '../../components/Section';
 import {useEventDetails} from './useEventDetails';
-import {BASE_URL, COLORS} from '../../utils/constants';
-import Skeleton from 'react-native-reanimated-skeleton';
+import {BASE_URL, tagsStyles} from '../../utils/constants';
 import ImagePreviewModal from '../../components/ImagePreviewModal';
 import VideoPreviewModal from '../../components/VideoPreviewModal';
-import RenderHTML from 'react-native-render-html';
+import RenderedImage from './RenderedImage';
+import RenderVideo from './RenderVideo';
 
 const EventDetails = () => {
   const {
@@ -44,28 +46,20 @@ const EventDetails = () => {
   } = useEventDetails();
   const renderImages = ({item, index}) => {
     return (
-      <Skeleton isLoading={!item} key={index}>
-        <TouchableOpacity
-          onPress={() => handleImagePress({url: item?.path, title: 'Preview'})}>
-          <Image
-            source={{uri: `${BASE_URL}${item?.path}`}}
-            style={styles.listImage}
-          />
-        </TouchableOpacity>
-      </Skeleton>
+      <RenderedImage
+        item={item}
+        key={index}
+        handleImagePress={handleImagePress}
+      />
     );
   };
   const renderVideos = ({item, index}) => {
     return (
-      <Skeleton isLoading={!item} key={index}>
-        <TouchableOpacity onPress={() => handleVideoPress(item?.path)}>
-          <Image
-            source={{uri: `${BASE_URL}${item?.video_thumbnail_path}`}}
-            style={styles.listVideo}
-          />
-          <Image source={ICONS.play} style={styles.playIcon} />
-        </TouchableOpacity>
-      </Skeleton>
+      <RenderVideo
+        item={item}
+        key={index}
+        handleVideoPress={handleVideoPress}
+      />
     );
   };
   return (
@@ -169,32 +163,14 @@ const EventDetails = () => {
               <RenderHTML
                 contentWidth={1}
                 source={{html: event?.description}}
-                tagsStyles={{
-                  p: {
-                    marginTop: 0,
-                    marginBottom: 0,
-                    paddingTop: 0,
-                    paddingBottom: 0,
-                    color: COLORS.black,
-                  },
-                  span: {
-                    marginTop: 0,
-                    marginBottom: 0,
-                    paddingTop: 0,
-                    paddingBottom: 0,
-                    color: COLORS.black,
-                  },
-                  li: {
-                    color: COLORS.black,
-                  },
-                }}
+                tagsStyles={tagsStyles}
               />
             </View>
           ) : (
             <Skeleton layout={[layout.descriptionLayout]} />
           )}
         </View>
-        {images?.length && (
+        {images?.length ? (
           <Section
             data={images}
             renderItem={renderImages}
@@ -203,8 +179,16 @@ const EventDetails = () => {
             )}
             onPressSeeAll={handleSeeAllImages}
           />
+        ) : (
+          <Section
+            data={new Array(4).fill(null)}
+            renderItem={renderImages}
+            title={() => (
+              <Text style={styles.eventInfoTitle}>{t('images')}</Text>
+            )}
+          />
         )}
-        {videos?.length && (
+        {videos?.length ? (
           <Section
             data={videos}
             renderItem={renderVideos}
@@ -213,22 +197,55 @@ const EventDetails = () => {
             )}
             onPressSeeAll={handleSeeAllVideos}
           />
+        ) : (
+          <Section
+            data={new Array(4).fill(null)}
+            renderItem={renderImages}
+            title={() => (
+              <Text style={styles.eventInfoTitle}>{t('videos')}</Text>
+            )}
+          />
         )}
         <View style={styles.eventInfoView}>
           <Text style={styles.eventInfoTitle}>{t('organizer')}</Text>
           <View style={styles.organizerDetailView}>
-            <Image
-              source={{uri: `${BASE_URL}${event?.creator?.profile_image}`}}
-              style={styles.organizerImage}
-            />
+            {event ? (
+              <Image
+                source={
+                  event?.creator?.profile_image
+                    ? {uri: `${BASE_URL}${event?.creator?.profile_image}`}
+                    : ICONS.publisher
+                }
+                style={styles.organizerImage}
+              />
+            ) : (
+              <View>
+                <Skeleton layout={[layout.publisherImageLayout]} />
+              </View>
+            )}
             <View style={styles.organizerTexts}>
-              <Text style={styles.organizerFirstText}>
-                {event?.creator?.first_name} {event?.creator?.last_name}
-              </Text>
-              <Text style={styles.organizerSecondText}>{t('organizer')}</Text>
-              <Text style={styles.organizerSecondText}>
-                {t('published_on')}: {getEventDate(event?.createdAt)}
-              </Text>
+              {event ? (
+                <View>
+                  <Text style={styles.organizerFirstText}>
+                    {event?.creator?.first_name} {event?.creator?.last_name}
+                  </Text>
+                  <Text style={styles.organizerSecondText}>
+                    {t('organizer')}
+                  </Text>
+                  <Text style={styles.organizerSecondText}>
+                    {t('published_on')}: {getEventDate(event?.publishedAt)}
+                  </Text>
+                </View>
+              ) : (
+                <View
+                  style={{
+                    alignItems: 'flex-start',
+                  }}>
+                  <Skeleton layout={[layout.publisherTextLayout]} />
+                  <Skeleton layout={[layout.publisherTextLayout]} />
+                  <Skeleton layout={[layout.publisherTextLayout]} />
+                </View>
+              )}
             </View>
           </View>
         </View>

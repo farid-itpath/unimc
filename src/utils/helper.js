@@ -12,23 +12,23 @@ export const getEventDate = date => {
   };
 };
 
-export const timeAgo = date => {
+export const timeAgo = (date, t) => {
   if (date) {
     const now = new Date();
     const time = new Date(date);
     const differenceInSeconds = Math.floor((now - time) / 1000);
 
     if (differenceInSeconds < 60) {
-      return `${differenceInSeconds} seconds ago`;
+      return `${differenceInSeconds} ${t('seconds')} ${t('ago')}`;
     } else if (differenceInSeconds < 3600) {
       const minutes = Math.floor(differenceInSeconds / 60);
-      return `${minutes} ${minutes > 1 ? 'mins' : 'min'} ago`;
+      return `${minutes} ${minutes > 1 ? t('mins') : t('min')} ${t('ago')}`;
     } else if (differenceInSeconds < 86400) {
       const hours = Math.floor(differenceInSeconds / 3600);
-      return `${hours} ${hours > 1 ? 'hours' : 'hour'} ago`;
+      return `${hours} ${hours > 1 ? t('hours') : t('hour')} ${t('ago')}`;
     } else {
       const days = Math.floor(differenceInSeconds / 86400);
-      return `${days} ${days > 1 ? 'days' : 'day'} ago`;
+      return `${days} ${days > 1 ? t('days') : t('day')} ${t('ago')}`;
     }
   } else return '';
 };

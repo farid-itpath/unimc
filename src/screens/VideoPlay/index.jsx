@@ -36,7 +36,13 @@ const VideoPlay = ({route}) => {
           <Text style={styles.headerTitle}>{t('video')}</Text>
           <TouchableOpacity />
         </View>
-        {loading && <ActivityIndicator size="large" color={COLORS.primary} style={styles.activity}/>}
+        {loading && (
+          <ActivityIndicator
+            size="large"
+            color={COLORS.primary}
+            style={styles.activity}
+          />
+        )}
         <Video
           source={{uri: params?.videoUrl}}
           ref={videoRef}
@@ -46,6 +52,7 @@ const VideoPlay = ({route}) => {
           controls={true}
           onLoadStart={() => setLoading(true)}
           onLoad={() => setLoading(false)}
+          onError={error => console.log('error', error)}
         />
       </View>
     </SafeAreaView>

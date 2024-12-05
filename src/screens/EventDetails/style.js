@@ -25,7 +25,7 @@ export const styles = StyleSheet.create({
   headerImage: {
     height: heightScale(2.5),
     width: widthScale(1),
-    objectFit: 'fill',
+    objectFit: 'cover',
   },
   innerHeaderView: {
     ...StyleSheet.absoluteFillObject,
@@ -172,6 +172,7 @@ export const styles = StyleSheet.create({
     fontFamily: FONTS.InterMedium,
     fontSize: heightScale(72),
     color: COLORS.grey,
+    textTransform: 'capitalize',
   },
   organizerDetailView: {
     flexDirection: 'row',
@@ -200,5 +201,18 @@ export const layout = {
   eventDetails: {
     height: 50,
     width: '100%',
+  },
+  imageLayout: {
+    height: heightScale(8),
+    width: heightScale(8),
+  },
+  publisherImageLayout: {
+    height: heightScale(14),
+    width: heightScale(14),
+  },
+  publisherTextLayout: {
+    height: heightScale(52),
+    width: widthScale(4),
+    marginVertical: 5,
   },
 };

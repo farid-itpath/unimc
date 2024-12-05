@@ -20,11 +20,18 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingHorizontal: widthScale(12),
+    position: 'absolute',
+    zIndex: 10,
+    width: '100%',
   },
   headerTitle: {
     fontFamily: FONTS.InterBold,
     fontSize: heightScale(48),
     color: COLORS.white,
+  },
+  scrollView: {
+    marginTop: heightScale(12),
+    paddingBottom: heightScale(12),
   },
   searchIcon: {
     height: heightScale(30),

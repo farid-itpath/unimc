@@ -31,9 +31,9 @@ const NewsList = () => {
       <FlatListItem
         item={item}
         itemImage={item?.news_image}
-        itemDate={timeAgo(item?.publishedAt)}
-        itemDesc={item?.news_description}
-        itemTitle={item?.title}
+        itemDate={timeAgo(item?.publishedAt, t)}
+        itemDesc={item?.title}
+        itemTitle={item?.news_category?.title}
         onPress={() => handlePressNews(item?.id)}
         key={index}
       />
@@ -59,22 +59,24 @@ const NewsList = () => {
         backgroundColor={COLORS.extraLightGrey}
         barStyle="dark-content"
       />
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={styles.headerView}>
-          <TouchableHighlight
-            onPress={handlePressBack}
-            underlayColor={COLORS.primaryExtraLight}
-            style={styles.backIconView}>
-            <Image source={ICONS.back} style={styles.backIcon} />
-          </TouchableHighlight>
-          <Text style={styles.headerTitle}>{screenTitle}</Text>
-          <TouchableOpacity onPress={handlePressSearch}>
-            <Image source={ICONS.search} style={styles.searchIcon} />
-          </TouchableOpacity>
-        </View>
+      <View style={styles.headerView}>
+        <TouchableHighlight
+          onPress={handlePressBack}
+          underlayColor={COLORS.primaryExtraLight}
+          style={styles.backIconView}>
+          <Image source={ICONS.back} style={styles.backIcon} />
+        </TouchableHighlight>
+        <Text style={styles.headerTitle}>{screenTitle}</Text>
+        <TouchableOpacity onPress={handlePressSearch}>
+          <Image source={ICONS.search} style={styles.searchIcon} />
+        </TouchableOpacity>
+      </View>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.scrollView}>
         <FlatList
           data={
-            screenTitle === 'News' || screenTitle === 'Recent News'
+            screenTitle === t('news') || screenTitle === t('recent_news')
               ? news
               : news.filter(
                   newsItem => newsItem?.news_category?.title === screenTitle,

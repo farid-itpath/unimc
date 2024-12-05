@@ -14,7 +14,7 @@ export const styles = StyleSheet.create({
   newsImage: {
     height: heightScale(7),
     width: widthScale(2),
-    objectFit: 'fill',
+    objectFit: 'cover',
     borderRadius: 10,
   },
   newsDataView: {
@@ -56,11 +56,15 @@ export const styles = StyleSheet.create({
     fontSize: heightScale(72),
     fontFamily: FONTS.InterBold,
     color: COLORS.primary,
+    width: widthScale(4),
   },
   newsCategoryTime: {
     fontFamily: FONTS.InterMedium,
     fontSize: heightScale(64),
     color: COLORS.grey,
+    textAlign: 'right',
+    width: widthScale(4),
+    paddingRight: widthScale(20),
   },
   htmlContent: {
     height: 38,

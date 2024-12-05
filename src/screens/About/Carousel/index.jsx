@@ -34,7 +34,7 @@ const Carousel = ({data}) => {
         autoplay={true}
       />
       <Pagination
-        dotsLength={data?.length || 4}
+        dotsLength={data?.length}
         activeDotIndex={activeIndex}
         dotStyle={styles.dotStyle}
         inactiveDotStyle={styles.inactiveDotStyle}
